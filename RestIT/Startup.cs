@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using RestIT.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RestIT.Models;
 
 namespace RestIT
 {
@@ -41,6 +42,9 @@ namespace RestIT
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<RestITContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("RestITContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

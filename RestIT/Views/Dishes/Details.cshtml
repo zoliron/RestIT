@@ -1,0 +1,42 @@
+﻿@model RestIT.Models.Dish
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Dish</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dishName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dishName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.dishCost)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dishCost)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.dishRating)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dishRating)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.dishType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.dishType)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

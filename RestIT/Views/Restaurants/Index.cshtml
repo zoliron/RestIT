@@ -1,0 +1,59 @@
+﻿@model IEnumerable<RestIT.Models.Restaurant>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.restName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.restLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.restRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.restType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.restKosher)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.restName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.restLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.restRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.restType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.restKosher)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

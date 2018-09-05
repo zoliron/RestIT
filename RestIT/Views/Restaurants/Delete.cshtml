@@ -1,0 +1,51 @@
+﻿@model RestIT.Models.Restaurant
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Restaurant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.restName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.restName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.restLocation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.restLocation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.restRating)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.restRating)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.restType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.restType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.restKosher)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.restKosher)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
