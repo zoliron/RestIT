@@ -12,6 +12,7 @@ namespace RestIT.Models
         public int ID { get; set; }
         [DisplayName("Dish Name")]
         public String dishName { get; set; }
+        [RegularExpression("[^0-9]", ErrorMessage = "Dish Cost must be a number!")]
         [DisplayName("Dish Cost")]
         public int dishCost { get; set; }
         [Required(ErrorMessage = "Please enter your rate")]

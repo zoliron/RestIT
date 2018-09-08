@@ -12,18 +12,39 @@ namespace RestIT.Controllers
     public class ChefsController : Controller
     {
         private readonly RestITContext _context;
+        
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var chefs = from m in _context.Chef
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                chefs = chefs.Where(s => s.chefName.Contains(searchString));
+            }
+
+            return View(await chefs.ToListAsync());
+        }
+        
+
+
+
+
 
         public ChefsController(RestITContext context)
         {
             _context = context;
         }
 
+        /*
         // GET: Chefs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Chef.ToListAsync());
-        }
 
+            return View(await _context.Chef.ToListAsync());
+
+        }
+        */
         // GET: Chefs/Details/5
         public async Task<IActionResult> Details(int? id)
         {

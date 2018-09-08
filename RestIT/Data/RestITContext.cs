@@ -21,5 +21,6 @@ namespace RestIT.Models
         public DbSet<RestIT.Models.Dish> Dish { get; set; }
 
         public DbSet<RestIT.Models.Restaurant> Restaurant { get; set; }
+
     }
 }
