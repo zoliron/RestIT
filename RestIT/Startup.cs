@@ -15,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using RestIT.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using RestIT.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace RestIT
 {
@@ -46,13 +48,24 @@ namespace RestIT
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddRazorPagesOptions(options =>
-                {
-                    options.AllowAreas = true;
-                    options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
-                    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
-                });
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            //    .AddRazorPagesOptions(options =>
+            //    {
+            //        options.AllowAreas = true;
+            //        options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+            //        options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+            //    });
+
+            services.AddMvc(config =>
+            {
+                // using Microsoft.AspNetCore.Mvc.Authorization;
+                // using Microsoft.AspNetCore.Authorization;
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.ConfigureApplicationCookie(options =>
             {

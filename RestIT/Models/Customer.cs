@@ -10,6 +10,10 @@ namespace RestIT.Models
     public class Customer
     {
         public int ID { get; set; }
+
+        // user ID from AspNetUser table.
+        public string OwnerID { get; set; }
+
         [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Must enter a valid name! (Capital letter first)")]
         [StringLength(50, ErrorMessage = "Name cannot be longer than 30 characters.")]
         [DisplayName("Customer Name")]
@@ -23,5 +27,14 @@ namespace RestIT.Models
         [DisplayName("Customer Name")]
         [RegularExpression("[^0-9]", ErrorMessage = "Age must be a number!")]
         public int custAge { get; set; }
+
+        public ContactStatus Status { get; set; }
+    }
+
+    public enum ContactStatus
+    {
+        Submitted,
+        Approved,
+        Rejected
     }
 }
