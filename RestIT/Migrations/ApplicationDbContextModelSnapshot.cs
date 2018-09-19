@@ -180,6 +180,88 @@ namespace RestIT.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("RestIT.Models.Chef", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("chefName")
+                        .HasMaxLength(50);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Chef");
+                });
+
+            modelBuilder.Entity("RestIT.Models.Customer", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("custAge");
+
+                    b.Property<string>("custMail");
+
+                    b.Property<string>("custName")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("custPhone");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Customer");
+                });
+
+            modelBuilder.Entity("RestIT.Models.Dish", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("RestaurantID");
+
+                    b.Property<int>("dishCost");
+
+                    b.Property<string>("dishName");
+
+                    b.Property<float>("dishRating");
+
+                    b.Property<string>("dishType");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("RestaurantID");
+
+                    b.ToTable("Dish");
+                });
+
+            modelBuilder.Entity("RestIT.Models.Restaurant", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ChefID");
+
+                    b.Property<bool>("restKosher");
+
+                    b.Property<string>("restLocation");
+
+                    b.Property<string>("restName");
+
+                    b.Property<float>("restRating");
+
+                    b.Property<string>("restType");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ChefID");
+
+                    b.ToTable("Restaurant");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -222,6 +304,21 @@ namespace RestIT.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("RestIT.Models.Dish", b =>
+                {
+                    b.HasOne("RestIT.Models.Restaurant")
+                        .WithMany("Dishes")
+                        .HasForeignKey("RestaurantID");
+                });
+
+            modelBuilder.Entity("RestIT.Models.Restaurant", b =>
+                {
+                    b.HasOne("RestIT.Models.Chef", "Chef")
+                        .WithMany("Restuarants")
+                        .HasForeignKey("ChefID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

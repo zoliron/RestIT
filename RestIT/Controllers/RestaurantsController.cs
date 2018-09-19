@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using RestIT.Data;
 using RestIT.Models;
 
 namespace RestIT.Controllers
 {
     public class RestaurantsController : Controller
     {
-        private readonly RestITContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public RestaurantsController(RestITContext context)
+        public RestaurantsController(ApplicationDbContext context)
         {
             _context = context;
         }

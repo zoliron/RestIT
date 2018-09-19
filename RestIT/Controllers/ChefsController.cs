@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using RestIT.Data;
 using RestIT.Models;
 
 namespace RestIT.Controllers
 {
     public class ChefsController : Controller
     {
-        private readonly RestITContext _context;
+        private readonly ApplicationDbContext _context;
         
         public async Task<IActionResult> Index(string searchString)
         {
@@ -31,7 +32,7 @@ namespace RestIT.Controllers
 
 
 
-        public ChefsController(RestITContext context)
+        public ChefsController(ApplicationDbContext context)
         {
             _context = context;
         }

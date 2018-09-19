@@ -12,5 +12,12 @@ namespace RestIT.Data
             : base(options)
         {
         }
+        public DbSet<RestIT.Models.Chef> Chef { get; set; }
+
+        public DbSet<RestIT.Models.Customer> Customer { get; set; }
+
+        public DbSet<RestIT.Models.Dish> Dish { get; set; }
+
+        public DbSet<RestIT.Models.Restaurant> Restaurant { get; set; }
     }
 }

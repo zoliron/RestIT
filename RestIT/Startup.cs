@@ -64,8 +64,8 @@ namespace RestIT
             // using Microsoft.AspNetCore.Identity.UI.Services;
             services.AddSingleton<IEmailSender, EmailSender>();
 
-            services.AddDbContext<RestITContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("RestITContext")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContext")));
 
             services.AddAuthentication()
                 // Facebook authentication.
