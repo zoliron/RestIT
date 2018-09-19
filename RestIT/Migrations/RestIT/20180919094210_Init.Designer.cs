@@ -7,17 +7,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestIT.Models;
 
-namespace RestIT.Migrations
+namespace RestIT.Migrations.RestIT
 {
     [DbContext(typeof(RestITContext))]
-    [Migration("20180905193358_Initial")]
-    partial class Initial
+    [Migration("20180919094210_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -27,7 +27,8 @@ namespace RestIT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("chefName");
+                    b.Property<string>("chefName")
+                        .HasMaxLength(50);
 
                     b.HasKey("ID");
 
@@ -44,7 +45,8 @@ namespace RestIT.Migrations
 
                     b.Property<string>("custMail");
 
-                    b.Property<string>("custName");
+                    b.Property<string>("custName")
+                        .HasMaxLength(50);
 
                     b.Property<string>("custPhone");
 
@@ -82,7 +84,7 @@ namespace RestIT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ChefID");
+                    b.Property<int>("ChefID");
 
                     b.Property<bool>("restKosher");
 
@@ -110,9 +112,10 @@ namespace RestIT.Migrations
 
             modelBuilder.Entity("RestIT.Models.Restaurant", b =>
                 {
-                    b.HasOne("RestIT.Models.Chef")
+                    b.HasOne("RestIT.Models.Chef", "Chef")
                         .WithMany("Restuarants")
-                        .HasForeignKey("ChefID");
+                        .HasForeignKey("ChefID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

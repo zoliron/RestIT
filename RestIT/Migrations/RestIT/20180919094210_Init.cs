@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace RestIT.Migrations
+namespace RestIT.Migrations.RestIT
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace RestIT.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    chefName = table.Column<string>(nullable: true)
+                    chefName = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,7 +26,7 @@ namespace RestIT.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    custName = table.Column<string>(nullable: true),
+                    custName = table.Column<string>(maxLength: 50, nullable: true),
                     custPhone = table.Column<string>(nullable: true),
                     custMail = table.Column<string>(nullable: true),
                     custAge = table.Column<int>(nullable: false)
@@ -42,12 +42,12 @@ namespace RestIT.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ChefID = table.Column<int>(nullable: false),
                     restName = table.Column<string>(nullable: true),
                     restLocation = table.Column<string>(nullable: true),
                     restRating = table.Column<float>(nullable: false),
                     restType = table.Column<string>(nullable: true),
-                    restKosher = table.Column<bool>(nullable: false),
-                    ChefID = table.Column<int>(nullable: true)
+                    restKosher = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,7 +57,7 @@ namespace RestIT.Migrations
                         column: x => x.ChefID,
                         principalTable: "Chef",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestIT.Models;
 
-namespace RestIT.Migrations
+namespace RestIT.Migrations.RestIT
 {
     [DbContext(typeof(RestITContext))]
     partial class RestITContextModelSnapshot : ModelSnapshot
@@ -15,7 +15,7 @@ namespace RestIT.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -82,7 +82,7 @@ namespace RestIT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ChefID");
+                    b.Property<int>("ChefID");
 
                     b.Property<bool>("restKosher");
 
@@ -110,9 +110,10 @@ namespace RestIT.Migrations
 
             modelBuilder.Entity("RestIT.Models.Restaurant", b =>
                 {
-                    b.HasOne("RestIT.Models.Chef")
+                    b.HasOne("RestIT.Models.Chef", "Chef")
                         .WithMany("Restuarants")
-                        .HasForeignKey("ChefID");
+                        .HasForeignKey("ChefID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
