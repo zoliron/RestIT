@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using RestIT.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using RestIT.Areas.Identity.Authorization;
 
 namespace RestIT
 {
@@ -99,6 +100,13 @@ namespace RestIT
                     microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
                     microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];
                 });
+
+            // Authorization handlers.
+            services.AddScoped<IAuthorizationHandler, CustomerIsOwnerAuthorizationHandler>();
+
+            services.AddSingleton<IAuthorizationHandler, CustomerAdministratorsAuthorizationHandler>();
+
+            services.AddSingleton<IAuthorizationHandler, CustomerManagerAuthorizationHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
