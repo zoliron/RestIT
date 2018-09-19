@@ -67,12 +67,19 @@ namespace RestIT
             services.AddDbContext<RestITContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("RestITContext")));
 
-            // Facebook authentication.
-            services.AddAuthentication().AddFacebook(facebookOptions =>
+            services.AddAuthentication()
+                // Facebook authentication.
+                .AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-            });
+            })
+                // Google authentication.
+                .AddGoogle(googleOptions =>
+              {
+                  googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                  googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+              });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
