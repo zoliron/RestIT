@@ -44,11 +44,13 @@ namespace RestIT
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            // To Delete
             //services.AddDefaultIdentity<IdentityUser>()
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            
+            // To Delete
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
             //    .AddRazorPagesOptions(options =>
             //    {
@@ -135,6 +137,7 @@ namespace RestIT
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

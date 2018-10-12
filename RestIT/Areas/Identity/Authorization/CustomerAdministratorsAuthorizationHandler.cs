@@ -10,10 +10,7 @@ namespace RestIT.Areas.Identity.Authorization
 {
     public class CustomerAdministratorsAuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, Customer>
     {
-        protected override Task HandleRequirementAsync(
-                                              AuthorizationHandlerContext context,
-                                    OperationAuthorizationRequirement requirement,
-                                     Customer resource)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OperationAuthorizationRequirement requirement, Customer resource)
         {
             if (context.User == null)
             {

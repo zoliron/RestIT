@@ -13,17 +13,11 @@ namespace RestIT.Areas.Identity.Authorization
     {
         UserManager<IdentityUser> _userManager;
 
-        public CustomerIsOwnerAuthorizationHandler(UserManager<IdentityUser>
-            userManager)
-        {
+        public CustomerIsOwnerAuthorizationHandler(UserManager<IdentityUser> userManager){
             _userManager = userManager;
         }
 
-        protected override Task
-            HandleRequirementAsync(AuthorizationHandlerContext context,
-                                   OperationAuthorizationRequirement requirement,
-                                   Customer resource)
-        {
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,OperationAuthorizationRequirement requirement, Customer resource){
             if (context.User == null || resource == null)
             {
                 // Return Task.FromResult(0) if targeting a version of
