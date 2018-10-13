@@ -13,6 +13,18 @@ namespace RestIT.Controllers
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var customers = from m in _context.Customer
+                              select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customers = customers.Where(s => s.custName.Contains(searchString));
+            }
+
+            return View(await customers.ToListAsync());
+        }
 
         public CustomersController(ApplicationDbContext context)
         {
@@ -20,11 +32,12 @@ namespace RestIT.Controllers
         }
 
         // GET: Customers
+        /*
         public async Task<IActionResult> Index()
         {
             return View(await _context.Customer.ToListAsync());
         }
-
+        */
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {

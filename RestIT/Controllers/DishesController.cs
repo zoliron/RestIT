@@ -13,18 +13,30 @@ namespace RestIT.Controllers
     public class DishesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var dishes = from m in _context.Dish
+                              select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                dishes = dishes.Where(s => s.dishName.Contains(searchString));
+            }
+
+            return View(await dishes.ToListAsync());
+        }
 
         public DishesController(ApplicationDbContext context)
         {
             _context = context;
         }
-
+        /*
         // GET: Dishes
         public async Task<IActionResult> Index()
         {
             return View(await _context.Dish.ToListAsync());
         }
-
+        */
         // GET: Dishes/Details/5
         public async Task<IActionResult> Details(int? id)
         {

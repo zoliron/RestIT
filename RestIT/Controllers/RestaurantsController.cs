@@ -13,6 +13,18 @@ namespace RestIT.Controllers
     public class RestaurantsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var restaurants = from m in _context.Restaurant
+                        select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                restaurants = restaurants.Where(s => s.restName.Contains(searchString));
+            }
+
+            return View(await restaurants.ToListAsync());
+        }
 
         public RestaurantsController(ApplicationDbContext context)
         {
@@ -20,11 +32,12 @@ namespace RestIT.Controllers
         }
 
         // GET: Restaurants
+        /*
         public async Task<IActionResult> Index()
         {
             return View(await _context.Restaurant.ToListAsync());
         }
-
+        */
         // GET: Restaurants/Details/5
         public async Task<IActionResult> Details(int? id)
         {
