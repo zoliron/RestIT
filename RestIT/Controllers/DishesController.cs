@@ -54,7 +54,7 @@ namespace RestIT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,dishName,dishCost,dishRating,dishType")] Dish dish)
+        public async Task<IActionResult> Create([Bind("ID,dishName,dishCost,dishRating,dishType,dishIngredients,dishImage")] Dish dish)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace RestIT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,dishName,dishCost,dishRating,dishType")] Dish dish)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,dishName,dishCost,dishRating,dishType,dishIngredients,dishImage")] Dish dish)
         {
             if (id != dish.ID)
             {

@@ -3,19 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestIT.Data;
 
 namespace RestIT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180923144822_Initial1")]
+    partial class Initial1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -228,8 +230,6 @@ namespace RestIT.Migrations
 
                     b.Property<int>("dishCost");
 
-                    b.Property<string>("dishImage");
-
                     b.Property<string>("dishIngredients");
 
                     b.Property<string>("dishName");
@@ -324,7 +324,7 @@ namespace RestIT.Migrations
 
             modelBuilder.Entity("RestIT.Models.Restaurant", b =>
                 {
-                    b.HasOne("RestIT.Models.Chef")
+                    b.HasOne("RestIT.Models.Chef", "Chef")
                         .WithMany("Restuarants")
                         .HasForeignKey("ChefID")
                         .OnDelete(DeleteBehavior.Cascade);

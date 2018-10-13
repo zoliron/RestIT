@@ -34,6 +34,22 @@
                 <span asp-validation-for="dishType" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="dishIngredients" class="control-label"></label>
+                <input asp-for="dishIngredients" class="form-control" />
+                <span asp-validation-for="dishIngredients" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="file" name="Image" class="form-control" />
+                <img id="output" />
+                <script>
+                    var loadFile = function (event) {
+                        var output = document.getElementById('output');
+                        output.src = URL.createObjectURL(event.target.files[0]);
+
+                    };
+                </script>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>

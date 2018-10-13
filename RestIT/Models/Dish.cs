@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +13,7 @@ namespace RestIT.Models
         public int ID { get; set; }
         [DisplayName("Dish Name")]
         public String dishName { get; set; }
-        [RegularExpression("[^0-9]", ErrorMessage = "Dish Cost must be a number!")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Dish Cost must be a number!")]
         [DisplayName("Dish Cost")]
         public int dishCost { get; set; }
         [Required(ErrorMessage = "Please enter your rate")]
@@ -21,5 +22,8 @@ namespace RestIT.Models
         public float dishRating { get; set; }
         [DisplayName("Dish Type")]
         public String dishType { get; set; }
+        [DisplayName("Dish Ingredients")]
+        public String dishIngredients { get; set; }
+        public byte[] dishImage { get; set; }
     }
 }

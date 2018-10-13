@@ -11,7 +11,6 @@ namespace RestIT.Models
     {
         public int ID { get; set; }
         public int ChefID { get; set; }
-        public Chef Chef { get; set; }
         [DisplayName("Restuarant Name")]
         public String restName { get; set; }
         [DisplayName("Restuarant Location")]
