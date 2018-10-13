@@ -9,12 +9,18 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="Dishes" asp-action="Index" method="get">
+    <p>
+        Chef Name: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.dishName)
-            </th>
+            </th> 
             <th>
                 @Html.DisplayNameFor(model => model.dishCost)
             </th>

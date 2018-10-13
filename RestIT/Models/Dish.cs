@@ -24,6 +24,6 @@ namespace RestIT.Models
         public String dishType { get; set; }
         [DisplayName("Dish Ingredients")]
         public String dishIngredients { get; set; }
-        public byte[] dishImage { get; set; }
+        public byte[] dishImage { get; set; } 
     }
 }

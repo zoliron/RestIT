@@ -9,6 +9,13 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="Customers" asp-action="Index" method="get">
+    <p>
+        Chef Name: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -28,26 +35,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.custName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.custPhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.custMail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.custAge)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.custName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.custPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.custMail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.custAge)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
