@@ -10,8 +10,8 @@ using RestIT.Data;
 namespace RestIT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181013161413_dishimage")]
-    partial class dishimage
+    [Migration("20181015203828_rest2")]
+    partial class rest2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -230,7 +230,7 @@ namespace RestIT.Migrations
 
                     b.Property<int>("dishCost");
 
-                    b.Property<string>("dishImage");
+                    b.Property<byte[]>("dishImage");
 
                     b.Property<string>("dishIngredients");
 
@@ -253,7 +253,7 @@ namespace RestIT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ChefID");
+                    b.Property<int?>("ChefID");
 
                     b.Property<bool>("restKosher");
 
@@ -326,10 +326,9 @@ namespace RestIT.Migrations
 
             modelBuilder.Entity("RestIT.Models.Restaurant", b =>
                 {
-                    b.HasOne("RestIT.Models.Chef")
+                    b.HasOne("RestIT.Models.Chef", "Chef")
                         .WithMany("Restuarants")
-                        .HasForeignKey("ChefID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ChefID");
                 });
 #pragma warning restore 612, 618
         }

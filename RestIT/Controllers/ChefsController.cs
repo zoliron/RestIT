@@ -28,10 +28,6 @@ namespace RestIT.Controllers
         }
         
 
-
-
-
-
         public ChefsController(ApplicationDbContext context)
         {
             _context = context;
@@ -75,7 +71,7 @@ namespace RestIT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,chefName")] Chef chef)
+        public async Task<IActionResult> Create([Bind("ID,chefName,Restuarants")] Chef chef)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +103,7 @@ namespace RestIT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,chefName")] Chef chef)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,chefName,Restuarants")] Chef chef)
         {
             if (id != chef.ID)
             {

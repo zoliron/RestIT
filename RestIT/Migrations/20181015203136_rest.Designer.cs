@@ -10,14 +10,14 @@ using RestIT.Data;
 namespace RestIT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181011081528_chefsAddTest")]
-    partial class chefsAddTest
+    [Migration("20181015203136_rest")]
+    partial class rest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -230,6 +230,10 @@ namespace RestIT.Migrations
 
                     b.Property<int>("dishCost");
 
+                    b.Property<byte[]>("dishImage");
+
+                    b.Property<string>("dishIngredients");
+
                     b.Property<string>("dishName");
 
                     b.Property<float>("dishRating");
@@ -249,7 +253,7 @@ namespace RestIT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ChefID");
+                    b.Property<int?>("ChefID");
 
                     b.Property<bool>("restKosher");
 
@@ -260,6 +264,9 @@ namespace RestIT.Migrations
                     b.Property<float>("restRating");
 
                     b.Property<string>("restType");
+
+                    b.Property<string>("selectedChef")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
@@ -324,8 +331,7 @@ namespace RestIT.Migrations
                 {
                     b.HasOne("RestIT.Models.Chef", "Chef")
                         .WithMany("Restuarants")
-                        .HasForeignKey("ChefID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ChefID");
                 });
 #pragma warning restore 612, 618
         }
