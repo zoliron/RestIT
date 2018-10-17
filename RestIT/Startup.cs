@@ -23,12 +23,14 @@ namespace RestIT
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            Environment = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -44,20 +46,22 @@ namespace RestIT
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            // To Delete
-            //services.AddDefaultIdentity<IdentityUser>()
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-            
-            // To Delete
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-            //    .AddRazorPagesOptions(options =>
-            //    {
-            //        options.AllowAreas = true;
-            //        options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
-            //        options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
-            //    });
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                       .AddEntityFrameworkStores<ApplicationDbContext>()
+                       .AddDefaultUI()
+                       .AddDefaultTokenProviders();
+
+            var skipHTTPS = Configuration.GetValue<bool>("LocalTest:skipHTTPS");
+
+            services.Configure<MvcOptions>(options =>
+            {
+                // Set LocalTest:skipHTTPS to true to skip SSL requrement in 
+                // debug mode. This is useful when not using Visual Studio.
+                if (Environment.IsDevelopment() && !skipHTTPS)
+                {
+                    options.Filters.Add(new RequireHttpsAttribute());
+                }
+            });
 
             services.AddMvc(config =>
             {

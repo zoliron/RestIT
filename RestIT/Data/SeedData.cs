@@ -22,11 +22,11 @@ namespace RestIT.Data
                 // dotnet user-secrets set SeedUserPW <pw>
                 // The admin user can do anything
 
-                var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@contoso.com");
+                var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@restit.com");
                 await EnsureRole(serviceProvider, adminID, Constants.CustomerAdministratorsRole);
 
                 // allowed user can create and edit contacts that they create
-                var managerID = await EnsureUser(serviceProvider, testUserPw, "manager@contoso.com");
+                var managerID = await EnsureUser(serviceProvider, testUserPw, "manager@restit.com");
                 await EnsureRole(serviceProvider, managerID, Constants.CustomerManagersRole);
 
                 SeedDB(context, adminID);
@@ -36,12 +36,12 @@ namespace RestIT.Data
         private static async Task<string> EnsureUser(IServiceProvider serviceProvider,
                                                     string testUserPw, string UserName)
         {
-            var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
 
             var user = await userManager.FindByNameAsync(UserName);
             if (user == null)
             {
-                user = new IdentityUser { UserName = UserName };
+                user = new ApplicationUser { UserName = UserName };
                 await userManager.CreateAsync(user, testUserPw);
             }
 
@@ -64,7 +64,7 @@ namespace RestIT.Data
                 IR = await roleManager.CreateAsync(new IdentityRole(role));
             }
 
-            var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
 
             var user = await userManager.FindByIdAsync(uid);
 
@@ -87,9 +87,10 @@ namespace RestIT.Data
                     custAge = 25,
                     custPhone = "0547713375",
                     custMail = "ronen1245@gmail.com",
-                    Status = ContactStatus.Approved,
+                    Status = CustomerStatus.Approved,
                     OwnerID = adminID
-                });
+                }
+                );
             context.SaveChanges();
             }
     }

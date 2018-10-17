@@ -18,20 +18,20 @@ namespace RestIT.Models
         [StringLength(50, ErrorMessage = "Name cannot be longer than 30 characters.")]
         [DisplayName("Customer Name")]
         public String custName { get; set; }
-        [RegularExpression("[^0-9]*", ErrorMessage = "Phone must be a number!")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Phone must be a number!")]
         [DisplayName("Customer Phone")]
         public String custPhone { get; set; }
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         [DisplayName("Customer Mail")]
         public String custMail { get; set; }
-        [DisplayName("Customer Name")]
-        [RegularExpression("[^0-9]", ErrorMessage = "Age must be a number!")]
+        [DisplayName("Customer Age")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Age must be a number!")]
         public int custAge { get; set; }
 
-        public ContactStatus Status { get; set; }
+        public CustomerStatus Status { get; set; }
     }
 
-    public enum ContactStatus
+    public enum CustomerStatus
     {
         Submitted,
         Approved,

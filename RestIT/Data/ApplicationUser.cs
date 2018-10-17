@@ -8,7 +8,5 @@ namespace RestIT.Data
 {
     public class ApplicationUser : IdentityUser
     {
-        [PersonalData]
-        public string userRole { get; set; }
     }
 }

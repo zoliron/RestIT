@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using RestIT.Data;
 using RestIT.Models;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ namespace RestIT.Areas.Identity.Authorization
 {
     public class CustomerIsOwnerAuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, Customer>
     {
-        UserManager<IdentityUser> _userManager;
+        UserManager<ApplicationUser> _userManager;
 
-        public CustomerIsOwnerAuthorizationHandler(UserManager<IdentityUser> userManager){
+        public CustomerIsOwnerAuthorizationHandler(UserManager<ApplicationUser> userManager){
             _userManager = userManager;
         }
 
