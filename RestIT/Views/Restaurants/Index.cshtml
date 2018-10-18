@@ -1,22 +1,17 @@
 ﻿@model IEnumerable<RestIT.Models.Restaurant>
-
 @{
     ViewData["Title"] = "Index";
 }
-
-<h2>Index</h2>
-
+<h2>Restaurants List</h2>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
 <form asp-controller="Restaurants" asp-action="Index" method="get">
     <p>
         Restaurant Name: <input type="text" name="SearchString">
         <input type="submit" value="Filter" />
     </p>
 </form>
-
 <table class="table table-hover">
     <thead>
         <tr>
