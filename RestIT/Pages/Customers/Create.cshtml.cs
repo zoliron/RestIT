@@ -19,17 +19,17 @@ namespace RestIT.Pages.Customers
         {
         }
 
-        public IActionResult OnGet()
-        {
-            Customer = new Customer
-            {
-                custName = "Rick",
-                custAge = 25,
-                custPhone = "0547713375",
-                custMail = "rick@rick.com"
-            };
-            return Page();
-        }
+        //public IActionResult OnGet()
+        //{
+        //    Customer = new Customer
+        //    {
+        //        custName = "Rick",
+        //        custAge = 25,
+        //        custPhone = "0547713375",
+        //        custMail = "rick@rick.com"
+        //    };
+        //    return Page();
+        //}
 
         [BindProperty]
         public Customer Customer { get; set; }
