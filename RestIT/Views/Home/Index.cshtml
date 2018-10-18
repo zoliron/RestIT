@@ -1,41 +1,85 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="container">
-    <h3>Welcome</h3>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="carousel slide multi-item-carousel" id="theCarousel">
-                <div class="carousel-inner ">
-                    <div class="item active">
 
-                        <div class="col-xs-4"> <a asp-area="" asp-controller="Restaurants" asp-action="Index"><img src="~/images/rest.svg" class="img-responsive"></a></div>
-                            <div class="col-xs-4  col-xs-offset-4">
-                                <h1>Restaurants</h1>
-                                <p>Click <a asp-area="" asp-controller="Restaurants" asp-action="Index"> here </a> for more info</p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="col-xs-4"><a asp-area="" asp-controller="Chefs" asp-action="Index"><img src="~/images/rest2.svg" class="img-responsive"></a></div>
-                            <div class="col-xs-4  col-xs-offset-4">
-                                <h1>Chefs</h1>
-                                <p>Click <a asp-area="" asp-controller="Chefs" asp-action="Index"> here </a> for more info</p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="col-xs-4"><a asp-area="" asp-controller="Dishes" asp-action="Index"><img src="~/images/rest3.svg" class="img-responsive"></a></div>
-                            <div class="col-xs-4  col-xs-offset-4 ">
-                                <h1>Dishes</h1>
-                                <p>Click <a asp-area="" asp-controller="Dishes" asp-action="Index"> here </a> for more info</p>
-                            </div>
-                        </div>
-                    </div>
-                <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-                <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-            </div>
+<div class="jumbotron">
+    <div class="card border-primary" style="max-width: 20rem;">
+        <div class="card-header">Restaurants</div>
+        <div class="card-body">
+            <img style="height: 120px; width: 100%; display: block;" src="~/images/rest.svg">
+            <hr class="my-4">
+            @*// Text examples
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
+            <a href="/Restaurants/Index" class="card-link">Resaurants list</a>
+        </div>
+    </div>
+
+    <div class="card border-primary" style="max-width: 20rem;">
+        <div class="card-header">Chefs</div>
+        <div class="card-body">
+            <img style="height: 120px; width: 100%; display: block;" src="~/images/rest2.svg">
+            <hr class="my-4">
+            @*// Text examples
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
+            <a href="/Chefs/Index" class="card-link">Chefs list</a>
+        </div>
+    </div>
+
+
+    <div class="card border-primary" style="max-width: 20rem;">
+        <div class="card-header">Restaurants</div>
+        <div class="card-body">
+            <img style="height: 120px; width: 100%; display: block;" src="~/images/rest3.svg">
+            <hr class="my-4">
+            @*// Text examples
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
+            <a href="/Dishes/Index" class="card-link">Dishes list</a>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+@*<div class="container">
+        <h3>Welcome</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="carousel slide multi-item-carousel" id="theCarousel">
+                    <div class="carousel-inner ">
+                        <div class="item active">
+                            <div class="col-xs-4"> <a asp-area="" asp-controller="Restaurants" asp-action="Index"><img src="~/images/rest.svg" class="img-responsive"></a></div>
+                                <div class="col-xs-4  col-xs-offset-4">
+                                    <h1>Restaurants</h1>
+                                    <p>Click <a asp-area="" asp-controller="Restaurants" asp-action="Index"> here </a> for more info</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-4"><a asp-area="" asp-controller="Chefs" asp-action="Index"><img src="~/images/rest2.svg" class="img-responsive"></a></div>
+                                <div class="col-xs-4  col-xs-offset-4">
+                                    <h1>Chefs</h1>
+                                    <p>Click <a asp-area="" asp-controller="Chefs" asp-action="Index"> here </a> for more info</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-4"><a asp-area="" asp-controller="Dishes" asp-action="Index"><img src="~/images/rest3.svg" class="img-responsive"></a></div>
+                                <div class="col-xs-4  col-xs-offset-4 ">
+                                    <h1>Dishes</h1>
+                                    <p>Click <a asp-area="" asp-controller="Dishes" asp-action="Index"> here </a> for more info</p>
+                                </div>
+                            </div>
+                        </div>
+                    <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                    <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>*@
 
 
 <!--
