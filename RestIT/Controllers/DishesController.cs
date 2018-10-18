@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -56,6 +57,7 @@ namespace RestIT.Controllers
         }
 
         // GET: Dishes/Create
+        [Authorize(Roles = "CustomerAdministrators")]
         public IActionResult Create()
         {
             return View();
@@ -66,6 +68,7 @@ namespace RestIT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> Create([Bind("ID,dishName,dishCost,dishRating,dishType,dishIngredients,dishImage")] Dish dish)
         {
             if (ModelState.IsValid)
@@ -78,6 +81,7 @@ namespace RestIT.Controllers
         }
 
         // GET: Dishes/Edit/5
+        [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -98,6 +102,7 @@ namespace RestIT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> Edit(int id, [Bind("ID,dishName,dishCost,dishRating,dishType,dishIngredients,dishImage")] Dish dish)
         {
             if (id != dish.ID)
@@ -129,6 +134,7 @@ namespace RestIT.Controllers
         }
 
         // GET: Dishes/Delete/5
+        [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,6 +155,7 @@ namespace RestIT.Controllers
         // POST: Dishes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var dish = await _context.Dish.FindAsync(id);

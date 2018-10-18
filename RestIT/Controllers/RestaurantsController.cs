@@ -11,7 +11,6 @@ using RestIT.Models;
 
 namespace RestIT.Controllers
 {
-    [Authorize(Roles = "CustomerAdministrators")]
     public class RestaurantsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -59,6 +58,7 @@ namespace RestIT.Controllers
         }
 
         // GET: Restaurants/Create
+        [Authorize(Roles = "CustomerAdministrators")]
         public IActionResult Create()
         {
             return View();
@@ -69,6 +69,7 @@ namespace RestIT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> Create([Bind("ID,restName,restLocation,restRating,restType,restKosher")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
@@ -81,6 +82,7 @@ namespace RestIT.Controllers
         }
 
         // GET: Restaurants/Edit/5
+        [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -101,6 +103,7 @@ namespace RestIT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> Edit(int id, [Bind("ID,restName,restLocation,restRating,restType,restKosher")] Restaurant restaurant)
         {
             if (id != restaurant.ID)
@@ -132,6 +135,7 @@ namespace RestIT.Controllers
         }
 
         // GET: Restaurants/Delete/5
+        [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -152,6 +156,7 @@ namespace RestIT.Controllers
         // POST: Restaurants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var restaurant = await _context.Restaurant.FindAsync(id);
