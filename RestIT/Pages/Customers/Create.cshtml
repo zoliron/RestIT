@@ -1,0 +1,45 @@
+@page
+@model RestIT.Pages.Customers.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h2>Create</h2>
+<h4>Customer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Customer.custName" class="control-label"></label>
+                <input asp-for="Customer.custName" class="form-control" />
+                <span asp-validation-for="Customer.custName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.custAge" class="control-label"></label>
+                <input asp-for="Customer.custAge" class="form-control" />
+                <span asp-validation-for="Customer.custAge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.custPhone" class="control-label"></label>
+                <input asp-for="Customer.custPhone" class="form-control" />
+                <span asp-validation-for="Customer.custPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.custMail" class="control-label"></label>
+                <input asp-for="Customer.custMail" class="form-control" />
+                <span asp-validation-for="Customer.custMail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
