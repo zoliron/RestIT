@@ -40,6 +40,39 @@
                     </label>
                 </div>
             </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                   
+                        <table>
+                            <tr>
+                                @{
+                                    int cnt = 0;
+                                    List<RestIT.Models.Dish> dishes = ViewBag.Dishes;
+
+                                    foreach (var dish in dishes)
+                                    {
+                                        if (cnt++ % 3 == 0)
+                                        {
+                                        @:</tr><tr>
+                                        }
+                                        @:<td>
+                                        <input type="checkbox"
+                                               name="selectedDishes"
+                                               value="@dish.ID"
+                                               @(Html.Raw(dish.assigned ? "checked=\"checked\"" : "")) />
+                                        @dish.dishName @:
+                                         @:</td>
+                                    }
+                                @:</tr>
+                                }
+                            </table>
+                    </div>
+                </div>
+
+
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

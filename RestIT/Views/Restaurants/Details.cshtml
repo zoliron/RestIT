@@ -40,6 +40,18 @@
         <dd>
             @Html.DisplayFor(model => model.restKosher)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dishes)
+        </dt>
+        <dd>
+            @{
+                foreach (var dish in Model.Dishes)
+                {
+                    @dish.dishName @:  <br />
+                }
+             }
+         </dd>
+
     </dl>
 </div>
 <div>
