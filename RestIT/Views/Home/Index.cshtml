@@ -11,8 +11,8 @@
                     <img style="height: 120px; width: 100%; display: block;" src="~/images/rest.svg">
                     <hr class="my-4">
                     @*// Text examples
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
                     <a href="/Restaurants/Index" class="card-link">Resaurants list</a>
                 </div>
             </div>
@@ -26,8 +26,8 @@
                     <img style="height: 120px; width: 100%; display: block;" src="~/images/rest2.svg">
                     <hr class="my-4">
                     @*// Text examples
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
                     <a href="/Chefs/Index" class="card-link">Chefs list</a>
                 </div>
             </div>
@@ -41,14 +41,38 @@
                     <img style="height: 120px; width: 100%; display: block;" src="~/images/rest3.svg">
                     <hr class="my-4">
                     @*// Text examples
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
                     <a href="/Dishes/Index" class="card-link">Dishes list</a>
                 </div>
             </div>
         </div>
+
+        <div id="googleMap" style="width:100%;height:300px;"></div>
+        <script>
+            function myMap() {
+                var mapProp = {
+                    center: new google.maps.LatLng(31.771959,35.217018),
+                    zoom: 10,
+                };
+                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                var marker = new google.maps.Marker({position: { lat:32.079607, lng:34.768794}, map: map });
+            }
+
+            //Add Marker Function
+           /* function addMarker(coords) {
+                var marker = new google.maps.marker({
+                    position: { lat: 32.079607, lng: 34.768794 }, map: map
+                });
+
+            }*/
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGNm5igtfDIpBwyHIklk36mPHXA5TYspc&callback=myMap"></script>
     </div>
 </div>
+
+
 
 <!--
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
