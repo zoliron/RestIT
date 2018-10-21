@@ -29,7 +29,8 @@ namespace RestIT.Data
                 var managerID = await EnsureUser(serviceProvider, testUserPw, "manager@restit.com");
                 await EnsureRole(serviceProvider, managerID, Constants.CustomerManagersRole);
 
-                SeedDB(context, adminID);
+                SeedCustomerDB(context, adminID);
+                SeedChefDB(context, adminID);
             }
         }
 
@@ -73,7 +74,8 @@ namespace RestIT.Data
             return IR;
         }
 
-        public static void SeedDB(ApplicationDbContext context, string adminID)
+        #region SeedCustomerDB
+        public static void SeedCustomerDB(ApplicationDbContext context, string adminID)
         {
             if (context.Customer.Any())
             {
@@ -89,9 +91,65 @@ namespace RestIT.Data
                     custMail = "ronen1245@gmail.com",
                     Status = CustomerStatus.Approved,
                     OwnerID = adminID
-                }
-                );
+                });
             context.SaveChanges();
+        } 
+        #endregion
+
+        #region SeedChefDB
+        public static void SeedChefDB(ApplicationDbContext context, string adminID)
+        {
+            if (context.Chef.Any())
+            {
+                return;   // DB has been seeded
             }
+            context.Chef.AddRange(
+                new Chef
+                {
+                    chefName = "Eyal Shani"
+                },
+                new Chef
+                {
+                    chefName = "Haim Cohen"
+                },
+                new Chef
+                {
+                    chefName = "Shaul Ben Aderet"
+                },
+                new Chef
+                {
+                    chefName = "Yossi Shitrit"
+                },
+                new Chef
+                {
+                    chefName = "Assaf Granit"
+                },
+                new Chef
+                {
+                    chefName = "Ran Shmueli"
+                },
+                new Chef
+                {
+                    chefName = "Yuval Ben Neriah"
+                },
+                new Chef
+                {
+                    chefName = "David Frenkel"
+                },
+                new Chef
+                {
+                    chefName = "Tomer Agai"
+                },
+                new Chef
+                {
+                    chefName = "Avivit Priel Avichai"
+                },
+                new Chef
+                {
+                    chefName = "Dana Yarzin"
+                });
+            context.SaveChanges();
+        } 
+        #endregion
     }
 }
