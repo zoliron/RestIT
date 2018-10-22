@@ -24,6 +24,7 @@ namespace RestIT.Models
         public String restType { get; set; }
         [DisplayName("Kosher")]
         public Boolean restKosher { get; set; }
-
+        public double Lat{ get; set; }
+        public double Lng { get; set; }
     }
 }
