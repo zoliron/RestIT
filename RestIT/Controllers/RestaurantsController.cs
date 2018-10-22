@@ -28,7 +28,7 @@ namespace RestIT.Controllers
                 restaurants = restaurants.Where(s => s.restName.Contains(searchString));
             }
 
-            return View(_context.Restaurant.Include(q => q.Dishes).ToList());
+            return View(await restaurants.ToListAsync());
 
         }
 
