@@ -18,7 +18,7 @@ namespace RestIT.Models
         [Required(ErrorMessage = "Please enter your rate")]
         [Range(0, 5, ErrorMessage = "Enter number between 0 to 5")]
         [DisplayName("Restuarant Rating")]
-        public float restRating { get; set; }
+        public double restRating { get; set; }
         public virtual ICollection<Dish> Dishes { get; set; }
         [DisplayName("Restuarant Type")]
         public String restType { get; set; }

@@ -31,6 +31,7 @@ namespace RestIT.Data
 
                 SeedCustomerDB(context, adminID);
                 SeedChefDB(context, adminID);
+                SeedRestaurantDB(context, adminID);
             }
         }
 
@@ -147,6 +148,195 @@ namespace RestIT.Data
                 new Chef
                 {
                     chefName = "Dana Yarzin"
+                });
+            context.SaveChanges();
+        }
+        #endregion
+
+        #region SeedRestaurantDB
+        public static void SeedRestaurantDB(ApplicationDbContext context, string adminID)
+        {
+            if (context.Restaurant.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            context.Restaurant.AddRange(
+                new Restaurant
+                {
+                    restName = "The Blue Rooster",
+                    restLocation = "Nissim Aloni 10, Tel Aviv",
+                    restRating = 4,
+                    restType = "Prestige",
+                    restKosher = true,
+                },
+                new Restaurant
+                {
+                    restName = "Yaffo Tel Aviv",
+                    restLocation = "Yigal Alon 98, Tel Aviv",
+                    restRating = 3,
+                    restType = "Mediterranean",
+                    restKosher = true,
+                },
+                new Restaurant
+                {
+                    restName = "Mashya",
+                    restLocation = "5 Mendeli st., Tel Aviv",
+                    restRating = 4,
+                    restType = "Fishes, Meat",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "MachneYuda",
+                    restLocation = "Beit Jacob 10, Jerusalem",
+                    restRating = 3,
+                    restType = "Mediterranean",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Claro",
+                    restLocation = "Ha''arbaa st 23, Tel Aviv",
+                    restRating = 4,
+                    restType = "Fishes, Meat",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Taizu",
+                    restLocation = "Menahim Begin 23, Tel Aviv",
+                    restRating = 5,
+                    restType = "Asian",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Pronto",
+                    restLocation = "Hertzel 6, Tel Aviv",
+                    restRating = 4,
+                    restType = "Italian",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Girrafe",
+                    restLocation = "Ibn Gabirol 49, Tel Aviv",
+                    restRating = 3,
+                    restType = "Asian",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "The Old Lady",
+                    restLocation = "Amiad 14, Tel Aviv",
+                    restRating = 5,
+                    restType = "Pizza",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Rustico",
+                    restLocation = "Rothschild blvd. 15, Tel Aviv",
+                    restRating = 4.5,
+                    restType = "Italian",
+                    restKosher = true,
+                },
+                new Restaurant
+                {
+                    restName = "2C",
+                    restLocation = "Menachem Begin 132, Tel Aviv",
+                    restRating = 5,
+                    restType = "Prestige, Mediterranean",
+                    restKosher = true,
+                },
+                new Restaurant
+                {
+                    restName = "Alabama",
+                    restLocation = "Pinkas David 47, Netanya",
+                    restRating = 5,
+                    restType = "Meat",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Limousine",
+                    restLocation = "Horesh HaAlonim St 14, Ramat Yishai",
+                    restRating = 4,
+                    restType = "Meat",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Whale",
+                    restLocation = "Ha-Yam St. 6, Eilat",
+                    restRating = 4,
+                    restType = "French, Mediterranean,  Fishes",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Santa Katarina",
+                    restLocation = "Har Sinai 2, Tel Aviv",
+                    restRating = 4,
+                    restType = "Chef Restaurant",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Ouzeria",
+                    restLocation = "Metalon 44, Tel Aviv",
+                    restRating = 3,
+                    restType = "Mediterranean, Fishes",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Dallal",
+                    restLocation = "Shabazi 10, Tel Aviv",
+                    restRating = 5,
+                    restType = "Mediterranean, Europe, Fishes, Pasta",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Suzana",
+                    restLocation = "Shabazi 9, Tel Aviv",
+                    restRating = 4,
+                    restType = "Mediterranean, Meat, Homemade food, Fishes, Stews, Breakfest ",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Golda",
+                    restLocation = "Mikve Israel 18, Tel Aviv",
+                    restRating = 5,
+                    restType = "Ice cream parlor, Desserts",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Aldo",
+                    restLocation = "Allenby 1, Tel Aviv",
+                    restRating = 4,
+                    restType = "Ice cream parlor, Desserts",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Taqueria",
+                    restLocation = "Levontin 28, Tel Aviv",
+                    restRating = 5,
+                    restType = "Mexican",
+                    restKosher = false,
+                },
+                new Restaurant
+                {
+                    restName = "Jericho",
+                    restLocation = "Pinchas Ben Yair 4, Tel Aviv",
+                    restRating = 5,
+                    restType = "Mediterranean,  Fishes, Meat",
+                    restKosher = false,
                 });
             context.SaveChanges();
         } 
