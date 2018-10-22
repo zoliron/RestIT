@@ -32,6 +32,7 @@ namespace RestIT.Data
                 SeedCustomerDB(context, adminID);
                 SeedChefDB(context, adminID);
                 SeedRestaurantDB(context, adminID);
+                SeedDishDB(context, adminID);
             }
         }
 
@@ -337,6 +338,235 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = "Mediterranean,  Fishes, Meat",
                     restKosher = false,
+                });
+            context.SaveChanges();
+        }
+        #endregion
+
+        #region SeedDishDB
+        public static void SeedDishDB(ApplicationDbContext context, string adminID)
+        {
+            if (context.Dish.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            context.Dish.AddRange(
+                new Dish
+                {
+                    dishName = "Cheese stuffed mushrooms",
+                    dishCost = 100,
+                    dishRating = 4,
+                    dishType = "First dish",
+                    dishIngredients = "Mushrooms, Cheese, Garlic, Coriander, Cream",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Fish & Chips",
+                    dishCost = 60,
+                    dishRating = 3,
+                    dishType = "First dish",
+                    dishIngredients = "Bass fish, Potatoes, Coriander, Garlic, Onions, Carrot",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Carpaccio",
+                    dishCost = 60,
+                    dishRating = 5,
+                    dishType = "First dish",
+                    dishIngredients = "Beef tenderloin, Arugala, Vinaigrette sauce, Parmezan",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Chicken salad",
+                    dishCost = 54,
+                    dishRating = 4,
+                    dishType = "First dish",
+                    dishIngredients = "Chicken breast, Tomatoes, Lettuce, Cucumbers, Red peppers, Onions, Vinaigrette sauce",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Thai Style Sweet Chili",
+                    dishCost = 59,
+                    dishRating = 3,
+                    dishType = "First dish",
+                    dishIngredients = "Sweet chili sauce, Chicken wings, Parsley",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Sushi tempura",
+                    dishCost = 56,
+                    dishRating = 4,
+                    dishType = "First dish",
+                    dishIngredients = "Rice, Salmon fish, Avocado, Cream cheese, Tamago, Panko bread crumbs",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Greek Salad",
+                    dishCost = 49,
+                    dishRating = 4,
+                    dishType = "First dish",
+                    dishIngredients = "Lettuce, Cucumbers, Red peppers, Onions, Tomatoes, Feta cheese, Fried mushrooms",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Chicken breast",
+                    dishCost = 75,
+                    dishRating = 5,
+                    dishType = "Main dish",
+                    dishIngredients = "Chicken breast, Peppers, Salt, Sweet potato fries, BBQ sauce",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Spaghetti alfredo",
+                    dishCost = 69,
+                    dishRating = 4,
+                    dishType = "Main dish",
+                    dishIngredients = "Mushrooms, Sour cream, Onions, Black pepper, Parmesan cheese",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Spaghetti bolognese",
+                    dishCost = 69,
+                    dishRating = 5,
+                    dishType = "Main dish",
+                    dishIngredients = "Beef, Tomatoes sauce, Onions, Carrots, Coriander, Paprika",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "chicken curry",
+                    dishCost = 75,
+                    dishRating = 5,
+                    dishType = "Main dish",
+                    dishIngredients = "Green curry, Cabbage, Sprouts, Peas, coconut milk",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Pad thai",
+                    dishCost = 75,
+                    dishRating = 4,
+                    dishType = "Main dish",
+                    dishIngredients = "Sprouts, Carrot, Mushrooms, Cabbage, Red pepper",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Hamburger",
+                    dishCost = 84,
+                    dishRating = 5,
+                    dishType = "Main dish",
+                    dishIngredients = "Beef, Tomatoes, Onions, Lettuce, Pickles, Mayonnaise",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Salmon fillet",
+                    dishCost = 110,
+                    dishRating = 5,
+                    dishType = "Main dish",
+                    dishIngredients = "Salmon, Lemon juice, Parsley, English black pepper, Olive oil",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Schnitzel with fries",
+                    dishCost = 89,
+                    dishRating = 5,
+                    dishType = "Main dish",
+                    dishIngredients = "Chicken schnitzel, Bread crumbs, Potatoes",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Entrecote",
+                    dishCost = 120,
+                    dishRating = 5,
+                    dishType = "Main dish",
+                    dishIngredients = "Beef entrecote",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Chocolate souffle",
+                    dishCost = 39,
+                    dishRating = 5,
+                    dishType = "Desert",
+                    dishIngredients = "Heavy cream, Dark chocolate, Milk, Flour",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Creme brulee",
+                    dishCost = 39,
+                    dishRating = 5,
+                    dishType = "Desert",
+                    dishIngredients = "Brown sugar, Heavy cream, Eggs, Bananas",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Cheesecake with cranberries",
+                    dishCost = 39,
+                    dishRating = 5,
+                    dishType = "Desert",
+                    dishIngredients = "Cracker crumbs, Cream cheese, Eggs, Vanilla, Cranberries sauce",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Pavlova",
+                    dishCost = 39,
+                    dishRating = 5,
+                    dishType = "Desert",
+                    dishIngredients = "Whipped cream , Fresh strawberries, Eggs",
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Coca Cola",
+                    dishCost = 14,
+                    dishRating = 0,
+                    dishType = "Beverage",
+                    dishIngredients = null,
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Water",
+                    dishCost = 10,
+                    dishRating = 0,
+                    dishType = "Beverage",
+                    dishIngredients = null,
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Orange juice",
+                    dishCost = 17,
+                    dishRating = 0,
+                    dishType = "Beverage",
+                    dishIngredients = null,
+                    dishImage = null
+                },
+                new Dish
+                {
+                    dishName = "Sprite",
+                    dishCost = 14,
+                    dishRating = 0,
+                    dishType = "Beverage",
+                    dishIngredients = null,
+                    dishImage = null
                 });
             context.SaveChanges();
         } 
