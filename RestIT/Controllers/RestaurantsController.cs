@@ -17,19 +17,32 @@ namespace RestIT.Controllers
         private readonly ApplicationDbContext _context;
         // GET: Restaurants
 
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string RestaurantType, string searchString)
         {
+            // Use LINQ to get list of genres.
+            IQueryable<string> genreQuery = from m in _context.Restaurant
+                                            orderby m.restType
+                                            select m.restType;
 
             var restaurants = from m in _context.Restaurant
-                              select m;
+                         select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 restaurants = restaurants.Where(s => s.restName.Contains(searchString));
             }
 
-            return View(await restaurants.ToListAsync());
+            if (!String.IsNullOrEmpty(RestaurantType))
+            {
+                restaurants = restaurants.Where(x => x.restType == RestaurantType);
+            }
 
+            var restaurantTypeVM = new RestaurantTypeViewModel();
+            restaurantTypeVM.Types = new SelectList(await genreQuery.Distinct().ToListAsync());
+            restaurantTypeVM.Restaurants = await restaurants.ToListAsync();
+            restaurantTypeVM.SearchString = searchString;
+
+            return View(restaurantTypeVM);
         }
 
 
