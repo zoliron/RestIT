@@ -17,19 +17,32 @@ namespace RestIT.Controllers
         private readonly ApplicationDbContext _context;
         // GET: Restaurants
 
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string RestaurantType, string searchString)
         {
+            // Use LINQ to get list of genres.
+            IQueryable<string> genreQuery = from m in _context.Restaurant
+                                            orderby m.restType
+                                            select m.restType;
 
-            var restaurants = from m in _context.Restaurant.Include(q => q.Dishes)
-                              select m;
+            var restaurants = from m in _context.Restaurant
+                         select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 restaurants = restaurants.Where(s => s.restName.Contains(searchString));
             }
 
-            return View(await restaurants.ToListAsync());
+            if (!String.IsNullOrEmpty(RestaurantType))
+            {
+                restaurants = restaurants.Where(x => x.restType == RestaurantType);
+            }
 
+            var restaurantTypeVM = new RestaurantTypeViewModel();
+            restaurantTypeVM.Types = new SelectList(await genreQuery.Distinct().ToListAsync());
+            restaurantTypeVM.Restaurants = await restaurants.ToListAsync();
+            restaurantTypeVM.SearchString = searchString;
+
+            return View(restaurantTypeVM);
         }
 
 
@@ -116,7 +129,7 @@ namespace RestIT.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
         //  public async Task<IActionResult> Edit(int id, string[] selectedDishes, [Bind("ID,restName,restLocation,restRating,restType,restKosher,Dishes")] Restaurant restaurant )
-        public ActionResult Edit(int? id, string[] selectedDishes,Restaurant rest)
+        public ActionResult Edit(int? id, string[] selectedDishes)
         {
             if (id == null)
             {
@@ -124,19 +137,7 @@ namespace RestIT.Controllers
             }
             var restaurant = _context.Restaurant.Include(q => q.Dishes)
                .Where(i => i.ID == id)
-              .Single();
-            //Restaurant restaurant = new Restaurant();
-            restaurant.restKosher = rest.restKosher;
-            restaurant.restLocation = rest.restLocation;
-            restaurant.restName = rest.restName;
-            restaurant.restRating = rest.restRating;
-            restaurant.restType = rest.restType;
-            restaurant.ID = rest.ID; 
-            
-            
-            
-
-
+               .Single();
 
             if (ModelState.IsValid)
             {
