@@ -20,7 +20,7 @@ namespace RestIT.Controllers
         public async Task<IActionResult> Index(string searchString)
         {
 
-            var restaurants = from m in _context.Restaurant
+            var restaurants = from m in _context.Restaurant.Include(q => q.Dishes)
                               select m;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -116,7 +116,7 @@ namespace RestIT.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
         //  public async Task<IActionResult> Edit(int id, string[] selectedDishes, [Bind("ID,restName,restLocation,restRating,restType,restKosher,Dishes")] Restaurant restaurant )
-        public ActionResult Edit(int? id, string[] selectedDishes)
+        public ActionResult Edit(int? id, string[] selectedDishes,Restaurant rest)
         {
             if (id == null)
             {
@@ -124,7 +124,19 @@ namespace RestIT.Controllers
             }
             var restaurant = _context.Restaurant.Include(q => q.Dishes)
                .Where(i => i.ID == id)
-               .Single();
+              .Single();
+            //Restaurant restaurant = new Restaurant();
+            restaurant.restKosher = rest.restKosher;
+            restaurant.restLocation = rest.restLocation;
+            restaurant.restName = rest.restName;
+            restaurant.restRating = rest.restRating;
+            restaurant.restType = rest.restType;
+            restaurant.ID = rest.ID; 
+            
+            
+            
+
+
 
             if (ModelState.IsValid)
             {
