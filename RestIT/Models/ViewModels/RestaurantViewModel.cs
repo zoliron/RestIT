@@ -7,7 +7,7 @@ namespace RestIT.Models.ViewModels
 {
     public class RestaurantViewModel : Restaurant
     {
-        public RestaurantViewModel(){}
+        public RestaurantViewModel() { }
         public RestaurantViewModel(Restaurant rest)
         {
             this.restKosher = rest.restKosher;
