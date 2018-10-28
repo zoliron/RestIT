@@ -2,21 +2,36 @@
 @{
     ViewData["Title"] = "Index";
 }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/js/RestIT.js"></script>
+
+
+
+
 <h2>Dishes List</h2>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<form asp-controller="Dishes" asp-action="Index" method="get">
 
-    <p>
-        <select asp-for="DishType" asp-items="Model.Types">
-            <option value="">All Types</option>
-        </select>
+<div class="row">
+    <form asp-controller="Dishes" asp-action="Index" method="get">
+        <span class="col-md-6">
+            Dish Name: <input asp-for="SearchString">
+            <button type="submit" class="btn btn-secondary"> Filter</button>
+        </span>
+        <span class="col-md-6">
+            <button type="button" class="btn btn-outline-secondary btn-sm">Advance Search</button>
+            <span id="div1" style="display:none;">
+                <select asp-for="DishType" asp-items="Model.Types">
+                    <option value="">All Types</option>
+                </select>
+            </span>
+        </span>
+    </form>
+</div>
 
-        Title: <input asp-for="SearchString">
-        <input type="submit" value="Filter" />
-    </p>
-</form>
+
 <table class="table table-hover">
     <thead>
         <tr>
