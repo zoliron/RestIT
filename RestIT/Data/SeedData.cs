@@ -166,7 +166,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "The Blue Rooster",
-                    restLocation = "Nissim Aloni 10, Tel Aviv",
+                    restAddress = "Nissim Aloni 10",
+                    restCity = "Tel Aviv",
                     restRating = 4,
                     restType = "Prestige",
                     restKosher = true,
@@ -176,7 +177,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Yaffo Tel Aviv",
-                    restLocation = "Yigal Alon 98, Tel Aviv",
+                    restAddress = "Yigal Alon 98",
+                    restCity = "Tel Aviv",
                     restRating = 3,
                     restType = "Mediterranean",
                     restKosher = true,
@@ -186,7 +188,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Mashya",
-                    restLocation = "5 Mendeli st., Tel Aviv",
+                    restAddress = "5 Mendeli st.",
+                    restCity = "Tel Aviv",
                     restRating = 4,
                     restType = "Fishes, Meat",
                     restKosher = false,
@@ -196,7 +199,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "MachneYuda",
-                    restLocation = "Beit Jacob 10, Jerusalem",
+                    restAddress = "Beit Jacob 10",
+                    restCity = "Jerusalem",
                     restRating = 3,
                     restType = "Mediterranean",
                     restKosher = false,
@@ -206,7 +210,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Claro",
-                    restLocation = "Ha''arbaa st 23, Tel Aviv",
+                    restAddress = "Ha''arbaa st 23",
+                    restCity = "Tel Aviv",
                     restRating = 4,
                     restType = "Fishes, Meat",
                     restKosher = false,
@@ -216,7 +221,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Taizu",
-                    restLocation = "Menahim Begin 23, Tel Aviv",
+                    restAddress = "Menahim Begin 23",
+                    restCity = "Tel Aviv",
                     restRating = 5,
                     restType = "Asian",
                     restKosher = false,
@@ -226,7 +232,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Pronto",
-                    restLocation = "Hertzel 6, Tel Aviv",
+                    restAddress = "Hertzel 6",
+                    restCity = "Tel Aviv",
                     restRating = 4,
                     restType = "Italian",
                     restKosher = false,
@@ -236,7 +243,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Girrafe",
-                    restLocation = "Ibn Gabirol 49, Tel Aviv",
+                    restAddress = "Ibn Gabirol 49",
+                    restCity = "Tel Aviv",
                     restRating = 3,
                     restType = "Asian",
                     restKosher = false,
@@ -246,7 +254,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "The Old Lady",
-                    restLocation = "Amiad 14, Tel Aviv",
+                    restAddress = "Amiad 14",
+                    restCity = "Tel Aviv",
                     restRating = 5,
                     restType = "Pizza",
                     restKosher = false,
@@ -256,7 +265,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Rustico",
-                    restLocation = "Rothschild blvd. 15, Tel Aviv",
+                    restAddress = "Rothschild blvd. 15",
+                    restCity = "Tel Aviv",
                     restRating = 4.5,
                     restType = "Italian",
                     restKosher = true,
@@ -266,7 +276,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "2C",
-                    restLocation = "Menachem Begin 132, Tel Aviv",
+                    restAddress = "Menachem Begin 132",
+                    restCity = "Tel Aviv",
                     restRating = 5,
                     restType = "Prestige, Mediterranean",
                     restKosher = true,
@@ -276,7 +287,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Alabama",
-                    restLocation = "Pinkas David 47, Netanya",
+                    restAddress = "Pinkas David 47",
+                    restCity = "Netanya",
                     restRating = 5,
                     restType = "Meat",
                     restKosher = false,
@@ -286,7 +298,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Limousine",
-                    restLocation = "Horesh HaAlonim St 14, Ramat Yishai",
+                    restAddress = "Horesh HaAlonim St 14",
+                    restCity = "Ramat Yishai",
                     restRating = 4,
                     restType = "Meat",
                     restKosher = false,
@@ -296,7 +309,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Whale",
-                    restLocation = "Ha-Yam St. 6, Eilat",
+                    restAddress = "Ha-Yam St. 6",
+                    restCity = "Eilat",
                     restRating = 4,
                     restType = "French, Mediterranean,  Fishes",
                     restKosher = false,
@@ -306,7 +320,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Santa Katarina",
-                    restLocation = "Har Sinai 2, Tel Aviv",
+                    restAddress = "Har Sinai 2",
+                    restCity = "Tel Aviv",
                     restRating = 4,
                     restType = "Chef Restaurant",
                     restKosher = false,
@@ -316,7 +331,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Ouzeria",
-                    restLocation = "Metalon 44, Tel Aviv",
+                    restAddress = "Metalon 44",
+                    restCity = "Tel Aviv",
                     restRating = 3,
                     restType = "Mediterranean, Fishes",
                     restKosher = false,
@@ -326,7 +342,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Dallal",
-                    restLocation = "Shabazi 10, Tel Aviv",
+                    restAddress = "Shabazi 10",
+                    restCity = "Tel Aviv",
                     restRating = 5,
                     restType = "Mediterranean, Europe, Fishes, Pasta",
                     restKosher = false,
@@ -336,7 +353,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Suzana",
-                    restLocation = "Shabazi 9, Tel Aviv",
+                    restAddress = "Shabazi 9",
+                    restCity = "Tel Aviv",
                     restRating = 4,
                     restType = "Mediterranean, Meat, Homemade food, Fishes, Stews, Breakfest ",
                     restKosher = false,
@@ -346,7 +364,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Golda",
-                    restLocation = "Mikve Israel 18, Tel Aviv",
+                    restAddress = "Mikve Israel 18",
+                    restCity = "Tel Aviv",
                     restRating = 5,
                     restType = "Ice cream parlor, Desserts",
                     restKosher = false,
@@ -356,7 +375,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Aldo",
-                    restLocation = "Allenby 1, Tel Aviv",
+                    restAddress = "Allenby 1",
+                    restCity = "Tel Aviv",
                     restRating = 4,
                     restType = "Ice cream parlor, Desserts",
                     restKosher = false,
@@ -366,7 +386,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Taqueria",
-                    restLocation = "Levontin 28, Tel Aviv",
+                    restAddress = "Levontin 28",
+                    restCity = "Tel Aviv",
                     restRating = 5,
                     restType = "Mexican",
                     restKosher = false,
@@ -376,7 +397,8 @@ namespace RestIT.Data
                 new Restaurant
                 {
                     restName = "Jericho",
-                    restLocation = "Pinchas Ben Yair 4, Tel Aviv",
+                    restAddress = "Pinchas Ben Yair 4",
+                    restCity = "Tel Aviv",
                     restRating = 5,
                     restType = "Mediterranean,  Fishes, Meat",
                     restKosher = false,

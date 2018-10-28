@@ -13,8 +13,10 @@ namespace RestIT.Models
         public virtual Chef Chef { get; set; }
         [DisplayName("Restuarant Name")]
         public String restName { get; set; }
-        [DisplayName("Restuarant Location")]
-        public String restLocation { get; set; }
+        [DisplayName("Restuarant Address")]
+        public String restAddress { get; set; }
+        [DisplayName("Restuarant City")]
+        public String restCity { get; set; }
         [Required(ErrorMessage = "Please enter your rate")]
         [Range(0, 5, ErrorMessage = "Enter number between 0 to 5")]
         [DisplayName("Restuarant Rating")]

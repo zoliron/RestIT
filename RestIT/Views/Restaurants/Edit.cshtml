@@ -19,9 +19,14 @@
                 <span asp-validation-for="restName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="restLocation" class="control-label"></label>
-                <input asp-for="restLocation" class="form-control" />
-                <span asp-validation-for="restLocation" class="text-danger"></span>
+                <label asp-for="restAddress" class="control-label"></label>
+                <input asp-for="restAddress" class="form-control" />
+                <span asp-validation-for="restAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="restCity" class="control-label"></label>
+                <input asp-for="restCity" class="form-control" />
+                <span asp-validation-for="restCity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="restRating" class="control-label"></label>
@@ -44,39 +49,39 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                   
-                        <table>
-                            <tr>
-                                @{
-                                    int cnt = 0;
-                                    List<RestIT.Models.Dish> dishes = ViewBag.Dishes;
 
-                                    foreach (var dish in dishes)
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                List<RestIT.Models.Dish> dishes = ViewBag.Dishes;
+
+                                foreach (var dish in dishes)
+                                {
+                                    if (cnt++ % 3 == 0)
                                     {
-                                        if (cnt++ % 3 == 0)
-                                        {
-                                        @:</tr><tr>
-                                        }
-                                        @:<td>
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
                                         <input type="checkbox"
                                                name="selectedDishes"
                                                value="@dish.ID"
                                                @(Html.Raw(dish.assigned ? "checked=\"checked\"" : "")) />
                                         @dish.dishName @:
-                                         @:</td>
-                                    }
-                                @:</tr>
+                                    @:</td>
                                 }
-                            </table>
+                            @:</tr>
+                            }
+                        </table>
                     </div>
                 </div>
 
 
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
     </div>
 </div>
 

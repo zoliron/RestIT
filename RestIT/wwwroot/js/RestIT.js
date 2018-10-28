@@ -1,11 +1,11 @@
 ﻿$(document).ready(function () {
     $("button").click(function () {
-        $("#RestaurantAdvanceSearch").fadeToggle('slow');
+        $("#RestaurantAdvancedSearch").fadeToggle('slow');
     });
 });
 
 $(document).ready(function () {
     $("button").click(function () {
-        $("#DishAdvanceSearch").fadeToggle('slow');
+        $("#DishAdvancedSearch").fadeToggle('slow');
     });
 });

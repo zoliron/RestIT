@@ -20,13 +20,13 @@
         </span>
 
         <span class="col-md-6">
-            <button type="button" class="btn btn-outline-secondary btn-sm">Advance Search</button>
-            <span id="RestaurantAdvanceSearch" style="display:none;">
+            <button type="button" class="btn btn-outline-secondary btn-sm">Advanced Search</button>
+            <span id="RestaurantAdvancedSearch" style="display:none;">
                 <select asp-for="RestaurantType" asp-items="Model.Types">
                     <option value="">All Types</option>
                 </select>
 
-                <select asp-for="RestaurantLocation" asp-items="Model.Locations">
+                <select asp-for="RestaurantCity" asp-items="Model.Citys">
                     <option value="">All Locations</option>
                 </select>
             </span>
@@ -41,7 +41,10 @@
                 @Html.DisplayNameFor(model => model.Restaurants[0].restName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Restaurants[0].restLocation)
+                @Html.DisplayNameFor(model => model.Restaurants[0].restAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurants[0].restCity)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Restaurants[0].restRating)
@@ -61,29 +64,32 @@
     <tbody>
         @foreach (var item in Model.Restaurants)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.restName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.restLocation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.restRating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.restType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.restKosher)
-                </td>
-                <td>
-                    @{
-                        if (item.Dishes != null)
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.restName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.restAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.restCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.restRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.restType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.restKosher)
+            </td>
+            <td>
+                @{
+                    if (item.Dishes != null)
+                    {
+                        foreach (var dish in item.Dishes)
                         {
-                            foreach (var dish in item.Dishes)
-                            {
-                                @dish.dishName @: <br />
+                            @dish.dishName @: <br />
 
 
 
@@ -92,16 +98,24 @@
 
 
 
-                            }
+
+
+
+
+
+
+
+
                         }
                     }
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
-            </tr>
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

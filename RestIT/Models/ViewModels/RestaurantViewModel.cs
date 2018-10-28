@@ -11,7 +11,8 @@ namespace RestIT.Models.ViewModels
         public RestaurantViewModel(Restaurant rest)
         {
             this.restKosher = rest.restKosher;
-            this.restLocation = rest.restLocation;
+            this.restAddress = rest.restAddress;
+            this.restCity = rest.restCity;
             this.restName = rest.restName;
             this.restRating = rest.restRating;
             this.restType = rest.restType;

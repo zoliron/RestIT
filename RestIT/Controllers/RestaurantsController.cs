@@ -17,16 +17,16 @@ namespace RestIT.Controllers
         private readonly ApplicationDbContext _context;
         // GET: Restaurants
 
-        public async Task<IActionResult> Index(string RestaurantType, string RestaurantLocation, double RestaurantRating, string searchString)
+        public async Task<IActionResult> Index(string RestaurantType, string RestaurantCity, double RestaurantRating, string searchString)
         {
             // Use LINQ to get list of genres.
             IQueryable<string> typeQuery = from m in _context.Restaurant
                                            orderby m.restType
                                             select m.restType;
 
-            IQueryable<string> locationQuery = from m in _context.Restaurant
-                                               orderby m.restLocation
-                                               select m.restLocation;
+            IQueryable<string> cityQuery = from m in _context.Restaurant
+                                               orderby m.restCity
+                                               select m.restCity;
 
             var restaurants = from m in _context.Restaurant.Include(q => q.Dishes)
                               select m;
@@ -36,9 +36,9 @@ namespace RestIT.Controllers
                 restaurants = restaurants.Where(s => s.restName.Contains(searchString));
             }
 
-            if (!String.IsNullOrEmpty(RestaurantLocation))
+            if (!String.IsNullOrEmpty(RestaurantCity))
             {
-                restaurants = restaurants.Where(x => x.restLocation == RestaurantLocation);
+                restaurants = restaurants.Where(x => x.restCity == RestaurantCity);
             }
 
             if (!String.IsNullOrEmpty(RestaurantType))
@@ -48,7 +48,7 @@ namespace RestIT.Controllers
 
             var restaurantSearchVM = new RestaurantSearchViewModel();
             restaurantSearchVM.Types = new SelectList(await typeQuery.Distinct().ToListAsync());
-            restaurantSearchVM.Locations = new SelectList(await locationQuery.Distinct().ToListAsync());
+            restaurantSearchVM.Citys = new SelectList(await cityQuery.Distinct().ToListAsync());
             restaurantSearchVM.Restaurants = await restaurants.ToListAsync();
             restaurantSearchVM.SearchString = searchString;
              return View(restaurantSearchVM);
@@ -149,7 +149,8 @@ namespace RestIT.Controllers
                .Single();
             //Restaurant restaurant = new Restaurant();
             restaurant.restKosher = rest.restKosher;
-            restaurant.restLocation = rest.restLocation;
+            restaurant.restAddress = restaurant.restAddress;
+            restaurant.restCity = rest.restCity;
             restaurant.restName = rest.restName;
             restaurant.restRating = rest.restRating;
             restaurant.restType = rest.restType;

@@ -10,9 +10,9 @@ namespace RestIT.Models.ViewModels
     {
         public List<Restaurant> Restaurants;
         public SelectList Types;
-        public SelectList Locations;
+        public SelectList Citys;
         public string RestaurantType { get; set; }
-        public string RestaurantLocation { get; set; }
+        public string RestaurantCity { get; set; }
         public string SearchString { get; set; }
     }
 }
