@@ -11,8 +11,10 @@ namespace RestIT.Models.ViewModels
         public List<Restaurant> Restaurants;
         public SelectList Types;
         public SelectList Citys;
+        public SelectList Chefs;
         public string RestaurantType { get; set; }
         public string RestaurantCity { get; set; }
         public string SearchString { get; set; }
+        public string RestaurantChef { get; set; }
     }
 }

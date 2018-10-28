@@ -4,7 +4,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - RestIT</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
 
+        .bg {
+            background-image: url("https://pune365.com/wp-content/uploads/2017/02/30287438_l.jpg");
+            height: 20%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-minty.css" />
         <link rel="stylesheet" href="~/css/RestIT.css" />
@@ -17,6 +30,7 @@
     </environment>
 </head>
 <body>
+    <div class="bg"></div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/Home">RestIT</a>
@@ -51,7 +65,7 @@
                 </form>
             </div>
         </div>
-                @await Html.PartialAsync("_LoginPartial")
+        @await Html.PartialAsync("_LoginPartial")
     </nav>
 
     <partial name="_CookieConsentPartial" />

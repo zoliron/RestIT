@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RestIT.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -192,10 +192,13 @@ namespace RestIT.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChefID = table.Column<int>(nullable: true),
                     restName = table.Column<string>(nullable: true),
-                    restLocation = table.Column<string>(nullable: true),
-                    restRating = table.Column<float>(nullable: false),
+                    restAddress = table.Column<string>(nullable: true),
+                    restCity = table.Column<string>(nullable: true),
+                    restRating = table.Column<double>(nullable: false),
                     restType = table.Column<string>(nullable: true),
-                    restKosher = table.Column<bool>(nullable: false)
+                    restKosher = table.Column<bool>(nullable: false),
+                    Lat = table.Column<double>(nullable: false),
+                    Lng = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -214,6 +217,7 @@ namespace RestIT.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    assigned = table.Column<bool>(nullable: false),
                     dishName = table.Column<string>(nullable: true),
                     dishCost = table.Column<int>(nullable: false),
                     dishRating = table.Column<float>(nullable: false),

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using RestIT.Data;
 using RestIT.Models;
 using RestIT.Models.ViewModels;
+using RestIT.ViewModels;
 
 namespace RestIT.Controllers
 {
@@ -17,7 +18,7 @@ namespace RestIT.Controllers
         private readonly ApplicationDbContext _context;
         // GET: Restaurants
 
-        public async Task<IActionResult> Index(string RestaurantType, string RestaurantCity, double RestaurantRating, string searchString)
+        public async Task<IActionResult> Index(string RestaurantType, string RestaurantCity, string RestaurantChef, double RestaurantRating, string searchString)
         {
             // Use LINQ to get list of genres.
             IQueryable<string> typeQuery = from m in _context.Restaurant
@@ -53,7 +54,6 @@ namespace RestIT.Controllers
             restaurantSearchVM.SearchString = searchString;
              return View(restaurantSearchVM);
         }
-
 
         public RestaurantsController(ApplicationDbContext context)
         {
@@ -94,7 +94,7 @@ namespace RestIT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
-        public async Task<IActionResult> Create([Bind("ID,restName,restLocation,restRating,restType,restKosher")] Restaurant restaurant,string[] selectedDishes)
+        public async Task<IActionResult> Create([Bind("ID,restName,restLocation,restRating,restType,restKosher,restChef")] Restaurant restaurant,string[] selectedDishes)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +109,6 @@ namespace RestIT.Controllers
         // GET: Restaurants/Edit/5
         [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> Edit(int? id)
-
         {
             if (id == null)
             {
@@ -117,18 +116,25 @@ namespace RestIT.Controllers
             }
 
             // var restaurant = await _context.Restaurant.Include(q=> q.Dishes).Where(q=>q.ID == id).FirstAsync();
-            var restaurant = await _context.Restaurant.Include(q => q.Dishes)
-                .Where(i => i.ID == id)
-                .FirstAsync();
+            //var restaurant = await _context.Restaurant.Include(q => q.Dishes)
+            //  .Where(i => i.ID == id)
+            //.FirstAsync();
 
+            var restaurant = await _context.Restaurant.FindAsync(id);
 
             CheckDishes(restaurant, _context);
             if (restaurant == null)
             {
                 return NotFound();
             }
-            return View(restaurant);
+            else
+            {
+                var getChefs = from chef in _context.Chef select chef;
+                var chefs = await getChefs.ToListAsync();
 
+                RestaurantViewModel restaurantViewModel = new RestaurantViewModel(restaurant, chefs);
+                return View(restaurantViewModel);
+            }
         }
 
         // POST: Restaurants/Edit/5
@@ -243,17 +249,13 @@ namespace RestIT.Controllers
 
 
         }
+
         private void UpdateDishes(string[] selectedDishes, Restaurant restaurant, ApplicationDbContext _context)
         {
             if (selectedDishes == null )
             {
                 restaurant.Dishes = new List<Dish>();
                 return;
-            }
-
-            if ( restaurant.Dishes == null)
-            {
-                restaurant.Dishes = new List<Dish>();
             }
 
             var selectedDishesHS = new HashSet<String>(selectedDishes);

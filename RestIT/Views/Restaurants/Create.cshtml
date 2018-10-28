@@ -1,4 +1,4 @@
-﻿@model RestIT.Models.Restaurant
+﻿@model RestIT.ViewModels.RestaurantViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -16,6 +16,10 @@
                 <label asp-for="restName" class="control-label"></label>
                 <input asp-for="restName" class="form-control" />
                 <span asp-validation-for="restName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="restChef" class="control-label"></label>
+                @Html.DropDownListFor(model => model.SelectedChef[0], new SelectList(Model.Chefs, "ChefID", "chefName"), "Select Chef")
             </div>
             <div class="form-group">
                 <label asp-for="restAddress" class="control-label"></label>
@@ -79,13 +83,13 @@
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
             </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

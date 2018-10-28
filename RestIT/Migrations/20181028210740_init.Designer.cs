@@ -10,14 +10,14 @@ using RestIT.Data;
 namespace RestIT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181022050513_RestaurantRating_ChangeToDouble")]
-    partial class RestaurantRating_ChangeToDouble
+    [Migration("20181028210740_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -257,9 +257,15 @@ namespace RestIT.Migrations
 
                     b.Property<int?>("ChefID");
 
-                    b.Property<bool>("restKosher");
+                    b.Property<double>("Lat");
 
-                    b.Property<string>("restLocation");
+                    b.Property<double>("Lng");
+
+                    b.Property<string>("restAddress");
+
+                    b.Property<string>("restCity");
+
+                    b.Property<bool>("restKosher");
 
                     b.Property<string>("restName");
 
