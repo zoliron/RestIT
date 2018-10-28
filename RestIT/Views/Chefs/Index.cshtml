@@ -7,11 +7,12 @@
     <a asp-action="Create">Create New</a>
 </p>
 <form asp-controller="Chefs" asp-action="Index" method="get">
-    <p>
-        Chef Name: <input type="text" name="SearchString">
-        <input type="submit" value="Filter" />
-    </p>
+        <span class="col-md-6">
+            Chef Name: <input type="text" name="SearchString">
+            <button type="submit" class="btn btn-secondary"> Filter</button>
+        </span>
 </form>
+
 <table class="table table-hover">
     <thead>
         <tr>

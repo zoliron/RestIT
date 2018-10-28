@@ -51,7 +51,7 @@ namespace RestIT.Controllers
             restaurantSearchVM.Locations = new SelectList(await locationQuery.Distinct().ToListAsync());
             restaurantSearchVM.Restaurants = await restaurants.ToListAsync();
             restaurantSearchVM.SearchString = searchString;
-            return View(restaurantSearchVM);
+             return View(restaurantSearchVM);
         }
 
 
