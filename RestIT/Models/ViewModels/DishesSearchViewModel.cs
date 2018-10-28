@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace RestIT.Models.ViewModels
 {
-    public class RestaurantSearchViewModel
+    public class DishSearchViewModel
     {
-        public List<Restaurant> Restaurants;
+        public List<Dish> Dishes;
         public SelectList Types;
-        public SelectList Locations;
-        public string RestaurantType { get; set; }
-        public string RestaurantLocation { get; set; }
+        public string DishType { get; set; }
         public string SearchString { get; set; }
     }
 }

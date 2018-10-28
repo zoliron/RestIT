@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RestIT.Models.Dish>
+﻿@model RestIT.Models.ViewModels.DishSearchViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,8 +7,13 @@
     <a asp-action="Create">Create New</a>
 </p>
 <form asp-controller="Dishes" asp-action="Index" method="get">
+
     <p>
-        Dish Name: <input type="text" name="SearchString">
+        <select asp-for="DishType" asp-items="Model.Types">
+            <option value="">All Types</option>
+        </select>
+
+        Title: <input asp-for="SearchString">
         <input type="submit" value="Filter" />
     </p>
 </form>
@@ -16,53 +21,54 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.dishName)
-            </th> 
-            <th>
-                @Html.DisplayNameFor(model => model.dishCost)
+                @Html.DisplayNameFor(model => model.Dishes[0].dishName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dishRating)
+                @Html.DisplayNameFor(model => model.Dishes[0].dishCost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dishType)
+                @Html.DisplayNameFor(model => model.Dishes[0].dishRating)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dishIngredients)
+                @Html.DisplayNameFor(model => model.Dishes[0].dishType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dishImage)
+                @Html.DisplayNameFor(model => model.Dishes[0].dishIngredients)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dishes[0].dishImage)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.dishName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dishCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dishRating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dishType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dishIngredients)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dishImage)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Dishes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dishName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dishCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dishRating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dishType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dishIngredients)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dishImage)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

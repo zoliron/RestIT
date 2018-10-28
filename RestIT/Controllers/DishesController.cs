@@ -8,23 +8,38 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RestIT.Data;
 using RestIT.Models;
+using RestIT.Models.ViewModels;
 
 namespace RestIT.Controllers
 {
     public class DishesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, string DishType)
         { 
             var dishes = from m in _context.Dish
                               select m;
+
+            IQueryable<string> typeQuery = from m in _context.Dish
+                                           orderby m.dishType
+                                           select m.dishType;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 dishes = dishes.Where(s => s.dishName.Contains(searchString));
             }
 
-            return View(await dishes.ToListAsync());
+            if (!String.IsNullOrEmpty(DishType))
+            {
+                dishes = dishes.Where(x => x.dishType == DishType);
+            }
+
+
+            var dishSearchVM = new DishSearchViewModel();
+            dishSearchVM.Types = new SelectList(await typeQuery.Distinct().ToListAsync());
+            dishSearchVM.Dishes = await dishes.ToListAsync();
+            dishSearchVM.SearchString = searchString;
+            return View(dishSearchVM);
         }
 
         public DishesController(ApplicationDbContext context)
