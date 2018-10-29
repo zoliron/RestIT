@@ -1,4 +1,4 @@
-﻿@model RestIT.ViewModels.RestaurantViewModel
+﻿@model RestIT.Models.Restaurant
 
 @{
     ViewData["Title"] = "Create";
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="restChef" class="control-label"></label>
-                @Html.DropDownListFor(model => model.SelectedChef[0], new SelectList(Model.Chefs, "ChefID", "chefName"), "Select Chef")
+                @*@Html.DropDownListFor(model => model.SelectedChef[0], new SelectList(Model.Chefs, "ChefID", "chefName"), "Select Chef")*@
             </div>
             <div class="form-group">
                 <label asp-for="restAddress" class="control-label"></label>
@@ -50,7 +50,6 @@
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-
                     <table>
                         <tr>
                             @{
@@ -76,9 +75,6 @@
                         </table>
                     </div>
                 </div>
-
-
-
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>

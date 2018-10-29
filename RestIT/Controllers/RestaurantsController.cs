@@ -17,7 +17,7 @@ namespace RestIT.Controllers
     public class RestaurantsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private String facebook_token = "";
+        private String facebook_token = "2477297058954584";
         
         // GET: Restaurants
         public async Task<IActionResult> Index(string RestaurantType, string RestaurantCity, string RestaurantChef, double RestaurantRating, string searchString)
@@ -96,19 +96,20 @@ namespace RestIT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
-        public async Task<IActionResult> Create([Bind("ID,restName,restLocation,restRating,restType,restKosher,restChef")] Restaurant restaurant,string[] selectedDishes)
+        public async Task<IActionResult> Create([Bind("ID,restName,restAddress,restCity,restRating,restType,restKosher,restChef")] Restaurant restaurant,string[] selectedDishes)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(restaurant);
                 UpdateDishes(selectedDishes, restaurant, _context);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
 
-                string fb_message = "Hi, New Restaurant Availabe " + restaurant.restName + " Check it out!";
-
+                string fb_message = "Hi, New Restaurant available " + restaurant.restName + " Check it out!";
+                
                 //Publish post to facebook with restaurant name
                 PublishFacebookPost(fb_message);
+                
+                return RedirectToAction(nameof(Index));
             }
            
             return View(restaurant);
@@ -123,25 +124,24 @@ namespace RestIT.Controllers
                 return NotFound();
             }
 
-            // var restaurant = await _context.Restaurant.Include(q=> q.Dishes).Where(q=>q.ID == id).FirstAsync();
-            //var restaurant = await _context.Restaurant.Include(q => q.Dishes)
-            //  .Where(i => i.ID == id)
-            //.FirstAsync();
+            //var restaurant = await _context.Restaurant.Include(q=> q.Dishes).Where(q=>q.ID == id).FirstAsync();
+            var restaurant = await _context.Restaurant.Include(q => q.Dishes)
+              .Where(i => i.ID == id).Include(c => c.restChef).Where(j => j.ID == id)
+              .FirstAsync();
 
-            var restaurant = await _context.Restaurant.FindAsync(id);
+            //var restaurant = await _context.Restaurant.FindAsync(id);
 
-            CheckDishes(restaurant, _context);
             if (restaurant == null)
             {
                 return NotFound();
             }
             else
             {
-                var getChefs = from chef in _context.Chef select chef;
-                var chefs = await getChefs.ToListAsync();
-
-                RestaurantViewModel restaurantViewModel = new RestaurantViewModel(restaurant, chefs);
-                return View(restaurantViewModel);
+                CheckDishes(restaurant, _context);
+                CheckChefs(restaurant, _context);
+               
+                //RestaurantViewModel restaurantViewModel = new RestaurantViewModel(restaurant, chefs);
+                return View(restaurant);
             }
         }
 
@@ -151,16 +151,17 @@ namespace RestIT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
-        //  public async Task<IActionResult> Edit(int id, string[] selectedDishes, [Bind("ID,restName,restLocation,restRating,restType,restKosher,Dishes")] Restaurant restaurant )
-        public ActionResult Edit(int? id, string[] selectedDishes, Restaurant rest)
+        //  public async Task<IActionResult> Edit(int id, string[] selectedDishes, [Bind("ID,restName,restAddress,restCity,restRating,restType,restKosher,Dishes")] Restaurant restaurant )
+        public ActionResult Edit(int? id, string[] selectedDishes, string[] selectedChef, Restaurant rest)
         {
             if (id == null)
             {
                 return NotFound();
             }
             var restaurant = _context.Restaurant.Include(q => q.Dishes)
-               .Where(i => i.ID == id)
+               .Where(i => i.ID == id).Include(c => c.restChef).Where(j => j.ID == id)
                .Single();
+
             //Restaurant restaurant = new Restaurant();
             restaurant.restKosher = rest.restKosher;
             restaurant.restAddress = restaurant.restAddress;
@@ -170,12 +171,12 @@ namespace RestIT.Controllers
             restaurant.restType = rest.restType;
             restaurant.ID = rest.ID;
 
-
             if (ModelState.IsValid)
             {
                 try
                 {
                     UpdateDishes(selectedDishes, restaurant, _context);
+                    UpdateDishes(selectedChef, restaurant, _context);
                     _context.Update(restaurant);
                     // await _context.SaveChangesAsync();
                     _context.SaveChanges();
@@ -205,7 +206,7 @@ namespace RestIT.Controllers
                 return NotFound();
             }
 
-            var restaurant = await _context.Restaurant.Include(d => d.Dishes)
+            var restaurant = await _context.Restaurant.Include(d => d.Dishes).Include(c => c.restChef).Where(j => j.ID == id)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (restaurant == null)
             {
@@ -254,16 +255,33 @@ namespace RestIT.Controllers
 
             }
             ViewBag.Dishes = viewModel;
+        }
 
+        private void CheckChefs(Restaurant restaurant, ApplicationDbContext context)
+        {
+            if (restaurant.restChef == null)
+            {
+                restaurant.restChef = new List<RestaurantChef>();
+            }
 
+            var allChefs = _context.Chef;
+            var viewModel = new List<Chef>();
+            foreach (var chef in allChefs)
+            {
+                viewModel.Add(new Chef
+                {
+                    ID = chef.ID,
+                    chefName = chef.chefName,
+                });
+            }
+            ViewBag.restChef = viewModel;
         }
 
         private void UpdateDishes(string[] selectedDishes, Restaurant restaurant, ApplicationDbContext _context)
         {
-            if (selectedDishes == null )
+            if (restaurant.Dishes == null )
             {
                 restaurant.Dishes = new List<Dish>();
-                return;
             }
 
             var selectedDishesHS = new HashSet<String>(selectedDishes);
@@ -286,10 +304,15 @@ namespace RestIT.Controllers
                         restaurant.Dishes.Remove(dish);
                     }
                 }
-
             }
+        }
 
-            
+        private void UpdateChefs(string selectedChef, Restaurant restaurant, ApplicationDbContext _context)
+        {
+            if (restaurant.restChef == null)
+            {
+                restaurant.restChef = new List<RestaurantChef>();
+            }
         }
         public Boolean PublishFacebookPost(String facebookMessage)
         {
@@ -309,10 +332,7 @@ namespace RestIT.Controllers
                 return false;
             }
         }
-
-
     }
-
 }
 
 
