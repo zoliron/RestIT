@@ -2,208 +2,115 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="jumbotron">
-    <div class="row">
-        <div class="col-lg-4 col-md-4 col-xs-4 thumb">
-            <div class="card border-primary" style="max-width: 20rem;">
-                <div class="card-header">Restaurants</div>
-                <div class="card-body">
-                    <img style="height: 120px; width: 100%; display: block;" src="~/images/rest.svg">
-                    <hr class="my-4">
-                    @*// Text examples
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
-                    <a href="/Restaurants/Index" class="card-link">Restaurants list</a>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-lg-4 col-md-4 col-xs-4 thumb">
-            <div class="card border-primary" style="max-width: 20rem;">
-                <div class="card-header">Chefs</div>
-                <div class="card-body">
-                    <img style="height: 120px; width: 100%; display: block;" src="~/images/rest2.svg">
-                    <hr class="my-4">
-                    @*// Text examples
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
-                    <a href="/Chefs/Index" class="card-link">Chefs list</a>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-lg-4 col-md-4 col-xs-4 thumb">
-            <div class="card border-primary" style="max-width: 20rem;">
-                <div class="card-header">Dishes</div>
-                <div class="card-body">
-                    <img style="height: 120px; width: 100%; display: block;" src="~/images/rest3.svg">
-                    <hr class="my-4">
-                    @*// Text examples
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
-                    <a href="/Dishes/Index" class="card-link">Dishes list</a>
-                </div>
-            </div>
-        </div>
-
-        <html>
-        <head>
-            <title>Simple Map</title>
-            <meta name="viewport" content="initial-scale=1.0">
-            <meta charset="utf-8">
-            <style>
-                /* Always set the map height explicitly to define the size of the div
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
                 * element that contains the map. */
-                #map {
-                    height: 100%;
-                }
-                /* Optional: Makes the sample page fill the window. */
-                html, body {
-                    height: 100%;
-                    margin: 0;
-                    padding: 0;
-                }
-            </style>
-        </head>
-        <body>
-            <div id="googleMap" style="width:100%;height:300px;"></div>
-            <script>
-                function myMap() {
-                    var mapProp = {
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
 
-                        center: new google.maps.LatLng(31.771959, 35.217018),
-                        zoom: 10,
-                    };
-                    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                    var marker = new google.maps.Marker({ position: { lat: 32.079607, lng: 34.768794 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.089353, lng: 34.797343 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.070393, lng: 34.794138 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 31.785449, lng: 35.211158 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.070957, lng: 34.787693 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.063879, lng: 34.780047 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.063723, lng: 34.769816 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.077292, lng: 34.781158 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.053544, lng: 34.755804 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.063537, lng: 34.770916 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.314456, lng: 34.873905 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.709276, lng: 35.174216 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 29.548329, lng: 34.967564 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.064640, lng: 34.771773 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.059046, lng: 34.772716 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.061327, lng: 34.763459 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.061646, lng: 34.763607 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.062874, lng: 34.776297 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.069460, lng: 34.783678 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.063193, lng: 34.776675 }, map: map });
-                    var marker = new google.maps.Marker({ position: { lat: 32.090798, lng: 34.781022 }, map: map });
-                }
-
-
-                function addMarker(coords) {
-                    var marker = new google.maps.Marker({ position: coords, map: map });
-
-                }
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGNm5igtfDIpBwyHIklk36mPHXA5TYspc&callback=myMap"></script>
-        </body>
-    </html>
-    </div>
-</div>
-
-
-
-
-<!--
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/rest.svg" alt="restaurant" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+<body>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-xs-4 thumb">
+                <div class="card border-primary" style="max-width: 20rem;">
+                    <div class="card-header">Restaurants</div>
+                    <div class="card-body">
+                        <img style="height: 120px; width: 100%; display: block;" src="~/images/rest.svg">
+                        <hr class="my-4">
+                        @*// Text examples
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
+                        <a href="/Restaurants/Index" class="card-link">Restaurants list</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+
+
+            <div class="col-lg-4 col-md-4 col-xs-4 thumb">
+                <div class="card border-primary" style="max-width: 20rem;">
+                    <div class="card-header">Chefs</div>
+                    <div class="card-body">
+                        <img style="height: 120px; width: 100%; display: block;" src="~/images/rest2.svg">
+                        <hr class="my-4">
+                        @*// Text examples
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
+                        <a href="/Chefs/Index" class="card-link">Chefs list</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+
+
+            <div class="col-lg-4 col-md-4 col-xs-4 thumb">
+                <div class="card border-primary" style="max-width: 20rem;">
+                    <div class="card-header">Dishes</div>
+                    <div class="card-body">
+                        <img style="height: 120px; width: 100%; display: block;" src="~/images/rest3.svg">
+                        <hr class="my-4">
+                        @*// Text examples
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>*@
+                        <a href="/Dishes/Index" class="card-link">Dishes list</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
+    <div class="jumbotron">
+        <div id="googleMap" style="width:100%;height:500px;"></div>
+        <script>
+            function myMap() {
+                var mapProp = {
+
+                    center: new google.maps.LatLng(32.079607, 34.768794),
+                    zoom: 13,
+                };
+                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                var marker = new google.maps.Marker({ position: { lat: 32.079607, lng: 34.768794 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.089353, lng: 34.797343 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.070393, lng: 34.794138 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 31.785449, lng: 35.211158 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.070957, lng: 34.787693 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.063879, lng: 34.780047 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.063723, lng: 34.769816 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.077292, lng: 34.781158 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.053544, lng: 34.755804 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.063537, lng: 34.770916 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.314456, lng: 34.873905 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.709276, lng: 35.174216 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 29.548329, lng: 34.967564 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.064640, lng: 34.771773 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.059046, lng: 34.772716 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.061327, lng: 34.763459 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.061646, lng: 34.763607 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.062874, lng: 34.776297 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.069460, lng: 34.783678 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.063193, lng: 34.776675 }, map: map });
+                var marker = new google.maps.Marker({ position: { lat: 32.090798, lng: 34.781022 }, map: map });
+            }
+
+
+            function addMarker(coords) {
+                var marker = new google.maps.Marker({ position: coords, map: map });
+
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGNm5igtfDIpBwyHIklk36mPHXA5TYspc&callback=myMap"></script>
     </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
-</div>
-    -->
+</body>
+</html>
