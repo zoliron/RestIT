@@ -10,14 +10,16 @@ using RestIT.Data;
 using RestIT.Models;
 using RestIT.Models.ViewModels;
 using RestIT.ViewModels;
+using Facebook;
 
 namespace RestIT.Controllers
 {
     public class RestaurantsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private String facebook_token = "";
+        
         // GET: Restaurants
-
         public async Task<IActionResult> Index(string RestaurantType, string RestaurantCity, string RestaurantChef, double RestaurantRating, string searchString)
         {
             // Use LINQ to get list of genres.
@@ -102,7 +104,13 @@ namespace RestIT.Controllers
                 UpdateDishes(selectedDishes, restaurant, _context);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
+                string fb_message = "Hi, New Restaurant Availabe " + restaurant.restName + " Check it out!";
+
+                //Publish post to facebook with restaurant name
+                PublishFacebookPost(fb_message);
             }
+           
             return View(restaurant);
         }
 
@@ -282,6 +290,24 @@ namespace RestIT.Controllers
             }
 
             
+        }
+        public Boolean PublishFacebookPost(String facebookMessage)
+        {
+            try
+            {
+                var fb = new FacebookClient(facebook_token);
+
+                dynamic result = fb.Post("me/feed", new
+                {
+                    message = facebookMessage
+                });
+                var newPostId = result.id;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
 
