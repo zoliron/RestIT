@@ -176,7 +176,7 @@ namespace RestIT.Controllers
                 try
                 {
                     UpdateDishes(selectedDishes, restaurant, _context);
-                    UpdateDishes(selectedChef, restaurant, _context);
+                    UpdateChefs(selectedChef, restaurant, _context);
                     _context.Update(restaurant);
                     // await _context.SaveChangesAsync();
                     _context.SaveChanges();
@@ -307,7 +307,7 @@ namespace RestIT.Controllers
             }
         }
 
-        private void UpdateChefs(string selectedChef, Restaurant restaurant, ApplicationDbContext _context)
+        private void UpdateChefs(string[] selectedChef, Restaurant restaurant, ApplicationDbContext _context)
         {
             if (restaurant.restChef == null)
             {
