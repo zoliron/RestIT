@@ -17,7 +17,7 @@ namespace RestIT.Controllers
     public class RestaurantsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private String facebook_token = "2477297058954584";
+        private String facebook_token = "EAAEvkEWov44BAAEskSIXey4Gy3dpoKOAEZAoZAXaZA0n0tpgmmGvdFLauSOxsZCRhJX03G9ZBVPBDeHf11ZAZAivqeU0wB4V9jZCLWtgiChdqbjlUylJxWhoX5HTcBXQ1mrs9NAZAsFZBLc994w1rSABjpBoc9e29NLR134tsFFbryyQZDZD";
         
         // GET: Restaurants
         public async Task<IActionResult> Index(string RestaurantType, string RestaurantCity, string RestaurantChef, double RestaurantRating, string searchString)
@@ -74,6 +74,9 @@ namespace RestIT.Controllers
 
             var restaurant = await _context.Restaurant.Include(d => d.Dishes)
                 .FirstOrDefaultAsync(m => m.ID == id);
+
+            CheckChefs(restaurant, _context);
+
             if (restaurant == null)
             {
                 return NotFound();
@@ -104,7 +107,7 @@ namespace RestIT.Controllers
                 UpdateDishes(selectedDishes, restaurant, _context);
                 await _context.SaveChangesAsync();
 
-                string fb_message = "Hi, New Restaurant available " + restaurant.restName + " Check it out!";
+                string fb_message = "Hi, New Restaurant available " + restaurant.restName + " in " + restaurant.restCity + ". Check it out!";
                 
                 //Publish post to facebook with restaurant name
                 PublishFacebookPost(fb_message);
@@ -152,7 +155,7 @@ namespace RestIT.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
         //  public async Task<IActionResult> Edit(int id, string[] selectedDishes, [Bind("ID,restName,restAddress,restCity,restRating,restType,restKosher,Dishes")] Restaurant restaurant )
-        public ActionResult Edit(int? id, string[] selectedDishes, string[] selectedChef, Restaurant rest)
+        public ActionResult Edit(int? id, string[] selectedDishes, int[] restChef, Restaurant rest)
         {
             if (id == null)
             {
@@ -176,7 +179,7 @@ namespace RestIT.Controllers
                 try
                 {
                     UpdateDishes(selectedDishes, restaurant, _context);
-                    UpdateChefs(selectedChef, restaurant, _context);
+                    UpdateChefs(restChef, restaurant, _context);
                     _context.Update(restaurant);
                     // await _context.SaveChangesAsync();
                     _context.SaveChanges();
@@ -307,7 +310,7 @@ namespace RestIT.Controllers
             }
         }
 
-        private void UpdateChefs(string[] selectedChef, Restaurant restaurant, ApplicationDbContext _context)
+        private void UpdateChefs(int[] chefsId, Restaurant restaurant, ApplicationDbContext _context)
         {
             if (restaurant.restChef == null)
             {
@@ -320,7 +323,7 @@ namespace RestIT.Controllers
             {
                 var fb = new FacebookClient(facebook_token);
 
-                dynamic result = fb.Post("me/feed", new
+                dynamic result = fb.Post("2477297058954584/feed", new
                 {
                     message = facebookMessage
                 });
