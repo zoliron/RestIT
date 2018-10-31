@@ -20,7 +20,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="restChef" class="control-label"></label>
-                @{
+                @Html.DropDownListFor(model => model.restChef, new SelectList(ViewBag.restChef, "ID", "chefName"), "Select Chef");
+
+                @*@{
                     List<RestIT.Models.Chef> chefs = ViewBag.restChef;
                     List<int> SelectedChef = new List<int>();
 
@@ -30,7 +32,7 @@
                         SelectedChef.Add(cid);
                     }
                     Html.DropDownListFor(r => r.restChef, new SelectList(chefs, "ID", "chefName"), "Select Chef");
-                }
+                }*@
             </div>
             <div class="form-group">
                 <label asp-for="restAddress" class="control-label"></label>
