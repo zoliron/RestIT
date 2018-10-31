@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Image\**" />
+    <Content Remove="Image\**" />
+    <EmbeddedResource Remove="Image\**" />
+    <None Remove="Image\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Areas\Identity\lib\bootstrap\dist\css\bootstrap.css" />
     <None Remove="Areas\Identity\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
     <None Remove="Areas\Identity\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
@@ -109,7 +116,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Image\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
 
