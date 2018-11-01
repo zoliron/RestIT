@@ -24,8 +24,9 @@ namespace RestIT.Controllers
         {
             // Use LINQ to get list of genres.
             IQueryable<string> typeQuery = from m in _context.Restaurant
-                                           orderby m.restType
-                                            select m.restType;
+                                           select m.restType.ToString(); 
+
+                                    
 
             IQueryable<string> cityQuery = from m in _context.Restaurant
                                                orderby m.restCity
@@ -46,7 +47,7 @@ namespace RestIT.Controllers
 
             if (!String.IsNullOrEmpty(RestaurantType))
             {
-                restaurants = restaurants.Where(x => x.restType == RestaurantType);
+                restaurants = restaurants.Where(x => x.restType.ToString()==(RestaurantType));
             }
 
             var restaurantSearchVM = new RestaurantSearchViewModel();

@@ -7,17 +7,22 @@ using System.Threading.Tasks;
 
 namespace RestIT.Models
 {
+    public enum RestType : int
+    {
+        None=0,
+        Italian,
+        Israeli,
+        Meat,
+        Mediterranean,
+        Europe,
+        Fishes,
+        Homemade,
+        Desserts,
+        Mexican,
+
+    }; 
     public class Restaurant
     {
-        private Restaurant restaurant;
-
-        public Restaurant() { }
-
-        public Restaurant(Restaurant restaurant)
-        {
-            this.restaurant = restaurant;
-        }
-
         public int ID { get; set; }
         [DisplayName("Restuarant's chef")]
         public virtual ICollection<RestaurantChef> restChef { get; set; }
@@ -34,7 +39,7 @@ namespace RestIT.Models
         [DisplayName("Restuarant's Dishes")]
         public virtual ICollection<Dish> Dishes { get; set; }
         [DisplayName("Restuarant Type")]
-        public String restType { get; set; }
+        public RestType restType { get; set; }
         [DisplayName("Kosher")]
         public Boolean restKosher { get; set; }
         public double Lat{ get; set; }
