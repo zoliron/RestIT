@@ -112,6 +112,10 @@
     <PackageReference Include="Facebook" Version="7.0.6" />
     <PackageReference Include="Microsoft.AspNet.WebHelpers" Version="3.2.6" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
   </ItemGroup>
 
