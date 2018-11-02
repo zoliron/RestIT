@@ -11,8 +11,8 @@ namespace RestIT.Models
     public class Dish
     {
         public int ID { get; set; }
-        [DisplayName("Dish Name")]
         public bool assigned { get; set; }
+        [DisplayName("Dish Name")]
         public String dishName { get; set; }
         [RegularExpression("^[0-9]+$", ErrorMessage = "Dish Cost must be a number!")]
         [DisplayName("Dish Cost")]
@@ -25,6 +25,6 @@ namespace RestIT.Models
         public String dishType { get; set; }
         [DisplayName("Dish Ingredients")]
         public String dishIngredients { get; set; }
-        public byte[] dishImage { get; set; } 
+        public string dishImage { get; set; } 
     }
 }

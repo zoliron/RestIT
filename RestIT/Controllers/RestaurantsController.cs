@@ -267,6 +267,10 @@ namespace RestIT.Controllers
             {
                 restaurant.restChef = new List<RestaurantChef>();
             }
+            else
+            {
+                ViewBag.selectedChef = restaurant.restChef.Last().ChefID;
+            }
 
             var allChefs = _context.Chef;
             var viewModel = new List<Chef>();

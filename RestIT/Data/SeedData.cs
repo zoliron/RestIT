@@ -428,7 +428,7 @@ namespace RestIT.Data
                     dishRating = 4,
                     dishType = "First dish",
                     dishIngredients = "Mushrooms, Cheese, Garlic, Coriander, Cream",
-                    dishImage = null
+                    dishImage = "/images/dishes/Cheese stuffed mushrooms.jpg"
                 },
                 new Dish
                 {
@@ -437,7 +437,7 @@ namespace RestIT.Data
                     dishRating = 3,
                     dishType = "First dish",
                     dishIngredients = "Bass fish, Potatoes, Coriander, Garlic, Onions, Carrot",
-                    dishImage = null
+                    dishImage = "/images/dishes/Fish & Chips.jpg"
                 },
                 new Dish
                 {
@@ -446,7 +446,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "First dish",
                     dishIngredients = "Beef tenderloin, Arugala, Vinaigrette sauce, Parmezan",
-                    dishImage = null
+                    dishImage = "/images/dishes/Carpaccio.jpg"
                 },
                 new Dish
                 {
@@ -455,7 +455,7 @@ namespace RestIT.Data
                     dishRating = 4,
                     dishType = "First dish",
                     dishIngredients = "Chicken breast, Tomatoes, Lettuce, Cucumbers, Red peppers, Onions, Vinaigrette sauce",
-                    dishImage = null
+                    dishImage = "/images/dishes/Chicken salad.jpg"
                 },
                 new Dish
                 {
@@ -464,7 +464,7 @@ namespace RestIT.Data
                     dishRating = 3,
                     dishType = "First dish",
                     dishIngredients = "Sweet chili sauce, Chicken wings, Parsley",
-                    dishImage = null
+                    dishImage = "/images/dishes/Thai Style Sweet Chili.jpg"
                 },
                 new Dish
                 {
@@ -473,7 +473,7 @@ namespace RestIT.Data
                     dishRating = 4,
                     dishType = "First dish",
                     dishIngredients = "Rice, Salmon fish, Avocado, Cream cheese, Tamago, Panko bread crumbs",
-                    dishImage = null
+                    dishImage = "/images/dishes/Sushi tempura.jpg"
                 },
                 new Dish
                 {
@@ -482,7 +482,7 @@ namespace RestIT.Data
                     dishRating = 4,
                     dishType = "First dish",
                     dishIngredients = "Lettuce, Cucumbers, Red peppers, Onions, Tomatoes, Feta cheese, Fried mushrooms",
-                    dishImage = null
+                    dishImage = "/images/dishes/Greek Salad.jpg"
                 },
                 new Dish
                 {
@@ -491,7 +491,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "Main dish",
                     dishIngredients = "Chicken breast, Peppers, Salt, Sweet potato fries, BBQ sauce",
-                    dishImage = null
+                    dishImage = "/images/dishes/Chicken breast.jpg"
                 },
                 new Dish
                 {
@@ -500,7 +500,7 @@ namespace RestIT.Data
                     dishRating = 4,
                     dishType = "Main dish",
                     dishIngredients = "Mushrooms, Sour cream, Onions, Black pepper, Parmesan cheese",
-                    dishImage = null
+                    dishImage = "/images/dishes/Spaghetti alfredo.jpg"
                 },
                 new Dish
                 {
@@ -509,7 +509,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "Main dish",
                     dishIngredients = "Beef, Tomatoes sauce, Onions, Carrots, Coriander, Paprika",
-                    dishImage = null
+                    dishImage = "/images/dishes/Spaghetti bolognese.jpg"
                 },
                 new Dish
                 {
@@ -518,7 +518,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "Main dish",
                     dishIngredients = "Green curry, Cabbage, Sprouts, Peas, coconut milk",
-                    dishImage = null
+                    dishImage = "/images/dishes/chicken curry.jpg"
                 },
                 new Dish
                 {
@@ -527,7 +527,7 @@ namespace RestIT.Data
                     dishRating = 4,
                     dishType = "Main dish",
                     dishIngredients = "Sprouts, Carrot, Mushrooms, Cabbage, Red pepper",
-                    dishImage = null
+                    dishImage = "/images/dishes/Pad thai.jpg"
                 },
                 new Dish
                 {
@@ -536,7 +536,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "Main dish",
                     dishIngredients = "Beef, Tomatoes, Onions, Lettuce, Pickles, Mayonnaise",
-                    dishImage = null
+                    dishImage = "/images/dishes/Hamburger.jpg"
                 },
                 new Dish
                 {
@@ -545,7 +545,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "Main dish",
                     dishIngredients = "Salmon, Lemon juice, Parsley, English black pepper, Olive oil",
-                    dishImage = null
+                    dishImage = "/images/dishes/Salmon fillet.jpg"
                 },
                 new Dish
                 {
@@ -554,7 +554,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "Main dish",
                     dishIngredients = "Chicken schnitzel, Bread crumbs, Potatoes",
-                    dishImage = null
+                    dishImage = "/images/dishes/Schnitzel with fries.jpg"
                 },
                 new Dish
                 {
@@ -563,7 +563,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "Main dish",
                     dishIngredients = "Beef entrecote",
-                    dishImage = null
+                    dishImage = "/images/dishes/Entrecote.jpg"
                 },
                 new Dish
                 {
@@ -572,7 +572,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "Desert",
                     dishIngredients = "Heavy cream, Dark chocolate, Milk, Flour",
-                    dishImage = null
+                    dishImage = "/images/dishes/Chocolate souffle.jpg"
                 },
                 new Dish
                 {
@@ -581,7 +581,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "Desert",
                     dishIngredients = "Brown sugar, Heavy cream, Eggs, Bananas",
-                    dishImage = null
+                    dishImage = "/images/dishes/Creme brulee.jpg"
                 },
                 new Dish
                 {
@@ -590,7 +590,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "Desert",
                     dishIngredients = "Cracker crumbs, Cream cheese, Eggs, Vanilla, Cranberries sauce",
-                    dishImage = null
+                    dishImage = "/images/dishes/Cheesecake with cranberries.jpg"
                 },
                 new Dish
                 {
@@ -599,7 +599,7 @@ namespace RestIT.Data
                     dishRating = 5,
                     dishType = "Desert",
                     dishIngredients = "Whipped cream , Fresh strawberries, Eggs",
-                    dishImage = null
+                    dishImage = "/images/dishes/Pavlova.jpg"
                 },
                 new Dish
                 {
@@ -608,7 +608,7 @@ namespace RestIT.Data
                     dishRating = 0,
                     dishType = "Beverage",
                     dishIngredients = null,
-                    dishImage = null
+                    dishImage = "/images/dishes/Coca Cola.jpg"
                 },
                 new Dish
                 {
@@ -617,7 +617,7 @@ namespace RestIT.Data
                     dishRating = 0,
                     dishType = "Beverage",
                     dishIngredients = null,
-                    dishImage = null
+                    dishImage = "/images/dishes/Water.jpg"
                 },
                 new Dish
                 {
@@ -626,7 +626,7 @@ namespace RestIT.Data
                     dishRating = 0,
                     dishType = "Beverage",
                     dishIngredients = null,
-                    dishImage = null
+                    dishImage = "/images/dishes/Orange juice.jpg"
                 },
                 new Dish
                 {
@@ -635,7 +635,7 @@ namespace RestIT.Data
                     dishRating = 0,
                     dishType = "Beverage",
                     dishIngredients = null,
-                    dishImage = null
+                    dishImage = "/images/dishes/Sprite.jpg"
                 });
             context.SaveChanges();
         } 

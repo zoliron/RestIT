@@ -50,9 +50,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Dishes[0].dishIngredients)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dishes[0].dishImage)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -74,9 +71,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.dishIngredients)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.dishImage)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

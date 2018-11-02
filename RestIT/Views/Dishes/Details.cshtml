@@ -37,8 +37,11 @@
         <dt>
             @Html.DisplayNameFor(model => model.dishIngredients)
         </dt>
-        <dd> 
+        <dd>
             @Html.DisplayFor(model => model.dishIngredients)
+        </dd>
+        <dd>
+            @Html.Raw(@ViewBag.dishImage)
         </dd>
     </dl>
 </div>

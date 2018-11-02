@@ -33,12 +33,12 @@ namespace RestIT.Controllers
             {
                 dishes = dishes.Where(x => x.dishType == DishType);
             }
-
-
+            
             var dishSearchVM = new DishSearchViewModel();
             dishSearchVM.Types = new SelectList(await typeQuery.Distinct().ToListAsync());
             dishSearchVM.Dishes = await dishes.ToListAsync();
             dishSearchVM.SearchString = searchString;
+
             return View(dishSearchVM);
         }
 
@@ -63,6 +63,9 @@ namespace RestIT.Controllers
 
             var dish = await _context.Dish
                 .FirstOrDefaultAsync(m => m.ID == id);
+
+            GenerateImageSrc(dish, 304, 228);
+
             if (dish == null)
             {
                 return NotFound();
@@ -182,6 +185,23 @@ namespace RestIT.Controllers
         private bool DishExists(int id)
         {
             return _context.Dish.Any(e => e.ID == id);
+        }
+
+        private void GenerateImageSrc(Dish dish, int width, int height)
+        {
+            if (dish == null)
+            {
+                return;
+            }
+
+            // && System.IO.File.Exists(dish.dishImage))
+
+            if (dish.dishImage != null)
+            {
+                string viewModel = "<img src=\"" + dish.dishImage + "\" alt=\"" + dish.dishName +
+                "\" width=\"" + width + "\" height=\"" + height+ "\">";
+                ViewBag.dishImage = viewModel;
+            }
         }
     }
 }
