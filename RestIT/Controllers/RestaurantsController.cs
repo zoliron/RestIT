@@ -157,19 +157,17 @@ namespace RestIT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
-        //  public async Task<IActionResult> Edit(int id, string[] selectedDishes, [Bind("ID,restName,restAddress,restCity,restRating,restType,restKosher,Dishes")] Restaurant restaurant )
         public ActionResult Edit(int? id, string[] selectedDishes, int[] restChef, Restaurant rest)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var restaurant = _context.Restaurant.Include(q => q.Dishes)
+            var restaurant = _context.Restaurant.Include(q => q.Dishes).Include(q=>q.restChef)
                .Where(i => i.ID == id).Single();
 
             var chef = _context.Chef.Single(j => j.ID == restChef[0]);
 
-            //Restaurant restaurant = new Restaurant();
             restaurant.restKosher = rest.restKosher;
             restaurant.restAddress = restaurant.restAddress;
             restaurant.restCity = rest.restCity;
@@ -185,7 +183,6 @@ namespace RestIT.Controllers
                     UpdateDishes(selectedDishes, restaurant, _context);
                     UpdateChefs(restaurant, chef, _context);
                     _context.Update(restaurant);
-                    // await _context.SaveChangesAsync();
                     _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)

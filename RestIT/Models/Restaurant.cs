@@ -19,6 +19,9 @@ namespace RestIT.Models
         Homemade,
         Desserts,
         Mexican,
+        Asian,
+
+        
 
     }; 
     public class Restaurant
