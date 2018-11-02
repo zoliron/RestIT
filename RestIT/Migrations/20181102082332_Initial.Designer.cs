@@ -10,8 +10,8 @@ using RestIT.Data;
 namespace RestIT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181031221155_inChefchangeRestaurant2RestaurantChef")]
-    partial class inChefchangeRestaurant2RestaurantChef
+    [Migration("20181102082332_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -269,7 +269,7 @@ namespace RestIT.Migrations
 
                     b.Property<double>("restRating");
 
-                    b.Property<string>("restType");
+                    b.Property<int>("restType");
 
                     b.HasKey("ID");
 
@@ -278,19 +278,17 @@ namespace RestIT.Migrations
 
             modelBuilder.Entity("RestIT.Models.RestaurantChef", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("RestaurantID");
 
-                    b.Property<int?>("chefID");
+                    b.Property<int>("ChefID");
 
-                    b.Property<int?>("restaurentID");
+                    b.Property<int>("ID");
 
-                    b.HasKey("ID");
+                    b.HasKey("RestaurantID", "ChefID");
 
-                    b.HasIndex("chefID");
+                    b.HasAlternateKey("ID");
 
-                    b.HasIndex("restaurentID");
+                    b.HasIndex("ChefID");
 
                     b.ToTable("RestaurantChef");
                 });
@@ -349,13 +347,15 @@ namespace RestIT.Migrations
 
             modelBuilder.Entity("RestIT.Models.RestaurantChef", b =>
                 {
-                    b.HasOne("RestIT.Models.Chef", "chef")
+                    b.HasOne("RestIT.Models.Chef", "Chef")
                         .WithMany("Restuarants")
-                        .HasForeignKey("chefID");
+                        .HasForeignKey("ChefID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("RestIT.Models.Restaurant", "restaurent")
+                    b.HasOne("RestIT.Models.Restaurant", "Restaurent")
                         .WithMany("restChef")
-                        .HasForeignKey("restaurentID");
+                        .HasForeignKey("RestaurantID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

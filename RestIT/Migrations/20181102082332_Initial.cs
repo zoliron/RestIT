@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RestIT.Migrations
 {
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -76,6 +76,26 @@ namespace RestIT.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customer", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Restaurant",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    restName = table.Column<string>(nullable: true),
+                    restAddress = table.Column<string>(nullable: true),
+                    restCity = table.Column<string>(nullable: true),
+                    restRating = table.Column<double>(nullable: false),
+                    restType = table.Column<int>(nullable: false),
+                    restKosher = table.Column<bool>(nullable: false),
+                    Lat = table.Column<double>(nullable: false),
+                    Lng = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Restaurant", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,33 +205,6 @@ namespace RestIT.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Restaurant",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ChefID = table.Column<int>(nullable: true),
-                    restName = table.Column<string>(nullable: true),
-                    restAddress = table.Column<string>(nullable: true),
-                    restCity = table.Column<string>(nullable: true),
-                    restRating = table.Column<double>(nullable: false),
-                    restType = table.Column<string>(nullable: true),
-                    restKosher = table.Column<bool>(nullable: false),
-                    Lat = table.Column<double>(nullable: false),
-                    Lng = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Restaurant", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Restaurant_Chef_ChefID",
-                        column: x => x.ChefID,
-                        principalTable: "Chef",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Dish",
                 columns: table => new
                 {
@@ -235,6 +228,32 @@ namespace RestIT.Migrations
                         principalTable: "Restaurant",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RestaurantChef",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false),
+                    RestaurantID = table.Column<int>(nullable: false),
+                    ChefID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RestaurantChef", x => new { x.RestaurantID, x.ChefID });
+                    table.UniqueConstraint("AK_RestaurantChef_ID", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_RestaurantChef_Chef_ChefID",
+                        column: x => x.ChefID,
+                        principalTable: "Chef",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RestaurantChef_Restaurant_RestaurantID",
+                        column: x => x.RestaurantID,
+                        principalTable: "Restaurant",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -282,8 +301,8 @@ namespace RestIT.Migrations
                 column: "RestaurantID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Restaurant_ChefID",
-                table: "Restaurant",
+                name: "IX_RestaurantChef_ChefID",
+                table: "RestaurantChef",
                 column: "ChefID");
         }
 
@@ -311,16 +330,19 @@ namespace RestIT.Migrations
                 name: "Dish");
 
             migrationBuilder.DropTable(
+                name: "RestaurantChef");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Restaurant");
+                name: "Chef");
 
             migrationBuilder.DropTable(
-                name: "Chef");
+                name: "Restaurant");
         }
     }
 }

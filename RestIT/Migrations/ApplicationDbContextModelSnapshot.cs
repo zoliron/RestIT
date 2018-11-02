@@ -15,7 +15,7 @@ namespace RestIT.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -253,8 +253,6 @@ namespace RestIT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ChefID");
-
                     b.Property<double>("Lat");
 
                     b.Property<double>("Lng");
@@ -273,26 +271,22 @@ namespace RestIT.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ChefID");
-
                     b.ToTable("Restaurant");
                 });
 
             modelBuilder.Entity("RestIT.Models.RestaurantChef", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("RestaurantID");
 
-                    b.Property<int?>("chefID");
+                    b.Property<int>("ChefID");
 
-                    b.Property<int?>("restaurentID");
+                    b.Property<int>("ID");
 
-                    b.HasKey("ID");
+                    b.HasKey("RestaurantID", "ChefID");
 
-                    b.HasIndex("chefID");
+                    b.HasAlternateKey("ID");
 
-                    b.HasIndex("restaurentID");
+                    b.HasIndex("ChefID");
 
                     b.ToTable("RestaurantChef");
                 });
@@ -349,22 +343,17 @@ namespace RestIT.Migrations
                         .HasForeignKey("RestaurantID");
                 });
 
-            modelBuilder.Entity("RestIT.Models.Restaurant", b =>
-                {
-                    b.HasOne("RestIT.Models.Chef")
-                        .WithMany("Restuarants")
-                        .HasForeignKey("ChefID");
-                });
-
             modelBuilder.Entity("RestIT.Models.RestaurantChef", b =>
                 {
-                    b.HasOne("RestIT.Models.Chef", "chef")
-                        .WithMany()
-                        .HasForeignKey("chefID");
+                    b.HasOne("RestIT.Models.Chef", "Chef")
+                        .WithMany("Restuarants")
+                        .HasForeignKey("ChefID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("RestIT.Models.Restaurant", "restaurent")
+                    b.HasOne("RestIT.Models.Restaurant", "Restaurent")
                         .WithMany("restChef")
-                        .HasForeignKey("restaurentID");
+                        .HasForeignKey("RestaurantID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
