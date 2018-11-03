@@ -14,7 +14,7 @@ namespace RestIT.Models
         public int ChefID { get; set; }
 
         //Relationships
-        public Restaurant Restaurent { get; set; }
-        public Chef Chef { get; set; }
+        public virtual Restaurant Restaurent { get; set; }
+        public virtual Chef Chef { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace RestIT.Controllers
 {
     public class RestaurantsController : Controller
     {
+
         private readonly ApplicationDbContext _context;
         private String facebook_token = "EAAEvkEWov44BAAEskSIXey4Gy3dpoKOAEZAoZAXaZA0n0tpgmmGvdFLauSOxsZCRhJX03G9ZBVPBDeHf11ZAZAivqeU0wB4V9jZCLWtgiChdqbjlUylJxWhoX5HTcBXQ1mrs9NAZAsFZBLc994w1rSABjpBoc9e29NLR134tsFFbryyQZDZD";
         
@@ -73,7 +74,7 @@ namespace RestIT.Controllers
                 return NotFound();
             }
 
-            var restaurant = await _context.Restaurant.Include(d => d.Dishes)
+            var restaurant = await _context.Restaurant.Include(d => d.Dishes).Include(q=>q.restChef)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             CheckChefs(restaurant, _context);
@@ -128,14 +129,11 @@ namespace RestIT.Controllers
                 return NotFound();
             }
 
-            //var restaurant = await _context.Restaurant.Include(q=> q.Dishes).Where(q=>q.ID == id).FirstAsync();
-            //var restaurant = await _context.Restaurant.Include(q => q.Dishes)
-            //  .Where(i => i.ID == id).Include(c => c.restChef).Where(j => j.ID == id)
-            //  .FirstAsync();
-            var restaurant = await _context.Restaurant.Include(q => q.Dishes)
-              .Where(i => i.ID == id).FirstAsync();
 
-            //var restaurant = await _context.Restaurant.FindAsync(id);
+                var restaurant = await _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
+                   .Where(i => i.ID == id).FirstAsync();
+            
+
 
             if (restaurant == null)
             {
@@ -145,8 +143,6 @@ namespace RestIT.Controllers
             {
                 CheckDishes(restaurant, _context);
                 CheckChefs(restaurant, _context);
-               
-                //RestaurantViewModel restaurantViewModel = new RestaurantViewModel(restaurant, chefs);
                 return View(restaurant);
             }
         }
@@ -163,11 +159,12 @@ namespace RestIT.Controllers
             {
                 return NotFound();
             }
-            var restaurant = _context.Restaurant.Include(q => q.Dishes).Include(q=>q.restChef)
-               .Where(i => i.ID == id).Single();
+            var restaurant = _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
+                .Where(i => i.ID == id).Single();
 
-            var chef = _context.Chef.Single(j => j.ID == restChef[0]);
-
+          
+          
+           
             restaurant.restKosher = rest.restKosher;
             restaurant.restAddress = restaurant.restAddress;
             restaurant.restCity = rest.restCity;
@@ -181,7 +178,11 @@ namespace RestIT.Controllers
                 try
                 {
                     UpdateDishes(selectedDishes, restaurant, _context);
-                    UpdateChefs(restaurant, chef, _context);
+                    if (restChef != null)
+                    {
+                        var chef = _context.Chef.Single(j => j.ID == restChef[0]); 
+                        UpdateChefs(restaurant, chef, _context);
+                    }
                     _context.Update(restaurant);
                     _context.SaveChanges();
                 }
@@ -269,7 +270,11 @@ namespace RestIT.Controllers
             }
             else
             {
-                ViewBag.selectedChef = restaurant.restChef.Last().ChefID;
+                if (restaurant.restChef.Count != 0)
+                {
+                    ViewBag.selectedChef = restaurant.restChef.Last().ChefID ;
+                    //ViewBag.selectedChef = restaurant.restChef.Last().Chef.chefName;
+                }
             }
 
             var allChefs = _context.Chef;
@@ -321,16 +326,17 @@ namespace RestIT.Controllers
             {
                 return;
             }
-
             if (restaurant.restChef == null)
             {
                 restaurant.restChef = new List<RestaurantChef>();
+            }
+
                 restaurant.restChef.Add(new RestaurantChef {
                        Restaurent = restaurant,
                        Chef = chef,
-                       ID = restaurant.restChef.Count,
+                       ID = restaurant.restChef.Count + 1,
                 });
-            }
+           
         }
         public Boolean PublishFacebookPost(String facebookMessage)
         {

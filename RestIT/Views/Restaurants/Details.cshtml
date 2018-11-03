@@ -21,6 +21,7 @@
         </dt>
         <dd>
             @*@ViewBag.restChef.restName*@
+            @ViewBag.selectedChef
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.restAddress)
@@ -59,7 +60,7 @@
             @{
                 foreach (var dish in Model.Dishes)
                 {
-                    @dish.dishName @:  <br />
+                    <a href="/Dishes/Details/@dish.ID" class="card-link">@dish.dishName</a>
                 }
             }
         </dd>
