@@ -111,7 +111,7 @@
         function myMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 32.079607, lng: 34.768794 },
-                zoom: 12
+                zoom: 13
             });
             $.get("@Url.Action("GetAllLocation", "Restaurants")", function (data) {
                 var marker = [];
@@ -120,8 +120,6 @@
                         }
                     });
         }
-
-
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGNm5igtfDIpBwyHIklk36mPHXA5TYspc&callback=myMap" async defer></script>
-    </div>
+</div>
