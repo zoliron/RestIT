@@ -33,5 +33,6 @@ namespace RestIT.Areas.Identity.Authorization
 
         public static readonly string CustomerAdministratorsRole = "CustomerAdministrators";
         public static readonly string CustomerManagersRole = "CustomerManagers";
+        public static readonly string CustomerMemberRole = "CustomerMember";
     }
 }

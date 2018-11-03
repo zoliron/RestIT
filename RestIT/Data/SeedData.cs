@@ -25,9 +25,15 @@ namespace RestIT.Data
                 var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@restit.com");
                 await EnsureRole(serviceProvider, adminID, Constants.CustomerAdministratorsRole);
 
-                // allowed user can create and edit contacts that they create
+                // allowed user can create and edit customers that they create
                 var managerID = await EnsureUser(serviceProvider, testUserPw, "manager@restit.com");
                 await EnsureRole(serviceProvider, managerID, Constants.CustomerManagersRole);
+
+                // Creating 25 test users
+                for (int i = 0; i < 25; i++) {
+                    var MemberID = await EnsureUser(serviceProvider, testUserPw, "user" + i + "@restit.com");
+                    await EnsureRole(serviceProvider, MemberID, Constants.CustomerMemberRole);
+                }
 
                 SeedCustomerDB(context, adminID);
                 SeedChefDB(context, adminID);
