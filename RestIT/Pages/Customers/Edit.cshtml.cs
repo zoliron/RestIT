@@ -16,7 +16,7 @@ namespace RestIT.Pages.Customers
         public EditModel(
             ApplicationDbContext context,
             IAuthorizationService authorizationService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<Customer> userManager)
             : base(context, authorizationService, userManager)
         {
         }
@@ -24,10 +24,10 @@ namespace RestIT.Pages.Customers
         [BindProperty]
         public Customer Customer { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
-            Customer = await Context.Customer.FirstOrDefaultAsync(
-                                                 m => m.ID == id);
+            Customer = await Context.Users.FirstOrDefaultAsync(
+                                                 m => m.Id == id);
 
             if (Customer == null)
             {
@@ -45,7 +45,7 @@ namespace RestIT.Pages.Customers
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(string id)
         {
             if (!ModelState.IsValid)
             {
@@ -55,7 +55,7 @@ namespace RestIT.Pages.Customers
             // Fetch Customer from DB to get OwnerID.
             var customer = await Context
                 .Customer.AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (customer == null)
             {
@@ -95,9 +95,9 @@ namespace RestIT.Pages.Customers
             return RedirectToPage("./Index");
         }
 
-        private bool ContactExists(int id)
+        private bool ContactExists(string id)
         {
-            return Context.Customer.Any(e => e.ID == id);
+            return Context.Users.Any(e => e.Id == id);
         }
     }
 }

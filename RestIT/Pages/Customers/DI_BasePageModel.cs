@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RestIT.Models;
 
 namespace RestIT.Pages.Customers
 {
@@ -9,12 +10,12 @@ namespace RestIT.Pages.Customers
     {
         protected ApplicationDbContext Context { get; }
         protected IAuthorizationService AuthorizationService { get; }
-        protected UserManager<ApplicationUser> UserManager { get; }
+        protected UserManager<Customer> UserManager { get; }
 
         public DI_BasePageModel(
             ApplicationDbContext context,
             IAuthorizationService authorizationService,
-            UserManager<ApplicationUser> userManager) : base()
+            UserManager<Customer> userManager) : base()
         {
             Context = context;
             UserManager = userManager;

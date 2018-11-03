@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -7,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace RestIT.Models
 {
-    public class Customer
+    public class Customer : IdentityUser
     {
-        public int ID { get; set; }
-
         // user ID from AspNetUser table.
         public string OwnerID { get; set; }
 
@@ -30,7 +29,6 @@ namespace RestIT.Models
         [DisplayName("Customer Age")]
         [RegularExpression("^[0-9]+$", ErrorMessage = "Age must be a number!")]
         public int custAge { get; set; }
-
 
 
         public CustomerStatus Status { get; set; }

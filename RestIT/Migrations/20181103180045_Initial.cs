@@ -40,7 +40,13 @@ namespace RestIT.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    OwnerID = table.Column<string>(nullable: true),
+                    custName = table.Column<string>(maxLength: 50, nullable: true),
+                    custPhone = table.Column<string>(nullable: true),
+                    custMail = table.Column<string>(nullable: true),
+                    custAge = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,24 +64,6 @@ namespace RestIT.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Chef", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Customer",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    OwnerID = table.Column<string>(nullable: true),
-                    custName = table.Column<string>(maxLength: 50, nullable: true),
-                    custPhone = table.Column<string>(nullable: true),
-                    custMail = table.Column<string>(nullable: true),
-                    custAge = table.Column<int>(nullable: false),
-                    Status = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customer", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -216,7 +204,7 @@ namespace RestIT.Migrations
                     dishRating = table.Column<float>(nullable: false),
                     dishType = table.Column<string>(nullable: true),
                     dishIngredients = table.Column<string>(nullable: true),
-                    dishImage = table.Column<byte[]>(nullable: true),
+                    dishImage = table.Column<string>(nullable: true),
                     RestaurantID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -322,9 +310,6 @@ namespace RestIT.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Customer");
 
             migrationBuilder.DropTable(
                 name: "Dish");

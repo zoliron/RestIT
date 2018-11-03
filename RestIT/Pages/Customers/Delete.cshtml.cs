@@ -15,7 +15,7 @@ namespace RestIT.Pages.Customers
         public DeleteModel(
             ApplicationDbContext context,
             IAuthorizationService authorizationService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<Customer> userManager)
             : base(context, authorizationService, userManager)
         {
         }
@@ -23,10 +23,10 @@ namespace RestIT.Pages.Customers
         [BindProperty]
         public Customer Customer { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
-            Customer = await Context.Customer.FirstOrDefaultAsync(
-                                                 m => m.ID == id);
+            Customer = await Context.Users.FirstOrDefaultAsync(
+                                                 m => m.Id == id);
 
             if (Customer == null)
             {
@@ -44,13 +44,13 @@ namespace RestIT.Pages.Customers
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(string id)
         {
-            Customer = await Context.Customer.FindAsync(id);
+            Customer = await Context.Users.FindAsync(id);
 
             var customer = await Context
-                .Customer.AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .Users.AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (customer == null)
             {
@@ -65,7 +65,7 @@ namespace RestIT.Pages.Customers
                 return new ChallengeResult();
             }
 
-            Context.Customer.Remove(Customer);
+            Context.Users.Remove(Customer);
             await Context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -30,9 +30,8 @@ namespace RestIT.Data
                 await EnsureRole(serviceProvider, managerID, Constants.CustomerManagersRole);
 
                 // Creating 25 test users
-                for (int i = 0; i < 25; i++) {
+                for (int i = 0; i < 5; i++) {
                     var MemberID = await EnsureUser(serviceProvider, testUserPw, "user" + i + "@restit.com");
-                    await EnsureRole(serviceProvider, MemberID, Constants.CustomerMemberRole);
                 }
 
                 SeedCustomerDB(context, adminID);
@@ -45,12 +44,12 @@ namespace RestIT.Data
         private static async Task<string> EnsureUser(IServiceProvider serviceProvider,
                                                     string testUserPw, string UserName)
         {
-            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+            var userManager = serviceProvider.GetService<UserManager<Customer>>();
 
             var user = await userManager.FindByNameAsync(UserName);
             if (user == null)
             {
-                user = new ApplicationUser { UserName = UserName };
+                user = new Customer { UserName = UserName };
                 await userManager.CreateAsync(user, testUserPw);
             }
 
@@ -73,7 +72,7 @@ namespace RestIT.Data
                 IR = await roleManager.CreateAsync(new IdentityRole(role));
             }
 
-            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+            var userManager = serviceProvider.GetService<UserManager<Customer>>();
 
             var user = await userManager.FindByIdAsync(uid);
 

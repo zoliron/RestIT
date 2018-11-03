@@ -7,18 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using RestIT.Data;
+using RestIT.Models;
 
 namespace RestIT.Areas.Identity.Pages.Account.Manage
 {
     public class ResetAuthenticatorModel : PageModel
     {
-        UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        UserManager<Customer> _userManager;
+        private readonly SignInManager<Customer> _signInManager;
         ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<Customer> userManager,
+            SignInManager<Customer> signInManager,
             ILogger<ResetAuthenticatorModel> logger)
         {
             _userManager = userManager;

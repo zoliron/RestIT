@@ -15,7 +15,7 @@ namespace RestIT.Pages.Customers
         public IndexModel(
             ApplicationDbContext context,
             IAuthorizationService authorizationService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<Customer> userManager)
             : base(context, authorizationService, userManager)
         {
         }
@@ -24,7 +24,7 @@ namespace RestIT.Pages.Customers
 
         public async Task OnGetAsync()
         {
-            var customers = from c in Context.Customer
+            var customers = from c in Context.Users
                            select c;
 
             var isAuthorized = User.IsInRole(Constants.CustomerManagersRole) ||

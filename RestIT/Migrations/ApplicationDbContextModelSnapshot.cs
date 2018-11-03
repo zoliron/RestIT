@@ -129,7 +129,21 @@ namespace RestIT.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("RestIT.Data.ApplicationUser", b =>
+            modelBuilder.Entity("RestIT.Models.Chef", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("chefName")
+                        .HasMaxLength(50);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Chef");
+                });
+
+            modelBuilder.Entity("RestIT.Models.Customer", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -154,6 +168,8 @@ namespace RestIT.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
 
+                    b.Property<string>("OwnerID");
+
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("PhoneNumber");
@@ -162,10 +178,21 @@ namespace RestIT.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<int>("Status");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
+
+                    b.Property<int>("custAge");
+
+                    b.Property<string>("custMail");
+
+                    b.Property<string>("custName")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("custPhone");
 
                     b.HasKey("Id");
 
@@ -178,44 +205,6 @@ namespace RestIT.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("RestIT.Models.Chef", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("chefName")
-                        .HasMaxLength(50);
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Chef");
-                });
-
-            modelBuilder.Entity("RestIT.Models.Customer", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("OwnerID");
-
-                    b.Property<int>("Status");
-
-                    b.Property<int>("custAge");
-
-                    b.Property<string>("custMail");
-
-                    b.Property<string>("custName")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("custPhone");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("RestIT.Models.Dish", b =>
@@ -301,7 +290,7 @@ namespace RestIT.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("RestIT.Data.ApplicationUser")
+                    b.HasOne("RestIT.Models.Customer")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -309,7 +298,7 @@ namespace RestIT.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("RestIT.Data.ApplicationUser")
+                    b.HasOne("RestIT.Models.Customer")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -322,7 +311,7 @@ namespace RestIT.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("RestIT.Data.ApplicationUser")
+                    b.HasOne("RestIT.Models.Customer")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -330,7 +319,7 @@ namespace RestIT.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("RestIT.Data.ApplicationUser")
+                    b.HasOne("RestIT.Models.Customer")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
