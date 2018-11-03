@@ -54,7 +54,7 @@ namespace RestIT.Pages.Customers
 
             // Fetch Customer from DB to get OwnerID.
             var customer = await Context
-                .Customer.AsNoTracking()
+                .Users.AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (customer == null)
