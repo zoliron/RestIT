@@ -70,47 +70,5 @@
             </div>
         </div>
     </div>
-
-    <div class="jumbotron">
-        <div id="googleMap" style="width:100%;height:500px;"></div>
-        <script>
-            function myMap() {
-                var mapProp = {
-
-                    center: new google.maps.LatLng(32.079607, 34.768794),
-                    zoom: 13,
-                };
-                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                var marker = new google.maps.Marker({ position: { lat: 32.079607, lng: 34.768794 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.089353, lng: 34.797343 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.070393, lng: 34.794138 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 31.785449, lng: 35.211158 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.070957, lng: 34.787693 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.063879, lng: 34.780047 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.063723, lng: 34.769816 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.077292, lng: 34.781158 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.053544, lng: 34.755804 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.063537, lng: 34.770916 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.314456, lng: 34.873905 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.709276, lng: 35.174216 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 29.548329, lng: 34.967564 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.064640, lng: 34.771773 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.059046, lng: 34.772716 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.061327, lng: 34.763459 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.061646, lng: 34.763607 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.062874, lng: 34.776297 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.069460, lng: 34.783678 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.063193, lng: 34.776675 }, map: map });
-                var marker = new google.maps.Marker({ position: { lat: 32.090798, lng: 34.781022 }, map: map });
-            }
-
-
-            function addMarker(coords) {
-                var marker = new google.maps.Marker({ position: coords, map: map });
-
-            }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGNm5igtfDIpBwyHIklk36mPHXA5TYspc&callback=myMap"></script>
-    </div>
 </body>
 </html>

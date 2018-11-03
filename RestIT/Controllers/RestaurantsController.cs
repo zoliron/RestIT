@@ -356,6 +356,11 @@ namespace RestIT.Controllers
                 return false;
             }
         }
+
+        public async Task<IActionResult> GetAllLocation()
+        {
+            return Json(await _context.Restaurant.ToListAsync());
+        }
     }
 }
 

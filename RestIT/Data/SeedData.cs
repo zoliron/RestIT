@@ -176,8 +176,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType = RestType.Fishes,
                     restKosher = true,
-                    Lat = 32.089348,
-                    Lng = 34.797386,
+                    restLat = 32.089348,
+                    restLng = 34.797386,
                 },
 
                 new Restaurant
@@ -188,8 +188,8 @@ namespace RestIT.Data
                     restRating = 3,
                     restType =  RestType.Israeli,
                     restKosher = true,
-                    Lat = 32.070353,
-                    Lng = 34.794209,
+                    restLat = 32.070353,
+                    restLng = 34.794209,
                 },
             
                 new Restaurant
@@ -200,8 +200,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType =  RestType.Mediterranean,
                     restKosher = false,
-                    Lat= 32.079671,
-                    Lng= 34.768773,
+                    restLat= 32.079671,
+                    restLng= 34.768773,
                 },
                 new Restaurant
                 {
@@ -211,8 +211,8 @@ namespace RestIT.Data
                     restRating = 3,
                     restType =  RestType.Israeli,
                     restKosher = false,
-                    Lat = 31.785449,
-                    Lng = 35.211158,
+                    restLat = 31.785449,
+                    restLng = 35.211158,
                 },
                 new Restaurant
                 {
@@ -222,8 +222,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType =  RestType.Mexican,
                     restKosher = false,
-                    Lat=32.070930,
-                    Lng=34.787801,
+                    restLat=32.070930,
+                    restLng=34.787801,
                 },
                 new Restaurant
                 {
@@ -233,8 +233,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType =  RestType.Asian,
                     restKosher = false,
-                    Lat=32.063943,
-                    Lng=34.780015,
+                    restLat=32.063943,
+                    restLng=34.780015,
                 },
                 new Restaurant
                 {
@@ -244,8 +244,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType = RestType.Italian,
                     restKosher = false,
-                    Lat=32.063641,
-                    Lng=34.769784,
+                    restLat=32.063641,
+                    restLng=34.769784,
                 },
                 new Restaurant
                 {
@@ -255,8 +255,8 @@ namespace RestIT.Data
                     restRating = 3,
                     restType = RestType.Asian,
                     restKosher = false,
-                    Lat=32.077274,
-                    Lng=34.781233,
+                    restLat=32.077274,
+                    restLng=34.781233,
                 },
                 new Restaurant
                 {
@@ -266,8 +266,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = RestType.Fishes,
                     restKosher = false,
-                    Lat=32.053589,
-                    Lng=34.755772,
+                    restLat=32.053589,
+                    restLng=34.755772,
                 },
                 new Restaurant
                 {
@@ -277,8 +277,8 @@ namespace RestIT.Data
                     restRating = 4.5,
                     restType = RestType.Italian,
                     restKosher = true,
-                    Lat=32.063546,
-                    Lng=34.770959,
+                    restLat=32.063546,
+                    restLng=34.770959,
                 },
                 new Restaurant
                 {
@@ -288,8 +288,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = RestType.Mediterranean,
                     restKosher = true,
-                    Lat = 32.074774,
-                    Lng= 34.791573,
+                    restLat = 32.074774,
+                    restLng= 34.791573,
                 },
                 new Restaurant
                 {
@@ -299,8 +299,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = RestType.Israeli,
                     restKosher = false,
-                    Lat=32.314429,
-                    Lng=34.873948,
+                    restLat=32.314429,
+                    restLng=34.873948,
                 },
                 new Restaurant
                 {
@@ -310,19 +310,19 @@ namespace RestIT.Data
                     restRating = 4,
                     restType = RestType.Italian,
                     restKosher = false,
-                    Lat= 32.709285,
-                    Lng= 35.174259,
+                    restLat= 32.709285,
+                    restLng= 35.174259,
                 },
                 new Restaurant
                 {
                     restName = "Whale",
                     restAddress = "Ha-Yam St. 6",
-                    restCity = "Eilat",
+                    restCity = "EirestLat",
                     restRating = 4,
                     restType =  RestType.Fishes,
                     restKosher = false,
-                    Lat= 29.548329,
-                    Lng= 34.967564,
+                    restLat= 29.548329,
+                    restLng= 34.967564,
                 },
                 new Restaurant
                 {
@@ -332,8 +332,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType = RestType.Mexican,
                     restKosher = false,
-                    Lat= 32.064640,
-                    Lng= 34.771773,
+                    restLat= 32.064640,
+                    restLng= 34.771773,
                 },
                 new Restaurant
                 {
@@ -343,8 +343,8 @@ namespace RestIT.Data
                     restRating = 3,
                     restType =  RestType.Homemade,
                     restKosher = false,
-                    Lat= 32.059046,
-                    Lng= 34.772716,
+                    restLat= 32.059046,
+                    restLng= 34.772716,
                 },
                 new Restaurant
                 {
@@ -354,8 +354,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType =  RestType.Israeli,            
                     restKosher = false,
-                    Lat=32.061327,
-                    Lng= 34.763459,
+                    restLat=32.061327,
+                    restLng= 34.763459,
                 },
                 new Restaurant
                 {
@@ -365,8 +365,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType =  RestType.Homemade,
                     restKosher = false,
-                    Lat= 32.061646,
-                    Lng= 34.763607,
+                    restLat= 32.061646,
+                    restLng= 34.763607,
                 },
                 new Restaurant
                 {
@@ -376,8 +376,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType =  RestType.Israeli,
                     restKosher = false,
-                    Lat= 32.062874,
-                    Lng= 34.776297,
+                    restLat= 32.062874,
+                    restLng= 34.776297,
                 },
                 new Restaurant
                 {
@@ -387,8 +387,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType = RestType.Desserts,
                     restKosher = false,
-                    Lat=32.069460,
-                    Lng=34.783678,
+                    restLat=32.069460,
+                    restLng=34.783678,
                 },
                 new Restaurant
                 {
@@ -398,8 +398,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType =  RestType.Europe,
                     restKosher = false,
-                    Lat=32.063193,
-                    Lng=34.776675,
+                    restLat=32.063193,
+                    restLng=34.776675,
                 },
                 new Restaurant
                 {
@@ -409,8 +409,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = RestType.Meat,
                     restKosher = false,
-                    Lat=32.090798,
-                    Lng=34.781022,
+                    restLat=32.090798,
+                    restLng=34.781022,
                 });
                 
             context.SaveChanges();
@@ -572,12 +572,12 @@ namespace RestIT.Data
                 },
                 new Dish
                 {
-                    dishName = "Chocolate souffle",
+                    dishName = "ChocorestLate souffle",
                     dishCost = 39,
                     dishRating = 5,
                     dishType = "Desert",
-                    dishIngredients = "Heavy cream, Dark chocolate, Milk, Flour",
-                    dishImage = "/images/dishes/Chocolate souffle.jpg"
+                    dishIngredients = "Heavy cream, Dark chocorestLate, Milk, Flour",
+                    dishImage = "/images/dishes/ChocorestLate souffle.jpg"
                 },
                 new Dish
                 {
