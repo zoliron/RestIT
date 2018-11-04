@@ -122,24 +122,29 @@
                     contentString[i] = '<div id="content">' +
                         '<div id="siteNotice">' +
                         '</div>' +
-                        '<h5 id="secondHeading" class="secondHeading">' + data[i].restCity + '</h5>' +
+                        '<h5 id="secondHeading" class="secondHeading">' + data[i].restCity + '</h3>' +
                         '<div id="bodyContent">' +
-                        '<p><b>' + data[i].restName + '</b>,<b>' + data[i].restAddress + '</b>,<b>';
+                        '<p><b>' + data[i].restName + '</b>,<b>' + data[i].restAddress + '</b>';
                   
                     infowindow[i] = new google.maps.InfoWindow({
                         content: contentString[i]
                     });
                     var mdl = marker[i];
-                    google.maps.event.addListener(marker[i], 'click', (function (mdl, i) {
+                    google.maps.event.addListener(marker[i], 'mouseover', (function (mdl, i) {
                         return function () {
                             infowindow[i].open(map, marker[i]);
+                        }
+                    })(marker[i], i));
+                    google.maps.event.addListener(marker[i], 'mouseout', (function (marker, i) {
+                        return function () {
+                            infowindow[i].close();
                         }
                     })(marker[i], i));
                   
                 }
 
                 
-            });
+            })
 
 
         }
