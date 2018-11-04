@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RestIT.Areas.Identity.Authorization;
+using RestIT.Areas.Identity.Pages.Account;
 using RestIT.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace RestIT.Data
 {
-    public class SeedData
+    public class SeedData 
     {
         public static async Task Initialize(IServiceProvider serviceProvider, string testUserPw)
         {
@@ -29,12 +31,8 @@ namespace RestIT.Data
                 var managerID = await EnsureUser(serviceProvider, testUserPw, "manager@restit.com");
                 await EnsureRole(serviceProvider, managerID, Constants.CustomerManagersRole);
 
-                // Creating 25 test users
-                for (int i = 0; i < 5; i++) {
-                    var MemberID = await EnsureUser(serviceProvider, testUserPw, "user" + i + "@restit.com");
-                }
-
                 SeedCustomerDB(context, adminID);
+                UpdateCustomersPasswords(context, "Tt123!@#");
                 SeedChefDB(context, adminID);
                 SeedRestaurantDB(context, adminID);
                 SeedDishDB(context, adminID);
@@ -84,23 +82,252 @@ namespace RestIT.Data
         #region SeedCustomerDB
         public static void SeedCustomerDB(ApplicationDbContext context, string adminID)
         {
-            if (context.Customer.Any())
-            {
-                return;   // DB has been seeded
-            }
+            //if (context.Customer.Any())
+            //{
+            //    return;   // DB has been seeded
+            //}
 
-            context.Customer.AddRange(
-                new Customer
-                {
-                    custName = "Ronen Zolicha",
-                    custAge = 25,
-                    custPhone = "0547713375",
-                    custMail = "ronen1245@gmail.com",
-                    Status = CustomerStatus.Approved,
-                    OwnerID = adminID
-                });
-            context.SaveChanges();
-        } 
+            var customers = from m in context.Users
+                            where m.UserName != "admin@restit.com" &&
+                            m.UserName != "manager@restit.com" &&
+                            m.UserName != null
+                            select m;
+
+            if (customers.Any())
+            {
+                return; // DB has been seeded
+            }
+            else
+            {
+                context.Customer.AddRange(
+                    new Customer
+                    {
+                        custName = "TestUser00",
+                        custAge = 31,
+                        custPhone = "0501234500",
+                        UserName = "TestUser00@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser01",
+                        custAge = 26,
+                        custPhone = "0501234501",
+                        UserName = "TestUser01@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser02",
+                        custAge = 42,
+                        custPhone = "0501234502",
+                        UserName = "TestUser02@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser03",
+                        custAge = 46,
+                        custPhone = "0501234503",
+                        UserName = "TestUser03@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser04",
+                        custAge = 39,
+                        custPhone = "0501234504",
+                        UserName = "TestUser04@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser05",
+                        custAge = 29,
+                        custPhone = "0501234505",
+                        UserName = "TestUser05@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser06",
+                        custAge = 27,
+                        custPhone = "0501234506",
+                        UserName = "TestUser06@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser07",
+                        custAge = 36,
+                        custPhone = "0501234507",
+                        UserName = "TestUser07@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser08",
+                        custAge = 42,
+                        custPhone = "0501234508",
+                        UserName = "TestUser08@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser09",
+                        custAge = 20,
+                        custPhone = "0501234509",
+                        UserName = "TestUser09@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser10",
+                        custAge = 24,
+                        custPhone = "0501234510",
+                        UserName = "TestUser10@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser11",
+                        custAge = 19,
+                        custPhone = "0501234511",
+                        UserName = "TestUser11@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser12",
+                        custAge = 43,
+                        custPhone = "0501234512",
+                        UserName = "TestUser12@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser13",
+                        custAge = 36,
+                        custPhone = "0501234513",
+                        UserName = "TestUser13@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser14",
+                        custAge = 26,
+                        custPhone = "0501234514",
+                        UserName = "TestUser14@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser15",
+                        custAge = 25,
+                        custPhone = "0501234515",
+                        UserName = "TestUser15@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser16",
+                        custAge = 18,
+                        custPhone = "0501234516",
+                        UserName = "TestUser16@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser17",
+                        custAge = 20,
+                        custPhone = "0501234517",
+                        UserName = "TestUser17@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser18",
+                        custAge = 67,
+                        custPhone = "0501234518",
+                        UserName = "TestUser18@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser19",
+                        custAge = 59,
+                        custPhone = "0501234519",
+                        UserName = "TestUser19@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser20",
+                        custAge = 40,
+                        custPhone = "0501234520",
+                        UserName = "TestUser20@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser21",
+                        custAge = 43,
+                        custPhone = "0501234521",
+                        UserName = "TestUser21@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser22",
+                        custAge = 44,
+                        custPhone = "0501234522",
+                        UserName = "TestUser22@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser23",
+                        custAge = 46,
+                        custPhone = "0501234523",
+                        UserName = "TestUser23@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser24",
+                        custAge = 22,
+                        custPhone = "0501234524",
+                        UserName = "TestUser24@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        OwnerID = adminID
+                    });
+                context.SaveChanges();
+            }
+        }
         #endregion
 
         #region SeedChefDB
@@ -642,6 +869,45 @@ namespace RestIT.Data
                     dishIngredients = null,
                     dishImage = "/images/dishes/Sprite.jpg"
                 });
+            context.SaveChanges();
+        }
+        #endregion
+
+        #region HashPasswords
+        public static string HashPassword(string password)
+        {
+            byte[] salt;
+            byte[] buffer2;
+            if (password == null)
+            {
+                throw new ArgumentNullException("password");
+            }
+            using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, 0x10, 0x3e8))
+            {
+                salt = bytes.Salt;
+                buffer2 = bytes.GetBytes(0x20);
+            }
+            byte[] dst = new byte[0x31];
+            Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
+            Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
+            return Convert.ToBase64String(dst);
+        } 
+        #endregion
+
+        #region UpdateCustomersPasswords
+        public static void UpdateCustomersPasswords(ApplicationDbContext context, String password)
+        {
+            var customers = from m in context.Users
+                            where m.UserName != "admin@restit.com" &&
+                            m.UserName != "manager@restit.com" &&
+                            m.UserName != null
+                            select m;
+
+            foreach (var customer in customers)
+            {
+                customer.PasswordHash = HashPassword(password);
+            }
+
             context.SaveChanges();
         } 
         #endregion
