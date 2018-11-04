@@ -39,8 +39,20 @@ namespace RestIT.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
 
-        public class InputModel
+        public class InputModel 
         {
+            [Required]
+            [Display(Name = "Name")]
+            public string Name { get; set; }
+
+            [Required]
+            [Display(Name = "Phone Number")]
+            public string Phone { get; set; }
+
+            [Required]
+            [Display(Name = "Age")]
+            public int Age { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -68,7 +80,10 @@ namespace RestIT.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new Customer { UserName = Input.Email, Email = Input.Email };
+                var user = new Customer { UserName = Input.Email, Email = Input.Email,
+                    custName = Input.Name, custAge = Input.Age, custPhone = Input.Phone,
+                    custMail = Input.Email
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
