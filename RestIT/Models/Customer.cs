@@ -30,6 +30,8 @@ namespace RestIT.Models
         [RegularExpression("^[0-9]+$", ErrorMessage = "Age must be a number!")]
         public int custAge { get; set; }
 
+        [DisplayName("Favourite Restuarant Type")]
+        public CustomerRestType custRestType { get; set; }
 
         public CustomerStatus Status { get; set; }
     }
@@ -40,4 +42,19 @@ namespace RestIT.Models
         Approved,
         Rejected
     }
+
+    public enum CustomerRestType : int
+    {
+        None = 0,
+        Italian,
+        Israeli,
+        Meat,
+        Mediterranean,
+        Europe,
+        Fishes,
+        Homemade,
+        Desserts,
+        Mexican,
+        Asian,
+    };
 }

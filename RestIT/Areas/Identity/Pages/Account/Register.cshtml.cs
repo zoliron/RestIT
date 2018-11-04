@@ -68,6 +68,11 @@ namespace RestIT.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "Favourite Restuarant Type")]
+            public CustomerRestType custRestType { get; set; }
+
         }
 
         public void OnGet(string returnUrl = null)
@@ -82,7 +87,7 @@ namespace RestIT.Areas.Identity.Pages.Account
             {
                 var user = new Customer { UserName = Input.Email, Email = Input.Email,
                     custName = Input.Name, custAge = Input.Age, custPhone = Input.Phone,
-                    custMail = Input.Email
+                    custMail = Input.Email, custRestType = Input.custRestType
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

@@ -107,6 +107,7 @@ namespace RestIT.Data
                         custPhone = "0501234500",
                         UserName = "TestUser00@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Asian,
                         OwnerID = adminID
                     },
                     new Customer
@@ -116,6 +117,7 @@ namespace RestIT.Data
                         custPhone = "0501234501",
                         UserName = "TestUser01@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Asian,
                         OwnerID = adminID
                     },
                     new Customer
@@ -125,6 +127,7 @@ namespace RestIT.Data
                         custPhone = "0501234502",
                         UserName = "TestUser02@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Asian,
                         OwnerID = adminID
                     },
                     new Customer
@@ -134,6 +137,7 @@ namespace RestIT.Data
                         custPhone = "0501234503",
                         UserName = "TestUser03@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Desserts,
                         OwnerID = adminID
                     },
                     new Customer
@@ -143,6 +147,7 @@ namespace RestIT.Data
                         custPhone = "0501234504",
                         UserName = "TestUser04@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Desserts,
                         OwnerID = adminID
                     },
                     new Customer
@@ -152,6 +157,7 @@ namespace RestIT.Data
                         custPhone = "0501234505",
                         UserName = "TestUser05@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Desserts,
                         OwnerID = adminID
                     },
                     new Customer
@@ -161,6 +167,7 @@ namespace RestIT.Data
                         custPhone = "0501234506",
                         UserName = "TestUser06@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Europe,
                         OwnerID = adminID
                     },
                     new Customer
@@ -170,6 +177,7 @@ namespace RestIT.Data
                         custPhone = "0501234507",
                         UserName = "TestUser07@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Europe,
                         OwnerID = adminID
                     },
                     new Customer
@@ -179,6 +187,7 @@ namespace RestIT.Data
                         custPhone = "0501234508",
                         UserName = "TestUser08@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Europe,
                         OwnerID = adminID
                     },
                     new Customer
@@ -188,6 +197,7 @@ namespace RestIT.Data
                         custPhone = "0501234509",
                         UserName = "TestUser09@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Mexican,
                         OwnerID = adminID
                     },
                     new Customer
@@ -197,6 +207,7 @@ namespace RestIT.Data
                         custPhone = "0501234510",
                         UserName = "TestUser10@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Fishes,
                         OwnerID = adminID
                     },
                     new Customer
@@ -206,6 +217,7 @@ namespace RestIT.Data
                         custPhone = "0501234511",
                         UserName = "TestUser11@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Fishes,
                         OwnerID = adminID
                     },
                     new Customer
@@ -215,6 +227,7 @@ namespace RestIT.Data
                         custPhone = "0501234512",
                         UserName = "TestUser12@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Fishes,
                         OwnerID = adminID
                     },
                     new Customer
@@ -224,6 +237,7 @@ namespace RestIT.Data
                         custPhone = "0501234513",
                         UserName = "TestUser13@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Homemade,
                         OwnerID = adminID
                     },
                     new Customer
@@ -233,6 +247,7 @@ namespace RestIT.Data
                         custPhone = "0501234514",
                         UserName = "TestUser14@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Homemade,
                         OwnerID = adminID
                     },
                     new Customer
@@ -242,6 +257,7 @@ namespace RestIT.Data
                         custPhone = "0501234515",
                         UserName = "TestUser15@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Homemade,
                         OwnerID = adminID
                     },
                     new Customer
@@ -251,6 +267,7 @@ namespace RestIT.Data
                         custPhone = "0501234516",
                         UserName = "TestUser16@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Israeli,
                         OwnerID = adminID
                     },
                     new Customer
@@ -260,6 +277,7 @@ namespace RestIT.Data
                         custPhone = "0501234517",
                         UserName = "TestUser17@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Israeli,
                         OwnerID = adminID
                     },
                     new Customer
@@ -269,6 +287,7 @@ namespace RestIT.Data
                         custPhone = "0501234518",
                         UserName = "TestUser18@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Italian,
                         OwnerID = adminID
                     },
                     new Customer
@@ -278,6 +297,7 @@ namespace RestIT.Data
                         custPhone = "0501234519",
                         UserName = "TestUser19@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Italian,
                         OwnerID = adminID
                     },
                     new Customer
@@ -287,6 +307,7 @@ namespace RestIT.Data
                         custPhone = "0501234520",
                         UserName = "TestUser20@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Meat,
                         OwnerID = adminID
                     },
                     new Customer
@@ -296,6 +317,7 @@ namespace RestIT.Data
                         custPhone = "0501234521",
                         UserName = "TestUser21@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Meat,
                         OwnerID = adminID
                     },
                     new Customer
@@ -305,6 +327,7 @@ namespace RestIT.Data
                         custPhone = "0501234522",
                         UserName = "TestUser22@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Mediterranean,
                         OwnerID = adminID
                     },
                     new Customer
@@ -314,6 +337,7 @@ namespace RestIT.Data
                         custPhone = "0501234523",
                         UserName = "TestUser23@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Mediterranean,
                         OwnerID = adminID
                     },
                     new Customer
@@ -323,6 +347,7 @@ namespace RestIT.Data
                         custPhone = "0501234524",
                         UserName = "TestUser24@gmail.com",
                         Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Mexican,
                         OwnerID = adminID
                     });
                 context.SaveChanges();

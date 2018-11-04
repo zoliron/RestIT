@@ -19,11 +19,9 @@ namespace RestIT.Models
         Homemade,
         Desserts,
         Mexican,
-        Asian,
-
-        
-
+        Asian,  
     }; 
+
     public class Restaurant
     {
         public int ID { get; set; }
