@@ -115,10 +115,33 @@
             });
             $.get("@Url.Action("GetAllLocation", "Restaurants")", function (data) {
                 var marker = [];
+                var contentString = [];
+                var infowindow = [];
                 for (var i = 0; i < data.length; i++) {
                     marker[i] = new google.maps.Marker({ position: { lat: data[i].restLat, lng: data[i].restLng }, map: map });
-                        }
+                    contentString[i] = '<div id="content">' +
+                        '<div id="siteNotice">' +
+                        '</div>' +
+                        '<h5 id="secondHeading" class="secondHeading">' + data[i].restCity + '</h5>' +
+                        '<div id="bodyContent">' +
+                        '<p><b>' + data[i].restName + '</b>,<b>' + data[i].restAddress + '</b>,<b>';
+                  
+                    infowindow[i] = new google.maps.InfoWindow({
+                        content: contentString[i]
                     });
+                    var mdl = marker[i];
+                    google.maps.event.addListener(marker[i], 'click', (function (mdl, i) {
+                        return function () {
+                            infowindow[i].open(map, marker[i]);
+                        }
+                    })(marker[i], i));
+                  
+                }
+
+                
+            });
+
+
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGNm5igtfDIpBwyHIklk36mPHXA5TYspc&callback=myMap" async defer></script>
