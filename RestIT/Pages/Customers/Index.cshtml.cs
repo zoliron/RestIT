@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace RestIT.Pages.Customers
 {
@@ -21,10 +23,11 @@ namespace RestIT.Pages.Customers
         }
 
         public IList<Customer> Customer { get; set; }
+        public string SearchString { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string searchString)
         {
-            var customers = from c in Context.Users
+            var customers = from c in Context.Customer
                            select c;
 
             var isAuthorized = User.IsInRole(Constants.CustomerManagersRole) ||
@@ -40,7 +43,13 @@ namespace RestIT.Pages.Customers
                                             || c.OwnerID == currentUserId);
             }
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customers = customers.Where(s => s.custName.Contains(searchString));
+            }
+
             Customer = await customers.ToListAsync();
+            SearchString = searchString;
         }
     }
 }
