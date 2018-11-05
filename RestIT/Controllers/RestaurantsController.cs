@@ -162,9 +162,6 @@ namespace RestIT.Controllers
             var restaurant = _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
                 .Where(i => i.ID == id).Single();
 
-          
-          
-           
             restaurant.restKosher = rest.restKosher;
             restaurant.restAddress = restaurant.restAddress;
             restaurant.restCity = rest.restCity;
@@ -264,17 +261,18 @@ namespace RestIT.Controllers
 
         private void CheckChefs(Restaurant restaurant, ApplicationDbContext context)
         {
-            if (restaurant.restChef == null)
+            if (restaurant.restChef.Count() == 0)
             {
                 restaurant.restChef = new List<RestaurantChef>();
+                ViewBag.selectedChefName = "None";
             }
             else
             {
-                if (restaurant.restChef.Count != 0)
-                {
-                    ViewBag.selectedChef = restaurant.restChef.Last().ChefID ;
-                    //ViewBag.selectedChef = restaurant.restChef.Last().Chef.chefName;
-                }
+                var temp = context.Chef
+                   .Include(p => p.Restuarants)
+                   .Single(p => p.ID == restaurant.restChef.Last().ChefID);
+
+                ViewBag.selectedChefName = temp.chefName;
             }
 
             var allChefs = _context.Chef;
@@ -326,18 +324,16 @@ namespace RestIT.Controllers
             {
                 return;
             }
-            if (restaurant.restChef == null)
-            {
-                restaurant.restChef = new List<RestaurantChef>();
-            }
 
-                restaurant.restChef.Add(new RestaurantChef {
-                       Restaurent = restaurant,
-                       Chef = chef,
-                       ID = restaurant.restChef.Count + 1,
-                });
-           
+            restaurant.restChef = new List<RestaurantChef>();
+
+            restaurant.restChef.Add(new RestaurantChef {
+               //ID = restaurant.restChef.Count + 1,
+               Restaurent = restaurant,
+               Chef = chef
+           });
         }
+
         public Boolean PublishFacebookPost(String facebookMessage)
         {
             try

@@ -33,6 +33,7 @@ namespace RestIT.Data
                 SeedChefDB(context, adminID);
                 SeedRestaurantDB(context, adminID);
                 SeedDishDB(context, adminID);
+                //SeedConnectionRestChef(context, adminID);
             }
         }
 
@@ -108,6 +109,10 @@ namespace RestIT.Data
             context.Chef.AddRange(
                 new Chef
                 {
+                    chefName = "None"
+                },
+                new Chef
+                {
                     chefName = "Eyal Shani"
                 },
                 new Chef
@@ -172,7 +177,7 @@ namespace RestIT.Data
                     restType = RestType.Fishes,
                     restKosher = true,
                     Lat = 32.089348,
-                    Lng = 34.797386,
+                    Lng = 34.797386
                 },
 
                 new Restaurant
@@ -407,7 +412,7 @@ namespace RestIT.Data
                     Lat=32.090798,
                     Lng=34.781022,
                 });
-                
+
             context.SaveChanges();
         }
         #endregion
@@ -638,7 +643,33 @@ namespace RestIT.Data
                     dishImage = "/images/dishes/Sprite.jpg"
                 });
             context.SaveChanges();
-        } 
+        }
         #endregion
+        private static void SeedConnectionRestChef(ApplicationDbContext context, string adminID)
+        {
+            if (context.RestaurantChef.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            var NoneChef = context.Chef.Single(j => j.chefName == "None");
+
+            foreach (Restaurant restaurant in context.Restaurant)
+            {
+                //Restaurant restaurantInDataBase = context.Restaurant.Single(s => s.restChef.Count() == 0);
+                restaurant.restChef = new List<RestaurantChef>()
+                {
+                    new RestaurantChef()
+                    {
+                        Chef = NoneChef,
+                        Restaurent = restaurant
+                    }
+                 };
+
+                context.Update(restaurant);
+            }
+
+            context.SaveChanges();
+        }
     }
 }

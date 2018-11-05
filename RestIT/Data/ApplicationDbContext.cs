@@ -21,6 +21,8 @@ namespace RestIT.Data
 
         public DbSet<RestIT.Models.Restaurant> Restaurant { get; set; }
 
+        public DbSet<RestIT.Models.RestaurantChef> RestaurantChef { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
