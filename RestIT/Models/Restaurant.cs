@@ -19,14 +19,13 @@ namespace RestIT.Models
         Homemade,
         Desserts,
         Mexican,
-        Asian,
-
-        
-
+        Asian,  
     }; 
+
     public class Restaurant
     {
         public int ID { get; set; }
+        public int DishID { get; set; }
         [DisplayName("Restuarant's chef")]
         [Required]
         public virtual ICollection<RestaurantChef> restChef { get; set; }
@@ -46,7 +45,7 @@ namespace RestIT.Models
         public RestType restType { get; set; }
         [DisplayName("Kosher")]
         public Boolean restKosher { get; set; }
-        public double Lat{ get; set; }
-        public double Lng { get; set; }
+        public double restLat{ get; set; }
+        public double restLng { get; set; }
     }
 }

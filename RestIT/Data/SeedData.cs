@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RestIT.Areas.Identity.Authorization;
+using RestIT.Areas.Identity.Pages.Account;
 using RestIT.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace RestIT.Data
 {
-    public class SeedData
+    public class SeedData 
     {
         public static async Task Initialize(IServiceProvider serviceProvider, string testUserPw)
         {
@@ -25,27 +27,27 @@ namespace RestIT.Data
                 var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@restit.com");
                 await EnsureRole(serviceProvider, adminID, Constants.CustomerAdministratorsRole);
 
-                // allowed user can create and edit contacts that they create
+                // allowed user can create and edit customers that they create
                 var managerID = await EnsureUser(serviceProvider, testUserPw, "manager@restit.com");
                 await EnsureRole(serviceProvider, managerID, Constants.CustomerManagersRole);
 
                 SeedCustomerDB(context, adminID);
+                UpdateCustomersPasswords(context, "Tt123!@#");
                 SeedChefDB(context, adminID);
                 SeedRestaurantDB(context, adminID);
                 SeedDishDB(context, adminID);
-                //SeedConnectionRestChef(context, adminID);
             }
         }
 
         private static async Task<string> EnsureUser(IServiceProvider serviceProvider,
                                                     string testUserPw, string UserName)
         {
-            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+            var userManager = serviceProvider.GetService<UserManager<Customer>>();
 
             var user = await userManager.FindByNameAsync(UserName);
             if (user == null)
             {
-                user = new ApplicationUser { UserName = UserName };
+                user = new Customer { UserName = UserName };
                 await userManager.CreateAsync(user, testUserPw);
             }
 
@@ -68,7 +70,7 @@ namespace RestIT.Data
                 IR = await roleManager.CreateAsync(new IdentityRole(role));
             }
 
-            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+            var userManager = serviceProvider.GetService<UserManager<Customer>>();
 
             var user = await userManager.FindByIdAsync(uid);
 
@@ -80,23 +82,277 @@ namespace RestIT.Data
         #region SeedCustomerDB
         public static void SeedCustomerDB(ApplicationDbContext context, string adminID)
         {
-            if (context.Customer.Any())
-            {
-                return;   // DB has been seeded
-            }
+            //if (context.Customer.Any())
+            //{
+            //    return;   // DB has been seeded
+            //}
 
-            context.Customer.AddRange(
-                new Customer
-                {
-                    custName = "Ronen Zolicha",
-                    custAge = 25,
-                    custPhone = "0547713375",
-                    custMail = "ronen1245@gmail.com",
-                    Status = CustomerStatus.Approved,
-                    OwnerID = adminID
-                });
-            context.SaveChanges();
-        } 
+            var customers = from m in context.Users
+                            where m.UserName != "admin@restit.com" &&
+                            m.UserName != "manager@restit.com" &&
+                            m.UserName != null
+                            select m;
+
+            if (customers.Any())
+            {
+                return; // DB has been seeded
+            }
+            else
+            {
+                context.Customer.AddRange(
+                    new Customer
+                    {
+                        custName = "TestUser00",
+                        custAge = 31,
+                        custPhone = "0501234500",
+                        UserName = "TestUser00@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Asian,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser01",
+                        custAge = 26,
+                        custPhone = "0501234501",
+                        UserName = "TestUser01@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Asian,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser02",
+                        custAge = 42,
+                        custPhone = "0501234502",
+                        UserName = "TestUser02@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Asian,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser03",
+                        custAge = 46,
+                        custPhone = "0501234503",
+                        UserName = "TestUser03@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Desserts,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser04",
+                        custAge = 39,
+                        custPhone = "0501234504",
+                        UserName = "TestUser04@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Desserts,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser05",
+                        custAge = 29,
+                        custPhone = "0501234505",
+                        UserName = "TestUser05@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Desserts,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser06",
+                        custAge = 27,
+                        custPhone = "0501234506",
+                        UserName = "TestUser06@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Europe,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser07",
+                        custAge = 36,
+                        custPhone = "0501234507",
+                        UserName = "TestUser07@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Europe,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser08",
+                        custAge = 42,
+                        custPhone = "0501234508",
+                        UserName = "TestUser08@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Europe,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser09",
+                        custAge = 20,
+                        custPhone = "0501234509",
+                        UserName = "TestUser09@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Mexican,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser10",
+                        custAge = 24,
+                        custPhone = "0501234510",
+                        UserName = "TestUser10@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Fishes,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser11",
+                        custAge = 19,
+                        custPhone = "0501234511",
+                        UserName = "TestUser11@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Fishes,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser12",
+                        custAge = 43,
+                        custPhone = "0501234512",
+                        UserName = "TestUser12@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Fishes,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser13",
+                        custAge = 36,
+                        custPhone = "0501234513",
+                        UserName = "TestUser13@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Homemade,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser14",
+                        custAge = 26,
+                        custPhone = "0501234514",
+                        UserName = "TestUser14@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Homemade,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser15",
+                        custAge = 25,
+                        custPhone = "0501234515",
+                        UserName = "TestUser15@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Homemade,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser16",
+                        custAge = 18,
+                        custPhone = "0501234516",
+                        UserName = "TestUser16@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Israeli,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser17",
+                        custAge = 20,
+                        custPhone = "0501234517",
+                        UserName = "TestUser17@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Israeli,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser18",
+                        custAge = 67,
+                        custPhone = "0501234518",
+                        UserName = "TestUser18@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Italian,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser19",
+                        custAge = 59,
+                        custPhone = "0501234519",
+                        UserName = "TestUser19@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Italian,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser20",
+                        custAge = 40,
+                        custPhone = "0501234520",
+                        UserName = "TestUser20@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Meat,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser21",
+                        custAge = 43,
+                        custPhone = "0501234521",
+                        UserName = "TestUser21@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Meat,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser22",
+                        custAge = 44,
+                        custPhone = "0501234522",
+                        UserName = "TestUser22@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Mediterranean,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser23",
+                        custAge = 46,
+                        custPhone = "0501234523",
+                        UserName = "TestUser23@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Mediterranean,
+                        OwnerID = adminID
+                    },
+                    new Customer
+                    {
+                        custName = "TestUser24",
+                        custAge = 22,
+                        custPhone = "0501234524",
+                        UserName = "TestUser24@gmail.com",
+                        Status = CustomerStatus.Approved,
+                        custRestType = CustomerRestType.Mexican,
+                        OwnerID = adminID
+                    });
+                context.SaveChanges();
+            }
+        }
         #endregion
 
         #region SeedChefDB
@@ -107,10 +363,6 @@ namespace RestIT.Data
                 return;   // DB has been seeded
             }
             context.Chef.AddRange(
-                new Chef
-                {
-                    chefName = "None"
-                },
                 new Chef
                 {
                     chefName = "Eyal Shani"
@@ -176,8 +428,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType = RestType.Fishes,
                     restKosher = true,
-                    Lat = 32.089348,
-                    Lng = 34.797386
+                    restLat = 32.089348,
+                    restLng = 34.797386,
                 },
 
                 new Restaurant
@@ -188,8 +440,8 @@ namespace RestIT.Data
                     restRating = 3,
                     restType =  RestType.Israeli,
                     restKosher = true,
-                    Lat = 32.070353,
-                    Lng = 34.794209,
+                    restLat = 32.070353,
+                    restLng = 34.794209,
                 },
             
                 new Restaurant
@@ -200,8 +452,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType =  RestType.Mediterranean,
                     restKosher = false,
-                    Lat= 32.079671,
-                    Lng= 34.768773,
+                    restLat= 32.079671,
+                    restLng= 34.768773,
                 },
                 new Restaurant
                 {
@@ -211,8 +463,8 @@ namespace RestIT.Data
                     restRating = 3,
                     restType =  RestType.Israeli,
                     restKosher = false,
-                    Lat = 31.785449,
-                    Lng = 35.211158,
+                    restLat = 31.785449,
+                    restLng = 35.211158,
                 },
                 new Restaurant
                 {
@@ -222,8 +474,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType =  RestType.Mexican,
                     restKosher = false,
-                    Lat=32.070930,
-                    Lng=34.787801,
+                    restLat=32.070930,
+                    restLng=34.787801,
                 },
                 new Restaurant
                 {
@@ -233,8 +485,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType =  RestType.Asian,
                     restKosher = false,
-                    Lat=32.063943,
-                    Lng=34.780015,
+                    restLat=32.063943,
+                    restLng=34.780015,
                 },
                 new Restaurant
                 {
@@ -244,8 +496,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType = RestType.Italian,
                     restKosher = false,
-                    Lat=32.063641,
-                    Lng=34.769784,
+                    restLat=32.063641,
+                    restLng=34.769784,
                 },
                 new Restaurant
                 {
@@ -255,8 +507,8 @@ namespace RestIT.Data
                     restRating = 3,
                     restType = RestType.Asian,
                     restKosher = false,
-                    Lat=32.077274,
-                    Lng=34.781233,
+                    restLat=32.077274,
+                    restLng=34.781233,
                 },
                 new Restaurant
                 {
@@ -266,8 +518,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = RestType.Fishes,
                     restKosher = false,
-                    Lat=32.053589,
-                    Lng=34.755772,
+                    restLat=32.053589,
+                    restLng=34.755772,
                 },
                 new Restaurant
                 {
@@ -277,8 +529,8 @@ namespace RestIT.Data
                     restRating = 4.5,
                     restType = RestType.Italian,
                     restKosher = true,
-                    Lat=32.063546,
-                    Lng=34.770959,
+                    restLat=32.063546,
+                    restLng=34.770959,
                 },
                 new Restaurant
                 {
@@ -288,8 +540,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = RestType.Mediterranean,
                     restKosher = true,
-                    Lat = 32.074774,
-                    Lng= 34.791573,
+                    restLat = 32.074774,
+                    restLng= 34.791573,
                 },
                 new Restaurant
                 {
@@ -299,8 +551,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = RestType.Israeli,
                     restKosher = false,
-                    Lat=32.314429,
-                    Lng=34.873948,
+                    restLat=32.314429,
+                    restLng=34.873948,
                 },
                 new Restaurant
                 {
@@ -310,19 +562,19 @@ namespace RestIT.Data
                     restRating = 4,
                     restType = RestType.Italian,
                     restKosher = false,
-                    Lat= 32.709285,
-                    Lng= 35.174259,
+                    restLat= 32.709285,
+                    restLng= 35.174259,
                 },
                 new Restaurant
                 {
                     restName = "Whale",
                     restAddress = "Ha-Yam St. 6",
-                    restCity = "Eilat",
+                    restCity = "EirestLat",
                     restRating = 4,
                     restType =  RestType.Fishes,
                     restKosher = false,
-                    Lat= 29.548329,
-                    Lng= 34.967564,
+                    restLat= 29.548329,
+                    restLng= 34.967564,
                 },
                 new Restaurant
                 {
@@ -332,8 +584,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType = RestType.Mexican,
                     restKosher = false,
-                    Lat= 32.064640,
-                    Lng= 34.771773,
+                    restLat= 32.064640,
+                    restLng= 34.771773,
                 },
                 new Restaurant
                 {
@@ -343,8 +595,8 @@ namespace RestIT.Data
                     restRating = 3,
                     restType =  RestType.Homemade,
                     restKosher = false,
-                    Lat= 32.059046,
-                    Lng= 34.772716,
+                    restLat= 32.059046,
+                    restLng= 34.772716,
                 },
                 new Restaurant
                 {
@@ -354,8 +606,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType =  RestType.Israeli,            
                     restKosher = false,
-                    Lat=32.061327,
-                    Lng= 34.763459,
+                    restLat=32.061327,
+                    restLng= 34.763459,
                 },
                 new Restaurant
                 {
@@ -365,8 +617,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType =  RestType.Homemade,
                     restKosher = false,
-                    Lat= 32.061646,
-                    Lng= 34.763607,
+                    restLat= 32.061646,
+                    restLng= 34.763607,
                 },
                 new Restaurant
                 {
@@ -376,8 +628,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType =  RestType.Israeli,
                     restKosher = false,
-                    Lat= 32.062874,
-                    Lng= 34.776297,
+                    restLat= 32.062874,
+                    restLng= 34.776297,
                 },
                 new Restaurant
                 {
@@ -387,8 +639,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType = RestType.Desserts,
                     restKosher = false,
-                    Lat=32.069460,
-                    Lng=34.783678,
+                    restLat=32.069460,
+                    restLng=34.783678,
                 },
                 new Restaurant
                 {
@@ -398,8 +650,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType =  RestType.Europe,
                     restKosher = false,
-                    Lat=32.063193,
-                    Lng=34.776675,
+                    restLat=32.063193,
+                    restLng=34.776675,
                 },
                 new Restaurant
                 {
@@ -409,10 +661,10 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = RestType.Meat,
                     restKosher = false,
-                    Lat=32.090798,
-                    Lng=34.781022,
+                    restLat=32.090798,
+                    restLng=34.781022,
                 });
-
+                
             context.SaveChanges();
         }
         #endregion
@@ -572,12 +824,12 @@ namespace RestIT.Data
                 },
                 new Dish
                 {
-                    dishName = "Chocolate souffle",
+                    dishName = "ChocorestLate souffle",
                     dishCost = 39,
                     dishRating = 5,
                     dishType = "Desert",
-                    dishIngredients = "Heavy cream, Dark chocolate, Milk, Flour",
-                    dishImage = "/images/dishes/Chocolate souffle.jpg"
+                    dishIngredients = "Heavy cream, Dark chocorestLate, Milk, Flour",
+                    dishImage = "/images/dishes/ChocorestLate souffle.jpg"
                 },
                 new Dish
                 {
@@ -645,31 +897,44 @@ namespace RestIT.Data
             context.SaveChanges();
         }
         #endregion
-        private static void SeedConnectionRestChef(ApplicationDbContext context, string adminID)
+
+        #region HashPasswords
+        public static string HashPassword(string password)
         {
-            if (context.RestaurantChef.Any())
+            byte[] salt;
+            byte[] buffer2;
+            if (password == null)
             {
-                return;   // DB has been seeded
+                throw new ArgumentNullException("password");
             }
-
-            var NoneChef = context.Chef.Single(j => j.chefName == "None");
-
-            foreach (Restaurant restaurant in context.Restaurant)
+            using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, 0x10, 0x3e8))
             {
-                //Restaurant restaurantInDataBase = context.Restaurant.Single(s => s.restChef.Count() == 0);
-                restaurant.restChef = new List<RestaurantChef>()
-                {
-                    new RestaurantChef()
-                    {
-                        Chef = NoneChef,
-                        Restaurent = restaurant
-                    }
-                 };
+                salt = bytes.Salt;
+                buffer2 = bytes.GetBytes(0x20);
+            }
+            byte[] dst = new byte[0x31];
+            Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
+            Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
+            return Convert.ToBase64String(dst);
+        } 
+        #endregion
 
-                context.Update(restaurant);
+        #region UpdateCustomersPasswords
+        public static void UpdateCustomersPasswords(ApplicationDbContext context, String password)
+        {
+            var customers = from m in context.Users
+                            where m.UserName != "admin@restit.com" &&
+                            m.UserName != "manager@restit.com" &&
+                            m.UserName != null
+                            select m;
+
+            foreach (var customer in customers)
+            {
+                customer.PasswordHash = HashPassword(password);
             }
 
             context.SaveChanges();
-        }
+        } 
+        #endregion
     }
 }

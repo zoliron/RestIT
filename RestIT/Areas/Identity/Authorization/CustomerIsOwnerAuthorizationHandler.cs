@@ -12,9 +12,9 @@ namespace RestIT.Areas.Identity.Authorization
 {
     public class CustomerIsOwnerAuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, Customer>
     {
-        UserManager<ApplicationUser> _userManager;
+        UserManager<Customer> _userManager;
 
-        public CustomerIsOwnerAuthorizationHandler(UserManager<ApplicationUser> userManager){
+        public CustomerIsOwnerAuthorizationHandler(UserManager<Customer> userManager){
             _userManager = userManager;
         }
 

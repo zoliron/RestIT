@@ -1,4 +1,4 @@
-@page "{id:int}"
+@page "{id}"
 @model RestIT.Pages.Customers.EditModel
 
 @{
@@ -13,7 +13,7 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Customer.ID" />
+            <input type="hidden" asp-for="Customer.Id" />
             <div class="form-group">
                 <label asp-for="Customer.custName" class="control-label"></label>
                 <input asp-for="Customer.custName" class="form-control" />
@@ -31,8 +31,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Customer.custMail" class="control-label"></label>
-                <input asp-for="Customer.custMail" class="form-control" />
-                <span asp-validation-for="Customer.custMail" class="text-danger"></span>
+                <input asp-for="Customer.UserName" class="form-control" />
+                <span asp-validation-for="Customer.UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

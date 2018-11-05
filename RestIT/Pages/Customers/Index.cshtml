@@ -5,15 +5,18 @@
     ViewData["Title"] = "Index";
 }
 <h2>Customers List</h2>
+
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<form asp-controller="Customers" asp-action="Index" method="get">
+
+<form>
     <span class="col-md-6">
         Customer Name: <input type="text" name="SearchString">
         <button type="submit" class="btn btn-secondary"> Filter</button>
     </span>
 </form>
+
 <table class="table table-hover">
     <thead>
         <tr>
@@ -30,6 +33,9 @@
                 @Html.DisplayNameFor(model => model.Customer[0].custMail)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Customer[0].custRestType)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Customer[0].Status)
             </th>
             <th></th>
@@ -38,40 +44,43 @@
     <tbody>
         @foreach (var item in Model.Customer)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.custName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.custAge)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.custPhone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.custMail)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @if ((await AuthorizationService.AuthorizeAsync(
-                     User, item,
-                     CustomerOperations.Update)).Succeeded)
-                    {
-                        <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
-                        <text> | </text>
-                    }
-                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a>
-                    @if ((await AuthorizationService.AuthorizeAsync(
-                     User, item,
-                     CustomerOperations.Delete)).Succeeded)
-                    {
-                        <text> | </text>
-                        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-                    }
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.custName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.custAge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.custPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.custRestType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @if ((await AuthorizationService.AuthorizeAsync(
+                User, item,
+                CustomerOperations.Update)).Succeeded)
+                {
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                    <text> | </text>
+                }
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                @if ((await AuthorizationService.AuthorizeAsync(
+                User, item,
+                CustomerOperations.Delete)).Succeeded)
+                {
+                    <text> | </text>
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                }
+            </td>
+        </tr>
         }
     </tbody>
 </table>

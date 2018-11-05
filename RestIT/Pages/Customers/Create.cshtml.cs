@@ -14,7 +14,7 @@ namespace RestIT.Pages.Customers
         public CreateModel(
             ApplicationDbContext context,
             IAuthorizationService authorizationService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<Customer> userManager)
             : base(context, authorizationService, userManager)
         {
         }

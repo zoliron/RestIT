@@ -14,16 +14,16 @@ namespace RestIT.Pages.Customers
         public DetailsModel(
             ApplicationDbContext context,
             IAuthorizationService authorizationService,
-            UserManager<ApplicationUser> userManager) 
+            UserManager<Customer> userManager) 
             : base(context, authorizationService, userManager)
         {
         }
 
         public Customer Customer { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
-            Customer = await Context.Customer.FirstOrDefaultAsync(m => m.ID == id);
+            Customer = await Context.Users.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Customer == null)
             {
@@ -45,10 +45,10 @@ namespace RestIT.Pages.Customers
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id, CustomerStatus status)
+        public async Task<IActionResult> OnPostAsync(string id, CustomerStatus status)
         {
-             var customer = await Context.Customer.FirstOrDefaultAsync(
-                                                       m => m.ID == id);
+             var customer = await Context.Users.FirstOrDefaultAsync(
+                                                       m => m.Id == id);
 
             if (customer == null)
             {
@@ -66,7 +66,7 @@ namespace RestIT.Pages.Customers
                 return new ChallengeResult();
             }
             customer.Status = status;
-            Context.Customer.Update(customer);
+            Context.Users.Update(customer);
             await Context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

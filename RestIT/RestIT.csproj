@@ -6,9 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Backup\**" />
     <Compile Remove="Image\**" />
+    <Content Remove="Backup\**" />
     <Content Remove="Image\**" />
+    <EmbeddedResource Remove="Backup\**" />
     <EmbeddedResource Remove="Image\**" />
+    <None Remove="Backup\**" />
     <None Remove="Image\**" />
   </ItemGroup>
 
@@ -181,10 +185,6 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Pages\_ViewStart.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Views\Customers\Create.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Error.cshtml">

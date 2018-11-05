@@ -1,4 +1,4 @@
-@page "{id:int}"
+@page "{id}"
 @model RestIT.Pages.Customers.DetailsModel
 
 @{
@@ -33,7 +33,7 @@
             @Html.DisplayNameFor(model => model.Customer.custMail)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Customer.custMail)
+            @Html.DisplayFor(model => model.Customer.UserName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Customer.Status)
@@ -50,7 +50,7 @@
        User, Model.Customer, CustomerOperations.Approve)).Succeeded)
     {
         <form style="display:inline;" method="post">
-            <input type="hidden" name="id" value="@Model.Customer.ID" />
+            <input type="hidden" name="id" value="@Model.Customer.Id" />
             <input type="hidden" name="status" value="@CustomerStatus.Approved" />
             <button type="submit" class="btn btn-xs btn-success">Approve</button>
         </form>
@@ -63,7 +63,7 @@
        User, Model.Customer, CustomerOperations.Reject)).Succeeded)
     {
         <form style="display:inline;" method="post">
-            <input type="hidden" name="id" value="@Model.Customer.ID" />
+            <input type="hidden" name="id" value="@Model.Customer.Id" />
             <input type="hidden" name="status" value="@CustomerStatus.Rejected" />
             <button type="submit" class="btn btn-xs btn-success">Reject</button>
         </form>
@@ -75,7 +75,7 @@
            User, Model.Customer,
            CustomerOperations.Update)).Succeeded)
     {
-        <a asp-page="./Edit" asp-route-id="@Model.Customer.ID">Edit</a>
+        <a asp-page="./Edit" asp-route-id="@Model.Customer.Id">Edit</a>
         <text> | </text>
     }
     <a asp-page="./Index">Back to List</a>

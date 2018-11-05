@@ -64,42 +64,90 @@
     <tbody>
         @foreach (var item in Model.Restaurants)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.restName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.restAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.restCity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.restRating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.restType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.restKosher)
-            </td>
-            <td>
-                @{
-                    if (item.Dishes != null)
-                    {
-                        foreach (var dish in item.Dishes)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.restName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.restAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.restCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.restRating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.restType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.restKosher)
+                </td>
+                <td>
+                    @{
+                        if (item.Dishes != null)
                         {
-                            @dish.dishName @: <br />
+                            foreach (var dish in item.Dishes)
+                            {
+                                @dish.dishName @: <br />
+                            }
                         }
                     }
-                }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+<div class="jumbotron">
+    <div id="map" style="width:100%;height:300px;"></div>
+    <script>
+        var map;
+        function myMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 32.079607, lng: 34.768794 },
+                zoom: 13
+            });
+            $.get("@Url.Action("GetAllLocation", "Restaurants")", function (data) {
+                var marker = [];
+                var contentString = [];
+                var infowindow = [];
+                for (var i = 0; i < data.length; i++) {
+                    marker[i] = new google.maps.Marker({ position: { lat: data[i].restLat, lng: data[i].restLng }, map: map });
+                    contentString[i] = '<div id="content">' +
+                        '<div id="siteNotice">' +
+                        '</div>' +
+                        '<h5 id="secondHeading" class="secondHeading">' + data[i].restCity + '</h3>' +
+                        '<div id="bodyContent">' +
+                        '<p><b>' + data[i].restName + '</b>,<b>' + data[i].restAddress + '</b>';
+                  
+                    infowindow[i] = new google.maps.InfoWindow({
+                        content: contentString[i]
+                    });
+                    var mdl = marker[i];
+                    google.maps.event.addListener(marker[i], 'mouseover', (function (mdl, i) {
+                        return function () {
+                            infowindow[i].open(map, marker[i]);
+                        }
+                    })(marker[i], i));
+                    google.maps.event.addListener(marker[i], 'mouseout', (function (marker, i) {
+                        return function () {
+                            infowindow[i].close();
+                        }
+                    })(marker[i], i));
+                  
+                }
+
+                
+            })
+
+
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGNm5igtfDIpBwyHIklk36mPHXA5TYspc&callback=myMap" async defer></script>
+</div>
