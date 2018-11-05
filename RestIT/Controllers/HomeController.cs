@@ -56,6 +56,53 @@ namespace RestIT.Controllers
             return View();
         }
 
+        //// Class for GroupBy view
+        //public class GroupByRestaurant
+        //{
+        //    public string RestName { get; set; }
+        //    public string RestCity { get; set; }
+        //};
+
+        //public void GroupByQuery() {
+        //    var result = from restaurant in _context.Restaurant
+        //                 group restaurant.restName by restaurant.restCity;
+
+        //    foreach (IGrouping<string, string> item in result)
+        //    {
+        //        Console.WriteLine(item.Key + ":");
+        //        foreach (var r in item)
+        //        {
+        //            Console.WriteLine(" " + r);
+        //        }
+        //    }
+        //}
+
+        //public IActionResult GroupByQuery() {
+        //    var result = from restaurant in _context.Restaurant
+        //                  group restaurant.restName by restaurant.restCity into newGroup
+        //                  select newGroup;
+
+        //    foreach (IGrouping<string, Restaurant> item in result) {
+        //        Console.WriteLine(item.Key + ":");
+        //        foreach (Restaurant r in item) {
+        //            Console.WriteLine(" " + r.restName);
+        //        }
+        //    }
+
+        //    //var co = new List<GroupByRestaurant>();
+        //    //foreach (var t in result)
+        //    //{
+        //    //    co.Add(new GroupByRestaurant()
+        //    //    {
+        //    //        RestName = t.,
+        //    //        RestCity = t.restCity
+        //    //    });
+        //    //}
+
+        //    return View(result);
+
+        //}
+
         // Class to JOIN between Restaurant table and Customer table
         public class RestaurantDishes
         {
