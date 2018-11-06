@@ -415,6 +415,10 @@ namespace RestIT.Data
             context.Chef.AddRange(
                 new Chef
                 {
+                    chefName = "None"
+                },
+                new Chef
+                {
                     chefName = "Eyal Shani"
                 },
                 new Chef
@@ -469,6 +473,8 @@ namespace RestIT.Data
                 return;   // DB has been seeded
             }
 
+            //Chef NoneChef = context.Chef.Single(i => i.chefName == "None");
+
             context.Restaurant.AddRange(
                 new Restaurant
                 {
@@ -480,6 +486,13 @@ namespace RestIT.Data
                     restKosher = true,
                     restLat = 32.089348,
                     restLng = 34.797386,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 4,
+                        }
+                    },
                 },
 
                 new Restaurant
@@ -492,6 +505,13 @@ namespace RestIT.Data
                     restKosher = true,
                     restLat = 32.070353,
                     restLng = 34.794209,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 3,
+                        }
+                    },
                 },
             
                 new Restaurant
@@ -504,6 +524,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat= 32.079671,
                     restLng= 34.768773,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 5,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -515,6 +542,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat = 31.785449,
                     restLng = 35.211158,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 6,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -526,6 +560,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.070930,
                     restLng=34.787801,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 7,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -537,6 +578,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.063943,
                     restLng=34.780015,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 8,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -548,6 +596,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.063641,
                     restLng=34.769784,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 9,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -559,6 +614,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.077274,
                     restLng=34.781233,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -570,6 +632,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.053589,
                     restLng=34.755772,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -581,6 +650,13 @@ namespace RestIT.Data
                     restKosher = true,
                     restLat=32.063546,
                     restLng=34.770959,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -592,6 +668,13 @@ namespace RestIT.Data
                     restKosher = true,
                     restLat = 32.074774,
                     restLng= 34.791573,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -603,6 +686,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.314429,
                     restLng=34.873948,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -614,6 +704,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat= 32.709285,
                     restLng= 35.174259,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -625,6 +722,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat= 29.548329,
                     restLng= 34.967564,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -636,6 +740,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat= 32.064640,
                     restLng= 34.771773,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 10,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -647,6 +758,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat= 32.059046,
                     restLng= 34.772716,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 11,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -658,6 +776,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.061327,
                     restLng= 34.763459,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -669,6 +794,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat= 32.061646,
                     restLng= 34.763607,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -680,6 +812,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat= 32.062874,
                     restLng= 34.776297,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -691,6 +830,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.069460,
                     restLng=34.783678,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -702,6 +848,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.063193,
                     restLng=34.776675,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 12,
+                        }
+                    },
                 },
                 new Restaurant
                 {
@@ -713,6 +866,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.090798,
                     restLng=34.781022,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 10,
+                        }
+                    },
                 });
                 
             context.SaveChanges();

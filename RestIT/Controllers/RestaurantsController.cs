@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using RestIT.Data;
 using RestIT.Models;
 using RestIT.Models.ViewModels;
-using RestIT.ViewModels;
 using Facebook;
 
 namespace RestIT.Controllers
@@ -26,14 +25,12 @@ namespace RestIT.Controllers
             // Use LINQ to get list of genres.
             IQueryable<string> typeQuery = from m in _context.Restaurant
                                            select m.restType.ToString(); 
-
-                                    
-
+                                          
             IQueryable<string> cityQuery = from m in _context.Restaurant
                                                orderby m.restCity
                                                select m.restCity;
 
-            var restaurants = from m in _context.Restaurant.Include(q => q.Dishes)
+            var restaurants = from m in _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
                               select m;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -56,7 +53,8 @@ namespace RestIT.Controllers
             restaurantSearchVM.Citys = new SelectList(await cityQuery.Distinct().ToListAsync());
             restaurantSearchVM.Restaurants = await restaurants.ToListAsync();
             restaurantSearchVM.SearchString = searchString;
-             return View(restaurantSearchVM);
+
+            return View(restaurantSearchVM);
         }
 
         public RestaurantsController(ApplicationDbContext context)
@@ -91,7 +89,10 @@ namespace RestIT.Controllers
         [Authorize(Roles = "CustomerAdministrators")]
         public IActionResult Create()
         {
-            CheckDishes(new Restaurant(), _context);
+            Restaurant restaurant = new Restaurant();
+            CheckDishes(restaurant, _context);
+            CheckChefs(restaurant, _context);
+
             return View();
         }
 
@@ -101,12 +102,16 @@ namespace RestIT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
-        public async Task<IActionResult> Create([Bind("ID,restName,restAddress,restCity,restRating,restType,restKosher,restChef")] Restaurant restaurant,string[] selectedDishes)
+        public async Task<IActionResult> Create([Bind("ID,restName,restAddress,restCity,restRating,restType,restKosher,restChef")] Restaurant restaurant,string[] selectedDishes, int[] restChef)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(restaurant);
                 UpdateDishes(selectedDishes, restaurant, _context);
+
+                var chef = _context.Chef.Single(j => j.ID == restChef[0]);
+                UpdateChefs(restaurant, chef, _context, true);
+
                 await _context.SaveChangesAsync();
 
                 string fb_message = "Hi, New Restaurant available " + restaurant.restName + " in " + restaurant.restCity + ". Check it out!";
@@ -129,12 +134,9 @@ namespace RestIT.Controllers
                 return NotFound();
             }
 
-
-                var restaurant = await _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
+            var restaurant = await _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
                    .Where(i => i.ID == id).FirstAsync();
             
-
-
             if (restaurant == null)
             {
                 return NotFound();
@@ -175,11 +177,9 @@ namespace RestIT.Controllers
                 try
                 {
                     UpdateDishes(selectedDishes, restaurant, _context);
-                    if (restChef != null)
-                    {
-                        var chef = _context.Chef.Single(j => j.ID == restChef[0]); 
-                        UpdateChefs(restaurant, chef, _context);
-                    }
+                    var chef = _context.Chef.Single(j => j.ID == restChef[0]); 
+                    UpdateChefs(restaurant, chef, _context, false);
+                    
                     _context.Update(restaurant);
                     _context.SaveChanges();
                 }
@@ -261,7 +261,7 @@ namespace RestIT.Controllers
 
         private void CheckChefs(Restaurant restaurant, ApplicationDbContext context)
         {
-            if (restaurant.restChef.Count() == 0)
+            if (restaurant.restChef == null || restaurant.restChef.Count() == 0)
             {
                 restaurant.restChef = new List<RestaurantChef>();
                 ViewBag.selectedChefName = "None";
@@ -318,17 +318,20 @@ namespace RestIT.Controllers
             }
         }
 
-        private void UpdateChefs(Restaurant restaurant, Chef chef, ApplicationDbContext _context)
+        private void UpdateChefs(Restaurant restaurant, Chef chef, ApplicationDbContext _context, bool Create)
         {
             if (chef == null)
             {
                 return;
             }
 
-            RestaurantChef restChefOld = _context.RestaurantChef.Single(i => i.RestaurantID == restaurant.ID);
-            _context.RestaurantChef.Remove(restChefOld);
-            _context.SaveChangesAsync();
-            
+            if (!Create)
+            {
+                RestaurantChef restChefOld = _context.RestaurantChef.Single(i => i.RestaurantID == restaurant.ID);
+                _context.RestaurantChef.Remove(restChefOld);
+                _context.SaveChangesAsync();
+
+            }
             restaurant.restChef = new List<RestaurantChef>();
 
             restaurant.restChef.Add(new RestaurantChef {

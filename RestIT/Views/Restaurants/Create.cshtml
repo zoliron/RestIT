@@ -19,8 +19,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="restChef" class="control-label"></label>
-                @*              @Html.DropDownListFor(model => model.restChef, new SelectList(ViewBag.restChef, "ID", "chefName"), "Select Chef")
-                *@
+                @Html.DropDownListFor(model => model.restChef, new SelectList(ViewBag.restChef, "ID", "chefName"), "--Select Chef--")
             </div>
             <div class="form-group">
                 <label asp-for="restAddress" class="control-label"></label>
