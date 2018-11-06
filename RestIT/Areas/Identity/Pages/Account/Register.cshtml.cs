@@ -54,9 +54,21 @@ namespace RestIT.Areas.Identity.Pages.Account
             public int Age { get; set; }
 
             [Required]
+            [Display(Name = "City")]
+            public CustomerCity City { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
+
+            [Required]
+            [Display(Name = "Sex")]
+            public CustomerSex Sex { get; set; }
+
+            [Required]
+            [Display(Name = "Favourite Restuarant Type")]
+            public CustomerRestType custRestType { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -68,11 +80,6 @@ namespace RestIT.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-
-            [Required]
-            [Display(Name = "Favourite Restuarant Type")]
-            public CustomerRestType custRestType { get; set; }
-
         }
 
         public void OnGet(string returnUrl = null)
@@ -87,7 +94,8 @@ namespace RestIT.Areas.Identity.Pages.Account
             {
                 var user = new Customer { UserName = Input.Email, Email = Input.Email,
                     custName = Input.Name, custAge = Input.Age, custPhone = Input.Phone,
-                    custMail = Input.Email, custRestType = Input.custRestType
+                    custMail = Input.Email, custRestType = Input.custRestType, custCity = Input.City,
+                    custSex = Input.Sex
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

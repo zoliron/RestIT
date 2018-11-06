@@ -108,6 +108,8 @@ namespace RestIT.Data
                         UserName = "TestUser00@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Asian,
+                        custCity = CustomerCity.Ashdod,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -118,6 +120,8 @@ namespace RestIT.Data
                         UserName = "TestUser01@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Asian,
+                        custCity = CustomerCity.Ashkelon,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -128,6 +132,8 @@ namespace RestIT.Data
                         UserName = "TestUser02@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Asian,
+                        custCity = CustomerCity.Jerusalem,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -138,6 +144,8 @@ namespace RestIT.Data
                         UserName = "TestUser03@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Desserts,
+                        custCity = CustomerCity.Raanana,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -148,6 +156,8 @@ namespace RestIT.Data
                         UserName = "TestUser04@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Desserts,
+                        custCity = CustomerCity.RamatGan,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -158,6 +168,8 @@ namespace RestIT.Data
                         UserName = "TestUser05@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Desserts,
+                        custCity = CustomerCity.Raanana,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -168,6 +180,8 @@ namespace RestIT.Data
                         UserName = "TestUser06@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Europe,
+                        custCity = CustomerCity.Ashdod,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -178,6 +192,8 @@ namespace RestIT.Data
                         UserName = "TestUser07@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Europe,
+                        custCity = CustomerCity.Ashkelon,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -188,6 +204,8 @@ namespace RestIT.Data
                         UserName = "TestUser08@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Europe,
+                        custCity = CustomerCity.Jerusalem,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -198,6 +216,8 @@ namespace RestIT.Data
                         UserName = "TestUser09@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Mexican,
+                        custCity = CustomerCity.Raanana,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -208,6 +228,8 @@ namespace RestIT.Data
                         UserName = "TestUser10@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Fishes,
+                        custCity = CustomerCity.RamatGan,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -218,6 +240,8 @@ namespace RestIT.Data
                         UserName = "TestUser11@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Fishes,
+                        custCity = CustomerCity.TelAviv,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -228,6 +252,8 @@ namespace RestIT.Data
                         UserName = "TestUser12@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Fishes,
+                        custCity = CustomerCity.Ashdod,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -238,6 +264,8 @@ namespace RestIT.Data
                         UserName = "TestUser13@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Homemade,
+                        custCity = CustomerCity.Ashkelon,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -248,6 +276,8 @@ namespace RestIT.Data
                         UserName = "TestUser14@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Homemade,
+                        custCity = CustomerCity.Jerusalem,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -258,6 +288,8 @@ namespace RestIT.Data
                         UserName = "TestUser15@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Homemade,
+                        custCity = CustomerCity.Raanana,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -268,6 +300,8 @@ namespace RestIT.Data
                         UserName = "TestUser16@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Israeli,
+                        custCity = CustomerCity.RamatGan,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -278,6 +312,8 @@ namespace RestIT.Data
                         UserName = "TestUser17@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Israeli,
+                        custCity = CustomerCity.TelAviv,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -288,6 +324,8 @@ namespace RestIT.Data
                         UserName = "TestUser18@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Italian,
+                        custCity = CustomerCity.Ashdod,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -298,6 +336,8 @@ namespace RestIT.Data
                         UserName = "TestUser19@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Italian,
+                        custCity = CustomerCity.Ashkelon,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -308,6 +348,8 @@ namespace RestIT.Data
                         UserName = "TestUser20@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Meat,
+                        custCity = CustomerCity.Jerusalem,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -318,6 +360,8 @@ namespace RestIT.Data
                         UserName = "TestUser21@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Meat,
+                        custCity = CustomerCity.Raanana,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -328,6 +372,8 @@ namespace RestIT.Data
                         UserName = "TestUser22@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Mediterranean,
+                        custCity = CustomerCity.RamatGan,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     },
                     new Customer
@@ -338,6 +384,8 @@ namespace RestIT.Data
                         UserName = "TestUser23@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Mediterranean,
+                        custCity = CustomerCity.TelAviv,
+                        custSex = CustomerSex.Female,
                         OwnerID = adminID
                     },
                     new Customer
@@ -348,6 +396,8 @@ namespace RestIT.Data
                         UserName = "TestUser24@gmail.com",
                         Status = CustomerStatus.Approved,
                         custRestType = CustomerRestType.Mexican,
+                        custCity = CustomerCity.Ashdod,
+                        custSex = CustomerSex.Male,
                         OwnerID = adminID
                     });
                 context.SaveChanges();
