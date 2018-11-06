@@ -120,45 +120,58 @@ namespace RestIT.Controllers
             var chefs = _context.Chef.ToList();
             var restChefs = _context.RestaurantChef.ToList();
 
-            //var result1 = from restaurant in restaurants
-            //             join restchef in restChefs
-            //             on restaurant.ID equals restchef.RestaurantID
-            //             select new
-            //             {
-            //                 restaurant.restName,
-            //                 restaurant.restCity,
-            //             };
+            // First join between Restaurant and restChef to get the common RestaurantID, restName & restCity
+            var result1 = from restaurant in restaurants
+                         join restchef in restChefs
+                         on restaurant.ID equals restchef.RestaurantID
+                         select new
+                         {
+                             restchef.RestaurantID,
+                             restaurant.restName,
+                             restaurant.restCity,
+                         };
 
-            //var result2 = from chef in chefs
-            //              join restchef in restChefs
-            //              on chef.ID equals restchef.ChefID
-            //              select new
-            //              {
-            //                  chef.chefName
-            //              };
+            // Second join between Chef and restChef to get the common ChefID & chefName
+            var result2 = from chef in chefs
+                          join restchef in restChefs
+                          on chef.ID equals restchef.ChefID
+                          select new
+                          {
+                              restchef.ChefID,
+                              chef.chefName
+                          };
 
-            var result = _context.Restaurant.Join(_context.Chef,
-            r => r.ID,
-            c => c.ID,
-            (r, c) =>
-             new
-             {
-                 RestName = r.restName,
-                 RestCity = r.restCity,
-                 ChefName = c.chefName
-             });
+            // Third join between result1 and result2 to get the common ChefID, RestaurantID and display the restName, restCity & chefName
+            var result3 = from restaurant in result1
+                          join chef in result2
+                          on restaurant.RestaurantID equals chef.ChefID
+                          select new
+                          {
+                              restaurant.restName,
+                              restaurant.restCity,
+                              chef.chefName
+                          };
 
 
             var co = new List<RestaurantChefs>();
-            foreach (var t in result)
+            foreach (var t in result3)
             {
                 co.Add(new RestaurantChefs()
                 {
-                    RestName = t.RestName,
-                    RestCity = t.RestCity,
-                    ChefName = t.ChefName
+                    RestName = t.restName,
+                    RestCity = t.restCity,
+                    ChefName = t.chefName
                 });
             }
+
+            //foreach (var t in result2)
+            //{
+            //    co.Add(new RestaurantChefs()
+            //    {
+            //        ChefName = t.chefName
+            //    });
+            //}
+
             return View(co);
         }
     }
