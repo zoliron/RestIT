@@ -325,6 +325,10 @@ namespace RestIT.Controllers
                 return;
             }
 
+            RestaurantChef restChefOld = _context.RestaurantChef.Single(i => i.RestaurantID == restaurant.ID);
+            _context.RestaurantChef.Remove(restChefOld);
+            _context.SaveChangesAsync();
+            
             restaurant.restChef = new List<RestaurantChef>();
 
             restaurant.restChef.Add(new RestaurantChef {
