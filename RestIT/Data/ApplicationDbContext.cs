@@ -40,5 +40,7 @@ namespace RestIT.Data
                 .WithMany(t => t.Restuarants)
                 .HasForeignKey(pt => pt.ChefID);
         }
+
+        public DbSet<RestIT.Models.TypeCalc> TypeCalc { get; set; }
     }
 }

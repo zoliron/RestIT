@@ -1,0 +1,51 @@
+﻿
+@model RestIT.Models.TypeCalc
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div style="margin-top 2% ; margin-bottom:2%; text-align:center"><h4>Rest Type Recommendation </h4></div>
+<div class="row">
+    <div class="form-group col-md-6">
+
+        <form asp-action="Create">
+
+
+            <div class="form-group col-md-6">
+                <div class="form-group">
+                    <label asp-for="sex" class="control-label"></label>
+                    @Html.DropDownList("sex",
+                      new SelectList(Enum.GetValues(typeof(Sex))),
+                      "Select Sex",
+                      new { @class = "form-control" })
+                    <span asp-validation-for="sex" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="city" class="control-label"></label>
+                    @Html.DropDownList("city",
+                        new SelectList(Enum.GetValues(typeof(City))),
+                        "Select City",
+                        new { @class = "form-control" })
+                    <span asp-validation-for="city" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="age" class="control-label"></label>
+                    <input asp-for="age" class="form-control" />
+                    <span asp-validation-for="age" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Done!" class="btn btn-primary" />
+                </div>
+
+
+            </div>
+            <h4>@ViewBag.result1</h4> <h1>@ViewBag.result2 </h1>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
