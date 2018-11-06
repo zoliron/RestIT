@@ -9,24 +9,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RestIT.Pages.Customers
 {
     public class IndexModel : DI_BasePageModel
     {
-        public IndexModel(
-            ApplicationDbContext context,
-            IAuthorizationService authorizationService,
-            UserManager<Customer> userManager)
-            : base(context, authorizationService, userManager)
-        {
-        }
+        public IndexModel(ApplicationDbContext context, IAuthorizationService authorizationService, UserManager<Customer> userManager) : base(context, authorizationService, userManager){ }
 
-        public IList<Customer> Customer { get; set; }
+        public IList<Customer> Customers;
+        public SelectList Types;
+        public SelectList Citys;
+        public SelectList Genders;
+        public string CustomerFavType { get; set; }
+        public string CustomerCity { get; set; }
         public string SearchString { get; set; }
+        public string CustomerGender { get; set; }
 
-        public async Task OnGetAsync(string searchString)
+        public async Task OnGetAsync(string searchString, string CustomerFavType, string CustomerCity, string CustomerGender)
         {
+            IQueryable<CustomerRestType> favTypeQuery = from m in Context.Customer
+                                                        orderby m.custRestType
+                                                        select m.custRestType;
+
+            IQueryable<CustomerCity> cityQuery = from m in Context.Customer
+                                                 orderby m.custCity
+                                                 select m.custCity;
+
+            IQueryable<CustomerSex> genderQuery = from m in Context.Customer
+                                                  orderby m.custSex
+                                                  select m.custSex;
+
             var customers = from c in Context.Customer
                            select c;
 
@@ -48,8 +61,29 @@ namespace RestIT.Pages.Customers
                 customers = customers.Where(s => s.custName.Contains(searchString));
             }
 
-            Customer = await customers.ToListAsync();
+            if (!String.IsNullOrEmpty(CustomerFavType))
+            {
+                customers = customers.Where(x => x.custRestType.ToString() == CustomerFavType);
+            }
+
+            if (!String.IsNullOrEmpty(CustomerCity))
+            {
+                customers = customers.Where(x => x.custCity.ToString() == (CustomerCity));
+            }
+
+            if (!String.IsNullOrEmpty(CustomerGender))
+            {
+                customers = customers.Where(x => x.custSex.ToString() == (CustomerGender));
+            }
+
+            Customers = await customers.ToListAsync();
             SearchString = searchString;
+            Types = new SelectList(await favTypeQuery.Distinct().ToListAsync());
+            Citys = new SelectList(await cityQuery.Distinct().ToListAsync());
+            Genders = new SelectList(await genderQuery.Distinct().ToListAsync());
+
+            //Customer = await customers.ToListAsync();
+            //SearchString = searchString;
         }
     }
 }

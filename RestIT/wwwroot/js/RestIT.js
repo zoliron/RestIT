@@ -9,3 +9,10 @@ $(document).ready(function () {
         $("#DishAdvancedSearch").fadeToggle('slow');
     });
 });
+
+$(document).ready(function () {
+    $("button").click(function () {
+        $("#CustomerAdvancedSearch").fadeToggle('slow');
+    });
+});
+
