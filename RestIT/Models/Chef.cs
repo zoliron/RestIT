@@ -14,7 +14,6 @@ namespace RestIT.Models
         [StringLength(50, ErrorMessage = "Name cannot be longer than 30 characters.")]
         [DisplayName("Chef Name")]
         public String chefName { get; set; }
-
         [DisplayName("Chef's Restuarants")]
         public virtual ICollection<RestaurantChef> Restuarants { get; set; }
     }
