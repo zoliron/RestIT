@@ -120,31 +120,21 @@ namespace RestIT.Controllers
             var chefs = _context.Chef.ToList();
             var restChefs = _context.RestaurantChef.ToList();
 
-            // First join between Restaurant and restChef to get the common RestaurantID, restName & restCity
+            // First join between Restaurant and restChef to get ChefID, restName & restCity using common RestaurantID
             var result1 = from restaurant in restaurants
                          join restchef in restChefs
                          on restaurant.ID equals restchef.RestaurantID
                          select new
                          {
-                             restchef.RestaurantID,
+                             restchef.ChefID,
                              restaurant.restName,
                              restaurant.restCity,
                          };
 
-            // Second join between Chef and restChef to get the common ChefID & chefName
+            // First join between Chef and result1 to get restName, restCity & chefName using common ChefID
             var result2 = from chef in chefs
-                          join restchef in restChefs
-                          on chef.ID equals restchef.ChefID
-                          select new
-                          {
-                              restchef.ChefID,
-                              chef.chefName
-                          };
-
-            // Third join between result1 and result2 to get the common ChefID, RestaurantID and display the restName, restCity & chefName
-            var result3 = from restaurant in result1
-                          join chef in result2
-                          on restaurant.RestaurantID equals chef.ChefID
+                          join restaurant in result1
+                          on chef.ID equals restaurant.ChefID
                           select new
                           {
                               restaurant.restName,
@@ -154,7 +144,7 @@ namespace RestIT.Controllers
 
 
             var co = new List<RestaurantChefs>();
-            foreach (var t in result3)
+            foreach (var t in result2)
             {
                 co.Add(new RestaurantChefs()
                 {
@@ -163,14 +153,6 @@ namespace RestIT.Controllers
                     ChefName = t.chefName
                 });
             }
-
-            //foreach (var t in result2)
-            //{
-            //    co.Add(new RestaurantChefs()
-            //    {
-            //        ChefName = t.chefName
-            //    });
-            //}
 
             return View(co);
         }
