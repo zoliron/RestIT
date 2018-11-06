@@ -103,48 +103,62 @@ namespace RestIT.Controllers
 
         //}
 
-        // Class to JOIN between Restaurant table and Customer table
-        public class RestaurantDishes
+        // Class to JOIN between Restaurant table and Chefs table
+        public class RestaurantChefs
         {
             public string RestName { get; set; }
             public string RestCity { get; set; }
-            public RestType RestType { get; set; }
-            public string DishName { get; set; }
-            public string DishType { get; set; }
+            public string ChefName { get; set; }
+
         };
 
-        public IActionResult JoinQueryRestaurantsDishes()
+        public IActionResult JoinQueryRestaurantsChefs()
         {
 
             // JOIN between Comments and Posts
             var restaurants = _context.Restaurant.ToList();
-            var dishes = _context.Dish.ToList();
+            var chefs = _context.Chef.ToList();
+            var restChefs = _context.RestaurantChef.ToList();
 
-            var result = from restaurant in restaurants
-                         join dish in dishes
-                         on restaurant.DishID equals dish.ID
-                         select new
-                         {
-                             restaurant.restName,
-                             restaurant.restCity,
-                             restaurant.restType,
-                             dish.dishName,
-                             dish.dishType
-                         };
+            //var result1 = from restaurant in restaurants
+            //             join restchef in restChefs
+            //             on restaurant.ID equals restchef.RestaurantID
+            //             select new
+            //             {
+            //                 restaurant.restName,
+            //                 restaurant.restCity,
+            //             };
 
-            var co = new List<RestaurantDishes>();
+            //var result2 = from chef in chefs
+            //              join restchef in restChefs
+            //              on chef.ID equals restchef.ChefID
+            //              select new
+            //              {
+            //                  chef.chefName
+            //              };
+
+            var result = _context.Restaurant.Join(_context.Chef,
+            r => r.ID,
+            c => c.ID,
+            (r, c) =>
+             new
+             {
+                 RestName = r.restName,
+                 RestCity = r.restCity,
+                 ChefName = c.chefName
+             });
+
+
+            var co = new List<RestaurantChefs>();
             foreach (var t in result)
             {
-                co.Add(new RestaurantDishes()
+                co.Add(new RestaurantChefs()
                 {
-                    RestName = t.restName,
-                    RestCity = t.restCity,
-                    RestType = t.restType,
-                    DishName = t.dishName,
-                    DishType = t.dishType
+                    RestName = t.RestName,
+                    RestCity = t.RestCity,
+                    ChefName = t.ChefName
                 });
             }
-
             return View(co);
         }
     }

@@ -569,7 +569,7 @@ namespace RestIT.Data
                 {
                     restName = "Whale",
                     restAddress = "Ha-Yam St. 6",
-                    restCity = "EirestLat",
+                    restCity = "Eilat",
                     restRating = 4,
                     restType =  RestType.Fishes,
                     restKosher = false,
