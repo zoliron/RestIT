@@ -103,47 +103,74 @@ namespace RestIT.Controllers
 
         //}
 
-        // Class to JOIN between Restaurant table and Customer table
-        public class RestaurantDishes
+        // Class to JOIN between Restaurant table and Chefs table
+        public class RestaurantChefs
         {
             public string RestName { get; set; }
             public string RestCity { get; set; }
-            public RestType RestType { get; set; }
-            public string DishName { get; set; }
-            public string DishType { get; set; }
+            public string ChefName { get; set; }
+
         };
 
-        public IActionResult JoinQueryRestaurantsDishes()
+        public IActionResult JoinQueryRestaurantsChefs()
         {
 
             // JOIN between Comments and Posts
             var restaurants = _context.Restaurant.ToList();
-            var dishes = _context.Dish.ToList();
+            var chefs = _context.Chef.ToList();
+            var restChefs = _context.RestaurantChef.ToList();
 
-            var result = from restaurant in restaurants
-                         join dish in dishes
-                         on restaurant.DishID equals dish.ID
+            // First join between Restaurant and restChef to get the common RestaurantID, restName & restCity
+            var result1 = from restaurant in restaurants
+                         join restchef in restChefs
+                         on restaurant.ID equals restchef.RestaurantID
                          select new
                          {
+                             restchef.RestaurantID,
                              restaurant.restName,
                              restaurant.restCity,
-                             restaurant.restType,
-                             dish.dishName,
-                             dish.dishType
                          };
 
-            var co = new List<RestaurantDishes>();
-            foreach (var t in result)
+            // Second join between Chef and restChef to get the common ChefID & chefName
+            var result2 = from chef in chefs
+                          join restchef in restChefs
+                          on chef.ID equals restchef.ChefID
+                          select new
+                          {
+                              restchef.ChefID,
+                              chef.chefName
+                          };
+
+            // Third join between result1 and result2 to get the common ChefID, RestaurantID and display the restName, restCity & chefName
+            var result3 = from restaurant in result1
+                          join chef in result2
+                          on restaurant.RestaurantID equals chef.ChefID
+                          select new
+                          {
+                              restaurant.restName,
+                              restaurant.restCity,
+                              chef.chefName
+                          };
+
+
+            var co = new List<RestaurantChefs>();
+            foreach (var t in result3)
             {
-                co.Add(new RestaurantDishes()
+                co.Add(new RestaurantChefs()
                 {
                     RestName = t.restName,
                     RestCity = t.restCity,
-                    RestType = t.restType,
-                    DishName = t.dishName,
-                    DishType = t.dishType
+                    ChefName = t.chefName
                 });
             }
+
+            //foreach (var t in result2)
+            //{
+            //    co.Add(new RestaurantChefs()
+            //    {
+            //        ChefName = t.chefName
+            //    });
+            //}
 
             return View(co);
         }

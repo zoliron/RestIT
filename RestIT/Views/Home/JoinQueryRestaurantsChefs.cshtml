@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RestIT.Controllers.HomeController.RestaurantDishes>
+﻿@model IEnumerable<RestIT.Controllers.HomeController.RestaurantChefs>
 @{
     ViewData["Title"] = "Join Query";
 }
@@ -12,13 +12,7 @@
             @Html.DisplayNameFor(model => model.RestCity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RestType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DishName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DishType)
+            @Html.DisplayNameFor(model => model.ChefName)
         </th>
         <th></th>
     </tr>
@@ -33,13 +27,7 @@
             @Html.DisplayFor(modelItem => item.RestCity)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RestType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DishName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DishType)
+            @Html.DisplayFor(modelItem => item.ChefName)
         </td>
     </tr>
     }

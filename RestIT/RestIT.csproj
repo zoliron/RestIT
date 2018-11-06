@@ -125,7 +125,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Recommendation\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
 

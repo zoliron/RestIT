@@ -8,8 +8,6 @@ namespace RestIT.Models
 {
     public class RestaurantChef
     {
-        [Key]
-        public int ID { get; set; }
         public int RestaurantID { get; set; }
         public int ChefID { get; set; }
 

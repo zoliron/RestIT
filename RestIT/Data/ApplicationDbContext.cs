@@ -28,7 +28,7 @@ namespace RestIT.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<RestaurantChef>()
-                .HasKey(x => new { x.RestaurantID, x.ChefID });
+                .HasKey(pt => new { pt.RestaurantID, pt.ChefID });
 
             modelBuilder.Entity<RestaurantChef>()
                 .HasOne(pt => pt.Restaurent)

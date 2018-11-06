@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestIT.Data;
 
 namespace RestIT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181106114509_MantToMany_RestChef")]
+    partial class MantToMany_RestChef
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,25 +280,6 @@ namespace RestIT.Migrations
                     b.HasIndex("ChefID");
 
                     b.ToTable("RestaurantChef");
-                });
-
-            modelBuilder.Entity("RestIT.Models.TypeCalc", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<float>("age");
-
-                    b.Property<int>("city");
-
-                    b.Property<int>("sex");
-
-                    b.Property<string>("type");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("TypeCalc");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
