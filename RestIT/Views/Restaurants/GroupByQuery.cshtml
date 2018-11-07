@@ -1,0 +1,22 @@
+﻿@*@model IEnumerable<RestIT.Models.Restaurant>
+@{
+    ViewBag.Title = "Restaurants";
+    List<Restaurant> restaurants = new List<Restaurant>(Model.ToList());
+}
+
+@{
+    // Group the Posts using Category as the key value and selecting only the Post's Title for each value.
+    IEnumerable<IGrouping<string, Restaurant> query = restaurants.GroupBy(restaurant => restaurant.restCity);
+    foreach (IGrouping<string, Restaurant> restaurantGroup in query)
+    {
+        // Print the key value of the IGrouping.
+        <span class="label label-warning">@Html.Raw(restaurantGroup.Key.ToString())</span><br />
+        // Iterate over each value in the IGrouping and print the value.
+        foreach (Restaurant r in restaurantGroup)
+        {
+            @Html.ActionLink(r.restName, "ViewPostGuest", "Restaurants", new { id = r.ID }, null) <span> by </span> <a href="http://@Html.Raw(r.restName)" target="_blank">@Html.Raw(r.restName)</a>
+            <br />
+        }
+        <br />
+    }
+}*@
