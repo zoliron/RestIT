@@ -57,19 +57,20 @@ namespace RestIT.Controllers
         }
 
         // Class for GroupBy view
-        public class GroupByRestaurantCity
+        public class GroupByRestaurant
         {
-            public string RestName { get; set; }
+            public RestType RestType { get; set; }
             public string RestCity { get; set; }
             public int RestCount { get; set; }
         };
 
+        // GroupBy restaurant cities
         public IActionResult GroupByRestaurantCityQuery()
         {
             var result = from restaurant in _context.Restaurant
                          select restaurant;
 
-            var restaurantCities = new List<GroupByRestaurantCity>();
+            var restaurantCities = new List<GroupByRestaurant>();
 
             foreach (var r in result.GroupBy(info => info.restCity)
                         .Select(group => new
@@ -78,13 +79,38 @@ namespace RestIT.Controllers
                             RestCount = group.Count(),
                         })
                         .OrderBy(x => x.RestCity))
-                restaurantCities.Add(new GroupByRestaurantCity()
+                restaurantCities.Add(new GroupByRestaurant()
                 {
                     RestCity = r.RestCity,
                     RestCount = r.RestCount
                 });
 
             return View(restaurantCities);
+
+        }
+
+        // GroupBy restaurant types
+        public IActionResult GroupByRestaurantTypeQuery()
+        {
+            var result = from restaurant in _context.Restaurant
+                         select restaurant;
+
+            var restaurantTypes = new List<GroupByRestaurant>();
+
+            foreach (var r in result.GroupBy(info => info.restType)
+                        .Select(group => new
+                        {
+                            RestType = group.Key,
+                            RestCount = group.Count(),
+                        })
+                        .OrderBy(x => x.RestType))
+                restaurantTypes.Add(new GroupByRestaurant()
+                {
+                    RestType = r.RestType,
+                    RestCount = r.RestCount
+                });
+
+            return View(restaurantTypes);
 
         }
 

@@ -3,6 +3,8 @@
     ViewData["Title"] = "Join Query";
 }
 
+<h2> Restaurant Join Chefs</h2>
+
 <table class="table">
     <tr>
         <th>
@@ -19,16 +21,16 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RestName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RestCity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChefName)
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChefName)
+            </td>
+        </tr>
     }
 </table>

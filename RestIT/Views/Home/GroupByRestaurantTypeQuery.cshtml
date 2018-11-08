@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<RestIT.Controllers.HomeController.GroupByRestaurant>
 @{
-    ViewData["Title"] = "GroupBy RestaurantCities";
+    ViewData["Title"] = "GroupBy RestaurantTypes";
 }
 
-<h2> GroupBy Restaurant Cities</h2>
+<h2> GroupBy Restaurant Types</h2>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.RestCity)
+            @Html.DisplayNameFor(model => model.RestType)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.RestCount)
@@ -19,7 +19,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.RestCity)
+                @Html.DisplayFor(modelItem => item.RestType)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RestCount)
