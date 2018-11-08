@@ -51,6 +51,20 @@ namespace RestIT.Controllers
 
 
                 });
+                ViewBag.result3 = "You'll probably enjoy being there on a : ";
+
+                Hang hang = new Hang(); 
+                ViewBag.result4 = hang.Run(new HangType
+                {
+                    City = (float)typeCalc.city,
+                    Sex = (float)typeCalc.sex,
+                    Age = (float)typeCalc.age,
+
+
+                });
+
+
+
                 return View();
             }
             return View(typeCalc);
