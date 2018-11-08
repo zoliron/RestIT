@@ -61,35 +61,27 @@ namespace RestIT.Controllers
         {
             public string RestName { get; set; }
             public string RestCity { get; set; }
+            public int RestCount { get; set; }
         };
 
         public IActionResult GroupByRestaurantCityQuery()
         {
             var result = from restaurant in _context.Restaurant
-                         group restaurant by restaurant.restCity into newGroup
-                         select newGroup;
+                         select restaurant;
 
             var co = new List<GroupByRestaurantCity>();
 
-            foreach (IGrouping<string, Restaurant> item in result)
-            {
-                foreach (Restaurant r in item)
-                {
-                    co.Add(new GroupByRestaurantCity()
-                    {
-                        RestName = r.restName,
-                        RestCity = r.restCity
-                    });
-                }
-            }
-
-            //foreach (var r in result)
-            //{
-            //    co.Add(new GroupByRestaurantCity()
-            //    {
-            //        RestName = r.Key,
-            //    });
-            //}
+            foreach (var r in result.GroupBy(info => info.restCity)
+                        .Select(group => new
+                        {
+                            RestCity = group.Key,
+                            RestCount = group.Count(),
+                        })
+                        .OrderBy(x => x.RestCity))
+                        co.Add(new GroupByRestaurantCity() {
+                            RestCity = r.RestCity,
+                            RestCount = r.RestCount
+                        });
 
             return View(co);
 
