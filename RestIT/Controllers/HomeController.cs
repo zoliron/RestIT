@@ -69,7 +69,7 @@ namespace RestIT.Controllers
             var result = from restaurant in _context.Restaurant
                          select restaurant;
 
-            var co = new List<GroupByRestaurantCity>();
+            var restaurantCities = new List<GroupByRestaurantCity>();
 
             foreach (var r in result.GroupBy(info => info.restCity)
                         .Select(group => new
@@ -78,12 +78,13 @@ namespace RestIT.Controllers
                             RestCount = group.Count(),
                         })
                         .OrderBy(x => x.RestCity))
-                        co.Add(new GroupByRestaurantCity() {
-                            RestCity = r.RestCity,
-                            RestCount = r.RestCount
-                        });
+                restaurantCities.Add(new GroupByRestaurantCity()
+                {
+                    RestCity = r.RestCity,
+                    RestCount = r.RestCount
+                });
 
-            return View(co);
+            return View(restaurantCities);
 
         }
 
