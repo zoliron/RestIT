@@ -192,7 +192,7 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Restaurants\GroupByQuery.cshtml">
+    <Content Update="Views\Home\JoinQueryRestaurantsChefs.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

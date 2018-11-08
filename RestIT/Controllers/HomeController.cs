@@ -56,52 +56,44 @@ namespace RestIT.Controllers
             return View();
         }
 
-        //// Class for GroupBy view
-        //public class GroupByRestaurant
-        //{
-        //    public string RestName { get; set; }
-        //    public string RestCity { get; set; }
-        //};
+        // Class for GroupBy view
+        public class GroupByRestaurantCity
+        {
+            public string RestName { get; set; }
+            public string RestCity { get; set; }
+        };
 
-        //public void GroupByQuery() {
-        //    var result = from restaurant in _context.Restaurant
-        //                 group restaurant.restName by restaurant.restCity;
+        public IActionResult GroupByRestaurantCityQuery()
+        {
+            var result = from restaurant in _context.Restaurant
+                         group restaurant by restaurant.restCity into newGroup
+                         select newGroup;
 
-        //    foreach (IGrouping<string, string> item in result)
-        //    {
-        //        Console.WriteLine(item.Key + ":");
-        //        foreach (var r in item)
-        //        {
-        //            Console.WriteLine(" " + r);
-        //        }
-        //    }
-        //}
+            var co = new List<GroupByRestaurantCity>();
 
-        //public IActionResult GroupByQuery() {
-        //    var result = from restaurant in _context.Restaurant
-        //                  group restaurant.restName by restaurant.restCity into newGroup
-        //                  select newGroup;
+            foreach (IGrouping<string, Restaurant> item in result)
+            {
+                foreach (Restaurant r in item)
+                {
+                    co.Add(new GroupByRestaurantCity()
+                    {
+                        RestName = r.restName,
+                        RestCity = r.restCity
+                    });
+                }
+            }
 
-        //    foreach (IGrouping<string, Restaurant> item in result) {
-        //        Console.WriteLine(item.Key + ":");
-        //        foreach (Restaurant r in item) {
-        //            Console.WriteLine(" " + r.restName);
-        //        }
-        //    }
+            //foreach (var r in result)
+            //{
+            //    co.Add(new GroupByRestaurantCity()
+            //    {
+            //        RestName = r.Key,
+            //    });
+            //}
 
-        //    //var co = new List<GroupByRestaurant>();
-        //    //foreach (var t in result)
-        //    //{
-        //    //    co.Add(new GroupByRestaurant()
-        //    //    {
-        //    //        RestName = t.,
-        //    //        RestCity = t.restCity
-        //    //    });
-        //    //}
+            return View(co);
 
-        //    return View(result);
-
-        //}
+        }
 
         // Class to JOIN between Restaurant table and Chefs table
         public class RestaurantChefs
