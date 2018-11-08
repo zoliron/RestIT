@@ -57,41 +57,60 @@ namespace RestIT.Controllers
         }
 
         // Class for GroupBy view
-        public class GroupByRestaurantCity
+        public class GroupByRestaurant
         {
-            public string RestName { get; set; }
+            public RestType RestType { get; set; }
             public string RestCity { get; set; }
+            public int RestCount { get; set; }
         };
 
+        // GroupBy restaurant cities
         public IActionResult GroupByRestaurantCityQuery()
         {
             var result = from restaurant in _context.Restaurant
-                         group restaurant by restaurant.restCity into newGroup
-                         select newGroup;
+                         select restaurant;
 
-            var co = new List<GroupByRestaurantCity>();
+            var restaurantCities = new List<GroupByRestaurant>();
 
-            foreach (IGrouping<string, Restaurant> item in result)
-            {
-                foreach (Restaurant r in item)
+            foreach (var r in result.GroupBy(info => info.restCity)
+                        .Select(group => new
+                        {
+                            RestCity = group.Key,
+                            RestCount = group.Count(),
+                        })
+                        .OrderBy(x => x.RestCity))
+                restaurantCities.Add(new GroupByRestaurant()
                 {
-                    co.Add(new GroupByRestaurantCity()
-                    {
-                        RestName = r.restName,
-                        RestCity = r.restCity
-                    });
-                }
-            }
+                    RestCity = r.RestCity,
+                    RestCount = r.RestCount
+                });
 
-            //foreach (var r in result)
-            //{
-            //    co.Add(new GroupByRestaurantCity()
-            //    {
-            //        RestName = r.Key,
-            //    });
-            //}
+            return View(restaurantCities);
 
-            return View(co);
+        }
+
+        // GroupBy restaurant types
+        public IActionResult GroupByRestaurantTypeQuery()
+        {
+            var result = from restaurant in _context.Restaurant
+                         select restaurant;
+
+            var restaurantTypes = new List<GroupByRestaurant>();
+
+            foreach (var r in result.GroupBy(info => info.restType)
+                        .Select(group => new
+                        {
+                            RestType = group.Key,
+                            RestCount = group.Count(),
+                        })
+                        .OrderBy(x => x.RestType))
+                restaurantTypes.Add(new GroupByRestaurant()
+                {
+                    RestType = r.RestType,
+                    RestCount = r.RestCount
+                });
+
+            return View(restaurantTypes);
 
         }
 
