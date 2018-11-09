@@ -22,6 +22,10 @@ namespace RestIT.Controllers
         // GET: Restaurants
         public async Task<IActionResult> Index(string RestaurantType, string RestaurantCity, string RestaurantChef, double RestaurantRating, string searchString)
         {
+            if (TempData["errorMessage"] != null)
+            {
+                ViewBag.error = TempData["errorMessage"].ToString();
+            }
             // Use LINQ to get list of genres.
             IQueryable<string> typeQuery = from m in _context.Restaurant
                                            select m.restType.ToString(); 
@@ -70,17 +74,21 @@ namespace RestIT.Controllers
             if (id == null)
             {
                 return NotFound();
+
             }
 
             var restaurant = await _context.Restaurant.Include(d => d.Dishes).Include(q=>q.restChef)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
-            CheckChefs(restaurant, _context);
 
             if (restaurant == null)
             {
-                return NotFound();
+                TempData["errorMessage"]  = "Restaurant not found. Please try another one."; 
+                //return NotFound();
+                return RedirectToAction(nameof(Index));
             }
+            CheckChefs(restaurant, _context);
+
 
             return View(restaurant);
         }
@@ -139,7 +147,9 @@ namespace RestIT.Controllers
             
             if (restaurant == null)
             {
-                return NotFound();
+                TempData["errorMessage"] = "Restaurant not found. Please try another one.";
+                return RedirectToAction(nameof(Index));
+                //return NotFound();
             }
             else
             {
@@ -187,7 +197,9 @@ namespace RestIT.Controllers
                 {
                     if (!RestaurantExists(restaurant.ID))
                     {
-                        return NotFound();
+                        //return NotFound();
+                        TempData["errorMessage"] = "Restaurant not found. Please try another one.";
+                        return RedirectToAction(nameof(Index));
                     }
                     else
                     {
@@ -212,7 +224,9 @@ namespace RestIT.Controllers
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (restaurant == null)
             {
-                return NotFound();
+                //return NotFound();
+                TempData["errorMessage"] = "Restaurant not found. Please try another one.";
+                return RedirectToAction(nameof(Index));
             }
 
             return View(restaurant);
@@ -329,7 +343,7 @@ namespace RestIT.Controllers
             {
                 RestaurantChef restChefOld = _context.RestaurantChef.Single(i => i.RestaurantID == restaurant.ID);
                 _context.RestaurantChef.Remove(restChefOld);
-                _context.SaveChangesAsync();
+               // _context.SaveChangesAsync();
 
             }
             restaurant.restChef = new List<RestaurantChef>();

@@ -17,6 +17,11 @@ namespace RestIT.Controllers
         
         public async Task<IActionResult> Index(string searchString)
         {
+            if (TempData["errorMessage"] != null)
+            {
+                ViewBag.error = TempData["errorMessage"].ToString();
+            }
+
             var chefs = from m in _context.Chef
                          select m;
 
@@ -55,7 +60,9 @@ namespace RestIT.Controllers
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (chef == null)
             {
-                return NotFound();
+                //return NotFound();
+                TempData["errorMessage"] = "Chef not found. Please try another one.";
+                return RedirectToAction(nameof(Index));
             }
 
             return View(chef);
@@ -97,7 +104,9 @@ namespace RestIT.Controllers
             var chef = await _context.Chef.FindAsync(id);
             if (chef == null)
             {
-                return NotFound();
+                TempData["errorMessage"] = "Chef not found. Please try another one.";
+                return RedirectToAction(nameof(Index));
+                //return NotFound();
             }
             return View(chef);
         }
@@ -126,7 +135,9 @@ namespace RestIT.Controllers
                 {
                     if (!ChefExists(chef.ID))
                     {
-                        return NotFound();
+                        TempData["errorMessage"] = "Chef not found. Please try another one.";
+                        return RedirectToAction(nameof(Index));
+                        //return NotFound();
                     }
                     else
                     {
@@ -151,7 +162,9 @@ namespace RestIT.Controllers
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (chef == null)
             {
-                return NotFound();
+                TempData["errorMessage"] = "Chef not found. Please try another one.";
+                return RedirectToAction(nameof(Index));
+                //return NotFound();
             }
 
             return View(chef);

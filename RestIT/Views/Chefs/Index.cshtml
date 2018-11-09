@@ -2,15 +2,17 @@
 @{
     ViewData["Title"] = "Index";
 }
+<h2>@ViewBag.error</h2>
+
 <h2>Chefs List</h2>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <form asp-controller="Chefs" asp-action="Index" method="get">
-        <span class="col-md-6">
-            Chef Name: <input type="text" name="SearchString">
-            <button type="submit" class="btn btn-secondary"> Filter</button>
-        </span>
+    <span class="col-md-6">
+        Chef Name: <input type="text" name="SearchString">
+        <button type="submit" class="btn btn-secondary"> Filter</button>
+    </span>
 </form>
 
 <table class="table table-hover">

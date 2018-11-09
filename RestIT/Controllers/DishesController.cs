@@ -16,7 +16,12 @@ namespace RestIT.Controllers
     {
         private readonly ApplicationDbContext _context;
         public async Task<IActionResult> Index(string searchString, string DishType)
-        { 
+        {
+            if (TempData["errorMessage"] != null)
+            {
+                ViewBag.error = TempData["errorMessage"].ToString();
+            }
+
             var dishes = from m in _context.Dish
                               select m;
 
@@ -64,12 +69,14 @@ namespace RestIT.Controllers
             var dish = await _context.Dish
                 .FirstOrDefaultAsync(m => m.ID == id);
 
-            GenerateImageSrc(dish, 304, 228);
 
             if (dish == null)
             {
-                return NotFound();
+                TempData["errorMessage"] = "Dish not found. Please try another one.";
+                return RedirectToAction(nameof(Index));
+                //return NotFound();
             }
+            GenerateImageSrc(dish, 304, 228);
 
             return View(dish);
         }
@@ -110,7 +117,9 @@ namespace RestIT.Controllers
             var dish = await _context.Dish.FindAsync(id);
             if (dish == null)
             {
-                return NotFound();
+                TempData["errorMessage"] = "Dish not found. Please try another one.";
+                return RedirectToAction(nameof(Index));
+              //  return NotFound();
             }
             return View(dish);
         }
@@ -139,7 +148,9 @@ namespace RestIT.Controllers
                 {
                     if (!DishExists(dish.ID))
                     {
-                        return NotFound();
+                        TempData["errorMessage"] = "Dish not found. Please try another one.";
+                        return RedirectToAction(nameof(Index));
+                        // return NotFound();
                     }
                     else
                     {
@@ -164,7 +175,9 @@ namespace RestIT.Controllers
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (dish == null)
             {
-                return NotFound();
+                TempData["errorMessage"] = "Dish not found. Please try another one.";
+                return RedirectToAction(nameof(Index));
+                //return NotFound();
             }
 
             return View(dish);
