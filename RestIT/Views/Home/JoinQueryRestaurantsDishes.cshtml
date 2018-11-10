@@ -1,0 +1,42 @@
+﻿@model IEnumerable<RestIT.Controllers.HomeController.RestaurantDishes>
+@{
+    ViewData["Title"] = "Join Query";
+}
+
+<h2> Restaurant Join Dishes</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RestName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RestCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DishName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DishCost)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RestName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RestCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DishName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DishCost)
+        </td>
+    </tr>
+    }
+</table>

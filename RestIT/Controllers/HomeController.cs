@@ -162,10 +162,10 @@ namespace RestIT.Controllers
                           };
 
 
-            var co = new List<RestaurantChefs>();
+            var restaurantChefs = new List<RestaurantChefs>();
             foreach (var t in result2)
             {
-                co.Add(new RestaurantChefs()
+                restaurantChefs.Add(new RestaurantChefs()
                 {
                     RestName = t.restName,
                     RestCity = t.restCity,
@@ -173,56 +173,61 @@ namespace RestIT.Controllers
                 });
             }
 
-            return View(co);
+            return View(restaurantChefs);
         }
 
-        //// Class to JOIN between Restaurant table and Dishes table
-        //public class RestaurantDishes
-        //{
-        //    public string RestName { get; set; }
-        //    public string DishName { get; set; }
-        //};
+        // Class to JOIN between Restaurant table and Dishes table
+        public class RestaurantDishes
+        {
+            public string RestName { get; set; }
+            public string RestCity { get; set; }
+            public string DishName { get; set; }
+            public int DishCost { get; set; }
+        };
 
-        //public IActionResult JoinQueryRestaurantsDishes()
-        //{
-        //    var restaurants = _context.Restaurant.ToList();
-        //    var dishes = _context.Dish.ToList();
+        public IActionResult JoinQueryRestaurantsDishes()
+        {
+            var restaurants = _context.Restaurant.ToList();
+            var dishes = _context.Dish.ToList();
+            var restDishes = _context.RestaurantDish.ToList();
 
-        //    // First join between Restaurant and Dishes to get restName & dishName using common RestaurantID
-        //    var result = from restaurant in restaurants
-        //                  join dish in dishes
-        //                  on restaurant.ID equals dish.Re
-        //                  select new
-        //                  {
-        //                      restchef.ChefID,
-        //                      restaurant.restName,
-        //                      restaurant.restCity,
-        //                  };
+            // First join between Restaurant and RestaurantDishes to get restName & dishName using common RestaurantID
+            var result1 = from restaurant in restaurants
+                         join restdish in restDishes
+                         on restaurant.ID equals restdish.RestaurantID
+                         select new
+                         {
+                             restdish.DishID,
+                             restaurant.restName,
+                             restaurant.restCity,
+                         };
 
-        //    // First join between Chef and result1 to get restName, restCity & chefName using common ChefID
-        //    var result2 = from chef in chefs
-        //                  join restaurant in result1
-        //                  on chef.ID equals restaurant.ChefID
-        //                  select new
-        //                  {
-        //                      restaurant.restName,
-        //                      restaurant.restCity,
-        //                      chef.chefName
-        //                  };
+            // First join between Dish and result1 to get restName, restCity, dishName & dishCost using common DishID
+            var result2 = from dish in dishes
+                          join restaurant in result1
+                          on dish.ID equals restaurant.DishID
+                          select new
+                          {
+                              restaurant.restName,
+                              restaurant.restCity,
+                              dish.dishName,
+                              dish.dishCost
+                          };
 
 
-        //    var co = new List<RestaurantChefs>();
-        //    foreach (var t in result2)
-        //    {
-        //        co.Add(new RestaurantChefs()
-        //        {
-        //            RestName = t.restName,
-        //            RestCity = t.restCity,
-        //            ChefName = t.chefName
-        //        });
-        //    }
+            var restaurantDishes = new List<RestaurantDishes>();
+            foreach (var t in result2)
+            {
+                restaurantDishes.Add(new RestaurantDishes()
+                {
+                    RestName = t.restName,
+                    RestCity = t.restCity,
+                    DishName = t.dishName,
+                    DishCost = t.dishCost
+                });
+            }
 
-        //    return View(co);
-        //}
+            return View(restaurantDishes);
+        }
     }
 }
