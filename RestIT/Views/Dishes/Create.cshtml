@@ -37,7 +37,7 @@
                 <input asp-for="dishIngredients" class="form-control" />
                 <span asp-validation-for="dishIngredients" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <input asp-for="dishImage" type="file" class="form-control" />
                 <img id="output" />
                 @*<script>
@@ -46,8 +46,8 @@
                 output.src = URL.createObjectURL(event.target.files[0]);
 
             };
-        </script>*@
-            </div> 
+        </script>
+            </div>*@ 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

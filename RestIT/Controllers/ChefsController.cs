@@ -81,7 +81,7 @@ namespace RestIT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
-        public async Task<IActionResult> Create([Bind("ID,chefName,Restuarants")] Chef chef)
+        public async Task<IActionResult> Create([Bind("ID,chefName")] Chef chef)
         {
             if (ModelState.IsValid)
             {
@@ -177,6 +177,11 @@ namespace RestIT.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var chef = await _context.Chef.FindAsync(id);
+            if (chef == null)
+            {
+                TempData["errorMessage"] = "Chef not found. Please try another one.";
+                return RedirectToAction(nameof(Index));
+            }
             _context.Chef.Remove(chef);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
