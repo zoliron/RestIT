@@ -182,7 +182,7 @@ namespace RestIT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
-        public ActionResult Edit(int? id, string[] selectedDishes, int[] restChef, Restaurant rest, Dish dish)
+        public async Task<IActionResult> Edit(int? id, string[] selectedDishes, int[] restChef, Restaurant rest, Dish dish)
         {
             if (id == null)
             {
@@ -217,7 +217,7 @@ namespace RestIT.Controllers
                     UpdateChefs(restaurant, chef, _context, false);
 
                     _context.Update(restaurant);
-                    //_context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -337,7 +337,7 @@ namespace RestIT.Controllers
             ViewBag.restChef = viewModel;
         }
 
-        private async void UpdateDishes(string[] selectedDishes, Restaurant Restaurant, ApplicationDbContext _context)
+        private void UpdateDishes(string[] selectedDishes, Restaurant Restaurant, ApplicationDbContext _context)
         {
             if (Restaurant.RestaurantDishes == null) {
                 Restaurant.RestaurantDishes = new List<RestaurantDish>();
@@ -368,7 +368,7 @@ namespace RestIT.Controllers
                         });
                     }
 
-                    // Adds RestaurantDish after the first was created
+                    // Checking if the RestaurantDish already exists.
                     foreach (var item in list) {
                         if (item.DishID == dish.ID && item.RestaurantID == Restaurant.ID)
                         {
@@ -377,6 +377,7 @@ namespace RestIT.Controllers
                         }
                     }
 
+                    // Adds RestaurantDish after the first was created
                     if (match == 0 && test.Count != 0)
                     {
                         _context.RestaurantDish.Add(new RestaurantDish
@@ -398,10 +399,10 @@ namespace RestIT.Controllers
                     //}
                 }
             }
-            await _context.SaveChangesAsync();
+            //_context.SaveChangesAsync();
         }
 
-        private async void UpdateChefs(Restaurant restaurant, Chef chef, ApplicationDbContext _context, bool Create)
+        private void UpdateChefs(Restaurant restaurant, Chef chef, ApplicationDbContext _context, bool Create)
         {
             if (chef == null)
             {
@@ -422,7 +423,7 @@ namespace RestIT.Controllers
                Restaurent = restaurant,
                Chef = chef
            });
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
         }
 
         public Boolean PublishFacebookPost(String facebookMessage)
