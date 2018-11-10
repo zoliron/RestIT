@@ -35,7 +35,14 @@ namespace RestIT.Controllers
                                                select m.restCity;
 
             var restaurants = from m in _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
-                              select m;
+                            select m;
+
+            //var restaurants = from rests in _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
+            //                  join chefs in _context.RestaurantChef on rests.restChef.Last().ChefID equals chefs.ChefID
+            //                  select new { xRest = rests, xChef = chefs};
+
+            var chefs = from c in _context.RestaurantChef.Include(c => c.Chef)
+                       select c;
 
             if (!String.IsNullOrEmpty(searchString))
             {
