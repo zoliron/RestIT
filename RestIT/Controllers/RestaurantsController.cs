@@ -10,6 +10,8 @@ using RestIT.Data;
 using RestIT.Models;
 using RestIT.Models.ViewModels;
 using Facebook;
+using System.Net;
+using System.IO;
 
 namespace RestIT.Controllers
 {
@@ -18,7 +20,7 @@ namespace RestIT.Controllers
 
         private readonly ApplicationDbContext _context;
         private String facebook_token = "EAAEvkEWov44BAAEskSIXey4Gy3dpoKOAEZAoZAXaZA0n0tpgmmGvdFLauSOxsZCRhJX03G9ZBVPBDeHf11ZAZAivqeU0wB4V9jZCLWtgiChdqbjlUylJxWhoX5HTcBXQ1mrs9NAZAsFZBLc994w1rSABjpBoc9e29NLR134tsFFbryyQZDZD";
-        
+
         // GET: Restaurants
         public async Task<IActionResult> Index(string RestaurantType, string RestaurantCity, string RestaurantChef, double RestaurantRating, string searchString)
         {
@@ -28,21 +30,21 @@ namespace RestIT.Controllers
             }
             // Use LINQ to get list of genres.
             IQueryable<string> typeQuery = from m in _context.Restaurant
-                                           select m.restType.ToString(); 
-                                          
+                                           select m.restType.ToString();
+
             IQueryable<string> cityQuery = from m in _context.Restaurant
-                                               orderby m.restCity
-                                               select m.restCity;
+                                           orderby m.restCity
+                                           select m.restCity;
 
             var restaurants = from m in _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
-                            select m;
+                              select m;
 
             //var restaurants = from rests in _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
             //                  join chefs in _context.RestaurantChef on rests.restChef.Last().ChefID equals chefs.ChefID
             //                  select new { xRest = rests, xChef = chefs};
 
             var chefs = from c in _context.RestaurantChef.Include(c => c.Chef)
-                       select c;
+                        select c;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -56,7 +58,7 @@ namespace RestIT.Controllers
 
             if (!String.IsNullOrEmpty(RestaurantType))
             {
-                restaurants = restaurants.Where(x => x.restType.ToString()==(RestaurantType));
+                restaurants = restaurants.Where(x => x.restType.ToString() == (RestaurantType));
             }
 
             var restaurantSearchVM = new RestaurantSearchViewModel();
@@ -84,13 +86,13 @@ namespace RestIT.Controllers
 
             }
 
-            var restaurant = await _context.Restaurant.Include(d => d.Dishes).Include(q=>q.restChef)
+            var restaurant = await _context.Restaurant.Include(d => d.Dishes).Include(q => q.restChef)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
 
             if (restaurant == null)
             {
-                TempData["errorMessage"]  = "Restaurant not found. Please try another one."; 
+                TempData["errorMessage"] = "Restaurant not found. Please try another one.";
                 //return NotFound();
                 return RedirectToAction(nameof(Index));
             }
@@ -117,7 +119,7 @@ namespace RestIT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
-        public async Task<IActionResult> Create([Bind("ID,restName,restAddress,restCity,restRating,restLat,restLng,restType,restKosher,restChef")] Restaurant restaurant,string[] selectedDishes, int[] restChef)
+        public async Task<IActionResult> Create([Bind("ID,restName,restAddress,restCity,restRating,restLat,restLng,restType,restKosher,restChef")] Restaurant restaurant, string[] selectedDishes, int[] restChef)
         {
             if (ModelState.IsValid)
             {
@@ -130,13 +132,13 @@ namespace RestIT.Controllers
                 await _context.SaveChangesAsync();
 
                 string fb_message = "Hi, New Restaurant available " + restaurant.restName + " in " + restaurant.restCity + ". Check it out!";
-                
+
                 //Publish post to facebook with restaurant name
                 PublishFacebookPost(fb_message);
-                
+
                 return RedirectToAction(nameof(Index));
             }
-           
+
             return View(restaurant);
         }
 
@@ -151,7 +153,7 @@ namespace RestIT.Controllers
 
             var restaurant = await _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
                    .Where(i => i.ID == id).FirstAsync();
-            
+
             if (restaurant == null)
             {
                 TempData["errorMessage"] = "Restaurant not found. Please try another one.";
@@ -184,6 +186,8 @@ namespace RestIT.Controllers
             restaurant.restKosher = rest.restKosher;
             restaurant.restAddress = restaurant.restAddress;
             restaurant.restCity = rest.restCity;
+            restaurant.restLat = rest.restLat;
+            restaurant.restLng = rest.restLng;
             restaurant.restName = rest.restName;
             restaurant.restRating = rest.restRating;
             restaurant.restType = rest.restType;
@@ -194,9 +198,9 @@ namespace RestIT.Controllers
                 try
                 {
                     UpdateDishes(selectedDishes, restaurant, _context);
-                    var chef = _context.Chef.Single(j => j.ID == restChef[0]); 
+                    var chef = _context.Chef.Single(j => j.ID == restChef[0]);
                     UpdateChefs(restaurant, chef, _context, false);
-                    
+
                     _context.Update(restaurant);
                     _context.SaveChanges();
                 }
@@ -244,7 +248,7 @@ namespace RestIT.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> DeleteConfirmed(int id)
-        { 
+        {
             var restaurant = await _context.Restaurant.Include(d => d.Dishes)
                 .FirstOrDefaultAsync(m => m.ID == id);
             _context.Restaurant.Remove(restaurant);
@@ -270,7 +274,7 @@ namespace RestIT.Controllers
             {
                 viewModel.Add(new Dish
                 {
-                    ID = dish.ID, 
+                    ID = dish.ID,
                     dishName = dish.dishName,
                     assigned = restaurant.Dishes.Contains(dish),
                 });
@@ -311,7 +315,7 @@ namespace RestIT.Controllers
 
         private void UpdateDishes(string[] selectedDishes, Restaurant restaurant, ApplicationDbContext _context)
         {
-            if (restaurant.Dishes == null )
+            if (restaurant.Dishes == null)
             {
                 restaurant.Dishes = new List<Dish>();
             }
@@ -350,16 +354,17 @@ namespace RestIT.Controllers
             {
                 RestaurantChef restChefOld = _context.RestaurantChef.Single(i => i.RestaurantID == restaurant.ID);
                 _context.RestaurantChef.Remove(restChefOld);
-               // _context.SaveChangesAsync();
+                // _context.SaveChangesAsync();
 
             }
             restaurant.restChef = new List<RestaurantChef>();
 
-            restaurant.restChef.Add(new RestaurantChef {
-               //ID = restaurant.restChef.Count + 1,
-               Restaurent = restaurant,
-               Chef = chef
-           });
+            restaurant.restChef.Add(new RestaurantChef
+            {
+                //ID = restaurant.restChef.Count + 1,
+                Restaurent = restaurant,
+                Chef = chef
+            });
         }
 
         public Boolean PublishFacebookPost(String facebookMessage)
@@ -385,8 +390,26 @@ namespace RestIT.Controllers
         {
             return Json(await _context.Restaurant.ToListAsync());
         }
+
+        public string GetTemperature(double longtitude, double latitude)
+        {
+            string html = string.Empty;
+            string url = @"http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longtitude + "&units=metric&mode=html&APPID=de89ef2331afa98fbd84af7d6be8e8b8"; 
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                html = reader.ReadToEnd();
+                stream.Dispose();
+            }
+
+            return html;
+        }
     }
 }
 
 
-          
+
