@@ -25,6 +25,7 @@ namespace RestIT.Models
         public String dishType { get; set; }
         [DisplayName("Dish Ingredients")]
         public String dishIngredients { get; set; }
-        public string dishImage { get; set; } 
+        public string dishImage { get; set; }
+        public virtual ICollection<RestaurantDish> RestaurantDishes { get; set; }
     }
 }

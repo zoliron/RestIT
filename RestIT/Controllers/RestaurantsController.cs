@@ -34,7 +34,10 @@ namespace RestIT.Controllers
                                                orderby m.restCity
                                                select m.restCity;
 
-            var restaurants = from m in _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
+            var restaurants = from m in _context.Restaurant
+                              .Include(q => q.Dishes)
+                              .Include(q => q.restChef)
+                              .Include(q => q.RestaurantDishes)
                               select m;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -77,7 +80,10 @@ namespace RestIT.Controllers
 
             }
 
-            var restaurant = await _context.Restaurant.Include(d => d.Dishes).Include(q=>q.restChef)
+            var restaurant = await _context.Restaurant
+                .Include(d => d.Dishes)
+                .Include(q=>q.restChef)
+                .Include(q => q.RestaurantDishes)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
 
@@ -110,7 +116,7 @@ namespace RestIT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
-        public async Task<IActionResult> Create([Bind("ID,restName,restAddress,restCity,restRating,restType,restKosher,restChef")] Restaurant restaurant,string[] selectedDishes, int[] restChef)
+        public async Task<IActionResult> Create([Bind("ID,restName,restAddress,restCity,restRating,restType,restKosher,restChef")] Restaurant restaurant, Dish dish, string[] selectedDishes, int[] restChef)
         {
             if (ModelState.IsValid)
             {
@@ -142,8 +148,11 @@ namespace RestIT.Controllers
                 return NotFound();
             }
 
-            var restaurant = await _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
-                   .Where(i => i.ID == id).FirstAsync();
+            var restaurant = await _context.Restaurant
+                .Include(q => q.Dishes)
+                .Include(q => q.restChef)
+                .Include(q => q.RestaurantDishes)
+                .Where(i => i.ID == id).FirstAsync();
             
             if (restaurant == null)
             {
@@ -165,13 +174,16 @@ namespace RestIT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
-        public ActionResult Edit(int? id, string[] selectedDishes, int[] restChef, Restaurant rest)
+        public ActionResult Edit(int? id, string[] selectedDishes, int[] restChef, Restaurant rest, Dish dish)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var restaurant = _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
+            var restaurant = _context.Restaurant
+                .Include(q => q.Dishes)
+                .Include(q => q.restChef)
+                .Include(q => q.RestaurantDishes)
                 .Where(i => i.ID == id).Single();
 
             restaurant.restKosher = rest.restKosher;
@@ -191,7 +203,7 @@ namespace RestIT.Controllers
                     UpdateChefs(restaurant, chef, _context, false);
                     
                     _context.Update(restaurant);
-                    _context.SaveChanges();
+                    //_context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -220,7 +232,11 @@ namespace RestIT.Controllers
                 return NotFound();
             }
 
-            var restaurant = await _context.Restaurant.Include(d => d.Dishes).Include(c => c.restChef).Where(j => j.ID == id)
+            var restaurant = await _context.Restaurant
+                .Include(d => d.Dishes)
+                .Include(c => c.restChef)
+                .Include(q => q.RestaurantDishes)
+                .Where(j => j.ID == id)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (restaurant == null)
             {
@@ -238,7 +254,10 @@ namespace RestIT.Controllers
         [Authorize(Roles = "CustomerAdministrators")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         { 
-            var restaurant = await _context.Restaurant.Include(d => d.Dishes)
+            var restaurant = await _context.Restaurant
+                .Include(d => d.Dishes)
+                .Include(d => d.restChef)
+                .Include(q => q.RestaurantDishes)
                 .FirstOrDefaultAsync(m => m.ID == id);
             _context.Restaurant.Remove(restaurant);
             await _context.SaveChangesAsync();
@@ -302,34 +321,50 @@ namespace RestIT.Controllers
             ViewBag.restChef = viewModel;
         }
 
-        private void UpdateDishes(string[] selectedDishes, Restaurant restaurant, ApplicationDbContext _context)
+        private void UpdateDishes(string[] selectedDishes, Restaurant Restaurant, ApplicationDbContext _context)
         {
-            if (restaurant.Dishes == null )
+            if (Restaurant.Dishes == null )
             {
-                restaurant.Dishes = new List<Dish>();
+                Restaurant.Dishes = new List<Dish>();
+            }
+
+            if (Restaurant.RestaurantDishes == null) {
+                Restaurant.RestaurantDishes = new List<RestaurantDish>();
             }
 
             var selectedDishesHS = new HashSet<String>(selectedDishes);
-            var restDishesID = new HashSet<int>
-                (restaurant.Dishes.Select(c => c.ID));
+            var currentRestaurantlist = new HashSet<int>(Restaurant.RestaurantDishes.Select(c => c.RestaurantID));
+            var restDishesID = new HashSet<int>(Restaurant.RestaurantDishes.Select(c => c.DishID));
 
             foreach (var dish in _context.Dish)
             {
                 if (selectedDishesHS.Contains(dish.ID.ToString()))
                 {
-                    if (!restDishesID.Contains(dish.ID))
-                    {
-                        restaurant.Dishes.Add(dish);
+                    RestaurantDish tempDishID = _context.RestaurantDish.Single(i => i.DishID == dish.ID);
+
+                    if (tempDishID.DishID == dish.ID) {
+                        break;
+                    }
+                    else {
+                        //Restaurant.Dishes.Add(dish);
+                        Restaurant.RestaurantDishes.Add(new RestaurantDish
+                        {
+                            Restaurant = Restaurant,
+                            Dish = dish,
+                            dishName = dish.dishName
+                        });
                     }
                 }
                 else
                 {
                     if (restDishesID.Contains(dish.ID))
                     {
-                        restaurant.Dishes.Remove(dish);
+                        RestaurantDish restDishOld = _context.RestaurantDish.Single(i => i.DishID == dish.ID);
+                        _context.RestaurantDish.Remove(restDishOld);
                     }
                 }
             }
+            _context.SaveChanges();
         }
 
         private void UpdateChefs(Restaurant restaurant, Chef chef, ApplicationDbContext _context, bool Create)
@@ -353,6 +388,7 @@ namespace RestIT.Controllers
                Restaurent = restaurant,
                Chef = chef
            });
+            _context.SaveChanges();
         }
 
         public Boolean PublishFacebookPost(String facebookMessage)

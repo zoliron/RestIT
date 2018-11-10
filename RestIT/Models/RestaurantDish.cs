@@ -7,8 +7,13 @@ namespace RestIT.Models
 {
     public class RestaurantDish
     {
-        public int ID { get; set; }
-        public Restaurant restaurent { get; set; }
-        public Dish dish { get; set; }
+        public int RestaurantID { get; set; }
+        public int DishID { get; set; }
+
+        public string dishName { get; set; }
+
+        //Relationships
+        public virtual Restaurant Restaurant { get; set; }
+        public virtual Dish Dish { get; set; }
     }
 }
