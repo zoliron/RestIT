@@ -343,13 +343,12 @@ namespace RestIT.Controllers
                 Restaurant.RestaurantDishes = new List<RestaurantDish>();
             }
             var selectedDishesHS = new HashSet<String>(selectedDishes);
-            var currentRestaurantlist = new HashSet<int>(Restaurant.RestaurantDishes.Select(c => c.RestaurantID));
             var restDishesID = new HashSet<int>(Restaurant.RestaurantDishes.Select(c => c.DishID));
 
             var list = from m in _context.RestaurantDish
                        select m;
 
-            List<RestaurantDish> test = list.ToList();
+            List<RestaurantDish> RestauntDishList = list.ToList();
             
 
             foreach (var dish in _context.Dish)
@@ -359,7 +358,7 @@ namespace RestIT.Controllers
                     var match = 0;
 
                     // First initialization
-                    if (test.Count == 0) {
+                    if (RestauntDishList.Count == 0) {
                         _context.RestaurantDish.Add(new RestaurantDish
                         {
                             Restaurant = Restaurant,
@@ -378,7 +377,7 @@ namespace RestIT.Controllers
                     }
 
                     // Adds RestaurantDish after the first was created
-                    if (match == 0 && test.Count != 0)
+                    if (match == 0 && RestauntDishList.Count != 0)
                     {
                         _context.RestaurantDish.Add(new RestaurantDish
                         {
@@ -390,13 +389,16 @@ namespace RestIT.Controllers
                 }
                 else
                 {
-                    //if (restDishesID.Contains(dish.ID)) {
-                    //    RestaurantDish restDishOld = _context.RestaurantDish.FirstOrDefault(i => i.DishID == dish.ID);
-                    //    if (restDishOld != null)
-                    //    {
-                    //        _context.RestaurantDish.Remove(restDishOld);
-                    //    }
-                    //}
+                    // Clearing the dishes if you didnt tick the dishes you want
+                    foreach (var item in list) {
+                        if (item.DishID == dish.ID && item.RestaurantID == Restaurant.ID) {
+                            RestaurantDish restDishOld = _context.RestaurantDish.FirstOrDefault(i => i.DishID == dish.ID && i.RestaurantID == Restaurant.ID);
+                            if (restDishOld != null)
+                            {
+                                _context.RestaurantDish.Remove(restDishOld);
+                            }
+                        }
+                    }
                 }
             }
             //_context.SaveChangesAsync();
