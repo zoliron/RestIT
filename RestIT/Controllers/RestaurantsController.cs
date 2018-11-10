@@ -89,7 +89,6 @@ namespace RestIT.Controllers
             var restaurant = await _context.Restaurant.Include(d => d.Dishes).Include(q => q.restChef)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
-
             if (restaurant == null)
             {
                 TempData["errorMessage"] = "Restaurant not found. Please try another one.";
@@ -97,7 +96,6 @@ namespace RestIT.Controllers
                 return RedirectToAction(nameof(Index));
             }
             CheckChefs(restaurant, _context);
-
 
             return View(restaurant);
         }
@@ -239,6 +237,8 @@ namespace RestIT.Controllers
                 TempData["errorMessage"] = "Restaurant not found. Please try another one.";
                 return RedirectToAction(nameof(Index));
             }
+
+            CheckChefs(restaurant, _context);
 
             return View(restaurant);
         }
