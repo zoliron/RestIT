@@ -1114,8 +1114,526 @@ namespace RestIT.Data
                      RestaurantID = 1,
                      dishName = "Cheese stuffed mushrooms",
                      DishID = 1,
-                     
-                 });
+
+                 },
+                 new RestaurantDish
+                 {
+                     RestaurantID = 1,
+                     dishName = "Pavlova",
+                     DishID = 4,
+
+                 },
+                 new RestaurantDish
+                 {
+                     RestaurantID = 1,
+                     dishName = "Hamburger",
+                     DishID = 11,
+
+                 },
+                  new RestaurantDish
+                  {
+                      RestaurantID = 1,
+                      dishName = "Chicken salad",
+                      DishID = 20,
+                  },
+                  new RestaurantDish
+                  {
+                      RestaurantID = 2,
+                      dishName = "Water",
+                      DishID = 2,
+                  },
+                  new RestaurantDish
+                  {
+                      RestaurantID = 2,
+                      dishName = "Orange juice",
+                      DishID = 23,
+                  },
+                   new RestaurantDish
+                   {
+                       RestaurantID = 3,
+                       dishName = "ChocorestLate souffle",
+                       DishID = 7,
+                   },
+                   new RestaurantDish
+                   {
+                       RestaurantID = 3,
+                       dishName = "Sprite",
+                       DishID = 24,
+                   },
+                   new RestaurantDish
+                   {
+                       RestaurantID = 4,
+                       dishName = "Spaghetti bolognese",
+                       DishID = 14,
+                   },
+                   new RestaurantDish
+                   {
+                       RestaurantID = 4,
+                       dishName = "Schnitzel with fries",
+                       DishID = 9,
+                   },
+                   new RestaurantDish
+                   {
+                       RestaurantID = 4,
+                       dishName = "Entrecote",
+                       DishID = 8,
+                   },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 4,
+                        dishName = "Chicken breast",
+                        DishID = 16,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 5,
+                        dishName = "Spaghetti alfredo",
+                        DishID = 15,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 5,
+                        dishName = "Carpaccio",
+                        DishID = 21,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 5,
+                        dishName = "Fish & Chips",
+                        DishID = 22,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 5,
+                        dishName = "Creme brulee",
+                        DishID = 6,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 5,
+                        dishName = "Salmon fillet",
+                        DishID = 10,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 6,
+                        dishName = "Salmon fillet",
+                        DishID = 10,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 6,
+                        dishName = "Greek Salad",
+                        DishID = 17,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 6,
+                        dishName = "Fish & Chips",
+                        DishID = 22,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 6,
+                        dishName = "ChocorestLate souffle",
+                        DishID = 7,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 7,
+                        dishName = "Carpaccio",
+                        DishID = 21,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 7,
+                        dishName = "Hamburger",
+                        DishID = 11,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 7,
+                        dishName = "Spaghetti alfredo",
+                        DishID = 15,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 7,
+                        dishName = "Cheesecake with cranberries",
+                        DishID = 5,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 8,
+                        dishName = "Pad thai",
+                        DishID = 12,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 8,
+                        dishName = "Fish & Chips",
+                        DishID = 22,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 8,
+                        dishName = "Salmon fillet",
+                        DishID = 10,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 9,
+                        dishName = "Cheese stuffed mushrooms",
+                        DishID = 1,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 9,
+                        dishName = "Schnitzel with fries",
+                        DishID = 9,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 9,
+                        dishName = "Spaghetti alfredo",
+                        DishID = 15,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 9,
+                        dishName = "Greek Salad",
+                        DishID = 17,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 10,
+                        dishName = "Hamburger",
+                        DishID = 11,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 10,
+                        dishName = "Entrecote",
+                        DishID = 8,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 10,
+                        dishName = "Chicken salad",
+                        DishID = 20,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 10,
+                        dishName = "Chicken breast",
+                        DishID = 16,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 11,
+                        dishName = "chicken curry",
+                        DishID = 13,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 11,
+                        dishName = "Sushi tempura",
+                        DishID = 18,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 11,
+                        dishName = "Carpaccio",
+                        DishID = 21,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 11,
+                        dishName = "Spaghetti bolognese",
+                        DishID = 14,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 12,
+                        dishName = "Spaghetti alfredo",
+                        DishID = 15,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 12,
+                        dishName = "Cheese stuffed mushrooms",
+                        DishID = 1,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 12,
+                        dishName = "Creme brulee",
+                        DishID = 6,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 13,
+                        dishName = "Coca Cola",
+                        DishID = 3,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 13,
+                        dishName = "Cheesecake with cranberries",
+                        DishID = 5,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 13,
+                        dishName = "Fish & Chips",
+                        DishID = 22,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 13,
+                        dishName = "Greek Salad",
+                        DishID = 17,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 14,
+                        dishName = "Thai Style Sweet Chili",
+                        DishID = 19,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 14,
+                        dishName = "Pad thai",
+                        DishID = 12,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 14,
+                        dishName = "Sushi tempura",
+                        DishID = 18,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 14,
+                        dishName = "Creme brulee",
+                        DishID = 6,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 14,
+                        dishName = "chicken curry",
+                        DishID = 13,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 15,
+                        dishName = "Carpaccio",
+                        DishID = 21,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 15,
+                        dishName = "Chicken salad",
+                        DishID = 20,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 15,
+                        dishName = "Salmon fillet",
+                        DishID = 10,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 15,
+                        dishName = "Entrecote",
+                        DishID = 8,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 15,
+                        dishName = "ChocorestLate souffle",
+                        DishID = 7,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 16,
+                        dishName = "Salmon fillet",
+                        DishID = 10,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 16,
+                        dishName = "chicken curry",
+                        DishID = 13,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 16,
+                        dishName = "Chicken breast",
+                        DishID = 16,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 16,
+                        dishName = "Pavlova",
+                        DishID = 4,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 17,
+                        dishName = "Hamburger",
+                        DishID = 11,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 17,
+                        dishName = "Spaghetti bolognese",
+                        DishID = 14,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 17,
+                        dishName = "Spaghetti alfredo",
+                        DishID = 15,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 17,
+                        dishName = "Carpaccio",
+                        DishID = 21,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 17,
+                        dishName = "Cheesecake with cranberries",
+                        DishID = 5,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 18,
+                        dishName = "chicken curry",
+                        DishID = 13,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 18,
+                        dishName = "Thai Style Sweet Chili",
+                        DishID = 19,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 18,
+                        dishName = "Entrecote",
+                        DishID = 8,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 18,
+                        dishName = "Carpaccio",
+                        DishID = 21,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 18,
+                        dishName = "Greek Salad",
+                        DishID = 17,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 19,
+                        dishName = "Schnitzel with fries",
+                        DishID = 9,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 19,
+                        dishName = "Spaghetti alfredo",
+                        DishID = 15,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 19,
+                        dishName = "Chicken salad",
+                        DishID = 20,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 19,
+                        dishName = "Sushi tempura",
+                        DishID = 18,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 20,
+                        dishName = "Hamburger",
+                        DishID = 11,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 20,
+                        dishName = "Schnitzel with fries",
+                        DishID = 9,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 20,
+                        dishName = "Spaghetti bolognese",
+                        DishID = 14,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 20,
+                        dishName = "Creme brulee",
+                        DishID = 6,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 21,
+                        dishName = "Fish & Chips",
+                        DishID = 22,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 21,
+                        dishName = "Chicken salad",
+                        DishID = 20,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 21,
+                        dishName = "Pad thai",
+                        DishID = 12,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 21,
+                        dishName = "Chicken breast",
+                        DishID = 16,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 22,
+                        dishName = "Cheese stuffed mushrooms",
+                        DishID = 1,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 22,
+                        dishName = "Carpaccio",
+                        DishID = 21,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 22,
+                        dishName = "Sushi tempura",
+                        DishID = 18,
+                    },
+                    new RestaurantDish
+                    {
+                        RestaurantID = 22,
+                        dishName = "ChocorestLate souffle",
+                        DishID = 7,
+                    });
             context.SaveChanges();
         }
         #endregion
