@@ -30,7 +30,8 @@ namespace RestIT.Pages.Customers
 
             if (Customer == null)
             {
-                return NotFound();
+                //return NotFound();
+                return RedirectToPage("./Index");
             }
 
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
@@ -54,7 +55,8 @@ namespace RestIT.Pages.Customers
 
             if (customer == null)
             {
-                return NotFound();
+                //return NotFound();
+                return RedirectToPage("./Index");
             }
 
             var isAuthorized = await AuthorizationService.AuthorizeAsync(

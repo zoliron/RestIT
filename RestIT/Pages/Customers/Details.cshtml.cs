@@ -20,6 +20,7 @@ namespace RestIT.Pages.Customers
         }
 
         public Customer Customer { get; set; }
+        public dynamic ViewBag { get; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -27,7 +28,8 @@ namespace RestIT.Pages.Customers
 
             if (Customer == null)
             {
-                return NotFound();
+                //return NotFound();
+                return RedirectToPage("./Index");
             }
 
             var isAuthorized = User.IsInRole(Constants.CustomerManagersRole) ||
@@ -52,7 +54,8 @@ namespace RestIT.Pages.Customers
 
             if (customer == null)
             {
-                return NotFound();
+                //return NotFound();
+                return RedirectToPage("./Index");
             }
 
             var customerOperation = (status == CustomerStatus.Approved) 
