@@ -631,6 +631,13 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.053589,
                     restLng=34.755772,
+                    restChef = new List<RestaurantChef>()
+                    {
+                        new RestaurantChef()
+                        {
+                            ChefID = 1,
+                        }
+                    },
                 },
                 new Restaurant
                 {

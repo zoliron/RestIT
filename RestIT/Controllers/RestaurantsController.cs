@@ -319,7 +319,7 @@ namespace RestIT.Controllers
             {
                 var temp = context.Chef
                    .Include(p => p.Restuarants)
-                   .Single(p => p.ID == restaurant.restChef.Last().ChefID);
+                   .FirstOrDefault(p => p.ID == restaurant.restChef.Last().ChefID);
 
                 ViewBag.selectedChefName = temp.chefName;
             }
@@ -413,10 +413,12 @@ namespace RestIT.Controllers
 
             if (!Create)
             {
-                RestaurantChef restChefOld = _context.RestaurantChef.Single(i => i.RestaurantID == restaurant.ID);
-                _context.RestaurantChef.Remove(restChefOld);
-                // _context.SaveChangesAsync();
-
+                RestaurantChef restChefOld = _context.RestaurantChef.FirstOrDefault(i => i.RestaurantID == restaurant.ID);
+                if (restChefOld != null)
+                {
+                    _context.RestaurantChef.Remove(restChefOld);
+                    // _context.SaveChangesAsync();
+                }
             }
             restaurant.restChef = new List<RestaurantChef>();
 
