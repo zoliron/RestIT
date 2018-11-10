@@ -129,10 +129,9 @@ namespace RestIT.Controllers
         {
             if (ModelState.IsValid)
             {
+                var chef = _context.Chef.Single(j => j.ID == restChef[0]);
                 _context.Add(restaurant);
                 UpdateDishes(selectedDishes, restaurant, _context);
-
-                var chef = _context.Chef.Single(j => j.ID == restChef[0]);
                 UpdateChefs(restaurant, chef, _context, true);
 
                 await _context.SaveChangesAsync();
@@ -213,8 +212,8 @@ namespace RestIT.Controllers
             {
                 try
                 {
-                    UpdateDishes(selectedDishes, restaurant, _context);
                     var chef = _context.Chef.Single(j => j.ID == restChef[0]);
+                    UpdateDishes(selectedDishes, restaurant, _context);
                     UpdateChefs(restaurant, chef, _context, false);
 
                     _context.Update(restaurant);
@@ -338,33 +337,49 @@ namespace RestIT.Controllers
             ViewBag.restChef = viewModel;
         }
 
-        private void UpdateDishes(string[] selectedDishes, Restaurant Restaurant, ApplicationDbContext _context)
+        private async void UpdateDishes(string[] selectedDishes, Restaurant Restaurant, ApplicationDbContext _context)
         {
-            if (Restaurant.Dishes == null )
-            {
-                Restaurant.Dishes = new List<Dish>();
-            }
-
             if (Restaurant.RestaurantDishes == null) {
                 Restaurant.RestaurantDishes = new List<RestaurantDish>();
             }
-
             var selectedDishesHS = new HashSet<String>(selectedDishes);
             var currentRestaurantlist = new HashSet<int>(Restaurant.RestaurantDishes.Select(c => c.RestaurantID));
             var restDishesID = new HashSet<int>(Restaurant.RestaurantDishes.Select(c => c.DishID));
+
+            var list = from m in _context.RestaurantDish
+                       select m;
+
+            List<RestaurantDish> test = list.ToList();
+            
 
             foreach (var dish in _context.Dish)
             {
                 if (selectedDishesHS.Contains(dish.ID.ToString()))
                 {
-                    RestaurantDish tempDishID = _context.RestaurantDish.Single(i => i.DishID == dish.ID);
+                    var match = 0;
 
-                    if (tempDishID.DishID == dish.ID) {
-                        break;
+                    // First initialization
+                    if (test.Count == 0) {
+                        _context.RestaurantDish.Add(new RestaurantDish
+                        {
+                            Restaurant = Restaurant,
+                            Dish = dish,
+                            dishName = dish.dishName
+                        });
                     }
-                    else {
-                        //Restaurant.Dishes.Add(dish);
-                        Restaurant.RestaurantDishes.Add(new RestaurantDish
+
+                    // Adds RestaurantDish after the first was created
+                    foreach (var item in list) {
+                        if (item.DishID == dish.ID && item.RestaurantID == Restaurant.ID)
+                        {
+                            match = 1;
+                            break;
+                        }
+                    }
+
+                    if (match == 0 && test.Count != 0)
+                    {
+                        _context.RestaurantDish.Add(new RestaurantDish
                         {
                             Restaurant = Restaurant,
                             Dish = dish,
@@ -374,17 +389,19 @@ namespace RestIT.Controllers
                 }
                 else
                 {
-                    if (restDishesID.Contains(dish.ID))
-                    {
-                        RestaurantDish restDishOld = _context.RestaurantDish.Single(i => i.DishID == dish.ID);
-                        _context.RestaurantDish.Remove(restDishOld);
-                    }
+                    //if (restDishesID.Contains(dish.ID)) {
+                    //    RestaurantDish restDishOld = _context.RestaurantDish.FirstOrDefault(i => i.DishID == dish.ID);
+                    //    if (restDishOld != null)
+                    //    {
+                    //        _context.RestaurantDish.Remove(restDishOld);
+                    //    }
+                    //}
                 }
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        private void UpdateChefs(Restaurant restaurant, Chef chef, ApplicationDbContext _context, bool Create)
+        private async void UpdateChefs(Restaurant restaurant, Chef chef, ApplicationDbContext _context, bool Create)
         {
             if (chef == null)
             {
@@ -405,7 +422,7 @@ namespace RestIT.Controllers
                Restaurent = restaurant,
                Chef = chef
            });
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public Boolean PublishFacebookPost(String facebookMessage)
