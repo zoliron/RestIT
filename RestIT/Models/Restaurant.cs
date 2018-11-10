@@ -27,7 +27,6 @@ namespace RestIT.Models
         public int ID { get; set; }
         [DisplayName("Restuarant's chef")]
         [Required]
-        [DisplayName("Restuarant's chef")]
         public virtual ICollection<RestaurantChef> restChef { get; set; }
         [DisplayName("Restuarant Name")]
         public String restName { get; set; }
