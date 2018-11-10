@@ -79,11 +79,15 @@ namespace RestIT.Controllers
                             RestCount = group.Count(),
                         })
                         .OrderBy(x => x.RestCity))
+            {
                 restaurantCities.Add(new GroupByRestaurant()
                 {
                     RestCity = r.RestCity,
                     RestCount = r.RestCount
                 });
+
+                ViewBag.data += r.RestCity + "," + r.RestCount + ",";
+            }
 
             return View(restaurantCities);
 
@@ -104,11 +108,17 @@ namespace RestIT.Controllers
                             RestCount = group.Count(),
                         })
                         .OrderBy(x => x.RestType))
+            {
                 restaurantTypes.Add(new GroupByRestaurant()
                 {
                     RestType = r.RestType,
                     RestCount = r.RestCount
                 });
+
+                ViewBag.data += r.RestType + "," + r.RestCount + ",";
+
+            }
+
 
             return View(restaurantTypes);
 
@@ -125,22 +135,20 @@ namespace RestIT.Controllers
 
         public IActionResult JoinQueryRestaurantsChefs()
         {
-
-            // JOIN between Comments and Posts
             var restaurants = _context.Restaurant.ToList();
             var chefs = _context.Chef.ToList();
             var restChefs = _context.RestaurantChef.ToList();
 
             // First join between Restaurant and restChef to get ChefID, restName & restCity using common RestaurantID
             var result1 = from restaurant in restaurants
-                         join restchef in restChefs
-                         on restaurant.ID equals restchef.RestaurantID
-                         select new
-                         {
-                             restchef.ChefID,
-                             restaurant.restName,
-                             restaurant.restCity,
-                         };
+                          join restchef in restChefs
+                          on restaurant.ID equals restchef.RestaurantID
+                          select new
+                          {
+                              restchef.ChefID,
+                              restaurant.restName,
+                              restaurant.restCity,
+                          };
 
             // First join between Chef and result1 to get restName, restCity & chefName using common ChefID
             var result2 = from chef in chefs
@@ -167,5 +175,54 @@ namespace RestIT.Controllers
 
             return View(co);
         }
+
+        //// Class to JOIN between Restaurant table and Dishes table
+        //public class RestaurantDishes
+        //{
+        //    public string RestName { get; set; }
+        //    public string DishName { get; set; }
+        //};
+
+        //public IActionResult JoinQueryRestaurantsDishes()
+        //{
+        //    var restaurants = _context.Restaurant.ToList();
+        //    var dishes = _context.Dish.ToList();
+
+        //    // First join between Restaurant and Dishes to get restName & dishName using common RestaurantID
+        //    var result = from restaurant in restaurants
+        //                  join dish in dishes
+        //                  on restaurant.ID equals dish.Re
+        //                  select new
+        //                  {
+        //                      restchef.ChefID,
+        //                      restaurant.restName,
+        //                      restaurant.restCity,
+        //                  };
+
+        //    // First join between Chef and result1 to get restName, restCity & chefName using common ChefID
+        //    var result2 = from chef in chefs
+        //                  join restaurant in result1
+        //                  on chef.ID equals restaurant.ChefID
+        //                  select new
+        //                  {
+        //                      restaurant.restName,
+        //                      restaurant.restCity,
+        //                      chef.chefName
+        //                  };
+
+
+        //    var co = new List<RestaurantChefs>();
+        //    foreach (var t in result2)
+        //    {
+        //        co.Add(new RestaurantChefs()
+        //        {
+        //            RestName = t.restName,
+        //            RestCity = t.restCity,
+        //            ChefName = t.chefName
+        //        });
+        //    }
+
+        //    return View(co);
+        //}
     }
 }
