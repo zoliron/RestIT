@@ -94,6 +94,9 @@ namespace RestIT.Controllers
                 //return NotFound();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Temp = GetTemperature(restaurant.restLng, restaurant.restLat);
+            ViewBag.axes = "lat:" + restaurant.restLat + ", lng:" + restaurant.restLng;
+
             CheckChefs(restaurant, _context);
 
             return View(restaurant);

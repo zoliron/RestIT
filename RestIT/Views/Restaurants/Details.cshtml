@@ -4,12 +4,18 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Restaurant</h4>
-    <hr />
-    <dl class="dl-horizontal">
+<h2>Details</h2>
+<h4>Restaurant</h4>
+<div class="row col-lg-9">
+    <style>
+        #map {
+            width: 300px;
+            height: 300px;
+            background-color: white;
+        }
+    </style>
+    <dl>
         <dt>
             @Html.DisplayNameFor(model => model.restName)
         </dt>
@@ -65,7 +71,33 @@
         </dd>
 
     </dl>
+    <div class="col-lg-3" style="width:100%;height:100%; height: auto; width:auto; float: none; clear: both; margin: 10px auto;">
+        <dl>
+            <dt>
+                @Html.Raw(ViewBag.temp)
+            </dt>
+            <dt>
+                <div id="map"></div>
+                <script>
+                    // Initialize and add the map
+                    function initMap() {
+                        // The location of Uluru
+                        var uluru = { @ViewBag.axes };
+                        // The map, centered at Uluru
+                        var map = new google.maps.Map(
+                            document.getElementById('map'), { zoom: 2, center: uluru });
+                        // The marker, positioned at Uluru
+                        var marker = new google.maps.Marker({ position: uluru, map: map });
+                    }
+                </script>
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGNm5igtfDIpBwyHIklk36mPHXA5TYspc&callback=initMap">
+                </script>
+            </dt>
+        </dl>      
+    </div>
 </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
     <a asp-action="Index">Back to List</a>

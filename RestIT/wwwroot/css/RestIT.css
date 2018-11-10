@@ -42,3 +42,7 @@ body {
     stroke: lightcoral;
     stroke-width: 0.5px;
 }
+
+.weather{
+    margin: 2px auto;
+}
