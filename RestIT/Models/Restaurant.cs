@@ -27,6 +27,7 @@ namespace RestIT.Models
         public int ID { get; set; }
         [DisplayName("Restuarant's chef")]
         [Required]
+        [DisplayName("Restuarant's chef")]
         public virtual ICollection<RestaurantChef> restChef { get; set; }
         [DisplayName("Restuarant Name")]
         public String restName { get; set; }
@@ -44,7 +45,13 @@ namespace RestIT.Models
         public RestType restType { get; set; }
         [DisplayName("Kosher")]
         public Boolean restKosher { get; set; }
+        [DisplayName("Restuarant's latitude")]
+        [RegularExpression("^([-]|[.]|[-.]|[0-9])[0-9]*[.]*[0-9]+$", ErrorMessage = "latitude must be a number!")]
+        [Required]
         public double restLat{ get; set; }
+        [DisplayName("Restuarant's longitude")]
+        [RegularExpression("^([-]|[.]|[-.]|[0-9])[0-9]*[.]*[0-9]+$", ErrorMessage = "longitude must be a number!")]
+        [Required]
         public double restLng { get; set; }
         public virtual ICollection<RestaurantDish> RestaurantDishes { get; set; }
 

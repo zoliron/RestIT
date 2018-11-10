@@ -413,10 +413,10 @@ namespace RestIT.Data
                 return;   // DB has been seeded
             }
             context.Chef.AddRange(
-                new Chef
-                {
-                    chefName = "None"
-                },
+                 new Chef
+                 {
+                     chefName = "None"
+                 },
                 new Chef
                 {
                     chefName = "Eyal Shani"
@@ -472,8 +472,6 @@ namespace RestIT.Data
             {
                 return;   // DB has been seeded
             }
-
-            //Chef NoneChef = context.Chef.Single(i => i.chefName == "None");
 
             context.Restaurant.AddRange(
                 new Restaurant
@@ -632,13 +630,6 @@ namespace RestIT.Data
                     restKosher = false,
                     restLat=32.053589,
                     restLng=34.755772,
-                    restChef = new List<RestaurantChef>()
-                    {
-                        new RestaurantChef()
-                        {
-                            ChefID = 1,
-                        }
-                    },
                 },
                 new Restaurant
                 {
@@ -668,14 +659,7 @@ namespace RestIT.Data
                     restKosher = true,
                     restLat = 32.074774,
                     restLng= 34.791573,
-                    restChef = new List<RestaurantChef>()
-                    {
-                        new RestaurantChef()
-                        {
-                            ChefID = 1,
-                        }
                     },
-                },
                 new Restaurant
                 {
                     restName = "Alabama",
@@ -852,7 +836,7 @@ namespace RestIT.Data
                     {
                         new RestaurantChef()
                         {
-                            ChefID = 12,
+                            ChefID = 1,
                         }
                     },
                 },
