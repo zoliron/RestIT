@@ -117,7 +117,7 @@ namespace RestIT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "CustomerAdministrators")]
-        public async Task<IActionResult> Create([Bind("ID,restName,restAddress,restCity,restRating,restType,restKosher,restChef")] Restaurant restaurant,string[] selectedDishes, int[] restChef)
+        public async Task<IActionResult> Create([Bind("ID,restName,restAddress,restCity,restRating,restLat,restLng,restType,restKosher,restChef")] Restaurant restaurant,string[] selectedDishes, int[] restChef)
         {
             if (ModelState.IsValid)
             {
