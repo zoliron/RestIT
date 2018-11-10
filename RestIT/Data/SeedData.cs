@@ -36,6 +36,7 @@ namespace RestIT.Data
                 SeedChefDB(context, adminID);
                 SeedRestaurantDB(context, adminID);
                 SeedDishDB(context, adminID);
+                SeedRestDishDB(context, adminID);
             }
         }
 
@@ -1088,6 +1089,26 @@ namespace RestIT.Data
                     dishIngredients = null,
                     dishImage = "/images/dishes/Sprite.jpg"
                 });
+            context.SaveChanges();
+        }
+        #endregion
+
+        #region SeedRestDishDB
+        public static void SeedRestDishDB(ApplicationDbContext context, string adminID)
+        {
+            if (context.RestaurantDish.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            context.RestaurantDish.AddRange(
+                 new RestaurantDish
+                 {
+                     RestaurantID = 1,
+                     dishName = "Cheese stuffed mushrooms",
+                     DishID = 1,
+                     
+                 });
             context.SaveChanges();
         }
         #endregion
