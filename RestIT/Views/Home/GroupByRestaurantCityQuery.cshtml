@@ -3,6 +3,16 @@
     ViewData["Title"] = "GroupBy RestaurantCities";
 }
 
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<style>
+    .chart {
+        fill: lightpink;
+        stroke: lightsalmon;
+        stroke-width: 0.5px;
+    }
+</style>
+
 <h2> GroupBy Restaurant Cities</h2>
 
 <table class="table">
@@ -28,3 +38,12 @@
     }
 </table>
 
+@{
+    var restaurantCities = ViewBag.data;
+}
+
+<div id="restaurantCities" hidden>@restaurantCities</div>
+
+<div>
+    <svg class="chart" name="countRestaurants" width="1000" height="400" onload="restaurantCitiesChart();"></svg>
+</div>
