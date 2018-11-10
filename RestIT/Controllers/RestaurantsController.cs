@@ -83,7 +83,6 @@ namespace RestIT.Controllers
             if (id == null)
             {
                 return NotFound();
-
             }
 
             var restaurant = await _context.Restaurant.Include(d => d.Dishes).Include(q => q.restChef)
@@ -179,7 +178,14 @@ namespace RestIT.Controllers
                 return NotFound();
             }
             var restaurant = _context.Restaurant.Include(q => q.Dishes).Include(q => q.restChef)
-                .Where(i => i.ID == id).Single();
+                .Where(i => i.ID == id).FirstOrDefault();
+
+            if (restaurant == null)
+            {
+                TempData["errorMessage"] = "Restaurant not found. Please try another one.";
+                return RedirectToAction(nameof(Index));
+                //return NotFound();
+            }
 
             restaurant.restKosher = rest.restKosher;
             restaurant.restAddress = restaurant.restAddress;
