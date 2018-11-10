@@ -49,7 +49,7 @@
                 @Html.DisplayNameFor(model => model.Restaurants[0].restKosher)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Restaurants[0].Dishes)
+                @Html.DisplayNameFor(model => model.Restaurants[0].RestaurantDishes)
             </th>
             <th></th>
         </tr>
@@ -75,11 +75,11 @@
                 </td>
                 <td>
                     @{
-                        if (item.Dishes != null)
+                        if (item.RestaurantDishes != null)
                         {
-                            foreach (var dish in item.Dishes)
+                            foreach (var dish in item.RestaurantDishes)
                             {
-                                @dish.dishName @: <br />
+                                    @dish.dishName @: <br />
                             }
                         }
                     }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestIT.Data;
 
 namespace RestIT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181110083201_ManyToMany_Dishes")]
+    partial class ManyToMany_Dishes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -288,8 +290,6 @@ namespace RestIT.Migrations
 
                     b.Property<int>("DishID");
 
-                    b.Property<string>("dishName");
-
                     b.HasKey("RestaurantID", "DishID");
 
                     b.HasIndex("DishID");
@@ -388,7 +388,7 @@ namespace RestIT.Migrations
                         .HasForeignKey("DishID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("RestIT.Models.Restaurant", "Restaurant")
+                    b.HasOne("RestIT.Models.Restaurant", "Restaurent")
                         .WithMany("RestaurantDishes")
                         .HasForeignKey("RestaurantID")
                         .OnDelete(DeleteBehavior.Cascade);
