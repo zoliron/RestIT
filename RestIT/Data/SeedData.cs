@@ -629,8 +629,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = RestType.Fishes,
                     restKosher = false,
-                    restLat=32.053589,
-                    restLng=34.755772,
+                    restLat= 32.053346,
+                    restLng= 34.755770,
                     restChef = new List<RestaurantChef>()
                     {
                         new RestaurantChef()
@@ -665,8 +665,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = RestType.Mediterranean,
                     restKosher = true,
-                    restLat = 32.074774,
-                    restLng= 34.791573,
+                    restLat = 32.074526,
+                    restLng= 34.792159,
                     },
                 new Restaurant
                 {
@@ -748,8 +748,8 @@ namespace RestIT.Data
                     restRating = 3,
                     restType =  RestType.Homemade,
                     restKosher = false,
-                    restLat= 32.059046,
-                    restLng= 34.772716,
+                    restLat= 32.058845,
+                    restLng= 34.772719,
                     restChef = new List<RestaurantChef>()
                     {
                         new RestaurantChef()
@@ -784,8 +784,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType =  RestType.Homemade,
                     restKosher = false,
-                    restLat= 32.061646,
-                    restLng= 34.763607,
+                    restLat= 32.061718,
+                    restLng= 34.763510,
                     restChef = new List<RestaurantChef>()
                     {
                         new RestaurantChef()
@@ -820,8 +820,8 @@ namespace RestIT.Data
                     restRating = 4,
                     restType = RestType.Desserts,
                     restKosher = false,
-                    restLat=32.069460,
-                    restLng=34.783678,
+                    restLat=32.074306,
+                    restLng= 34.765526,
                     restChef = new List<RestaurantChef>()
                     {
                         new RestaurantChef()
@@ -856,8 +856,8 @@ namespace RestIT.Data
                     restRating = 5,
                     restType = RestType.Meat,
                     restKosher = false,
-                    restLat=32.090798,
-                    restLng=34.781022,
+                    restLat= 32.054928,
+                    restLng= 34.757451,
                     restChef = new List<RestaurantChef>()
                     {
                         new RestaurantChef()
