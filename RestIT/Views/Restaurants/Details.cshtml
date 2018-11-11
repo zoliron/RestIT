@@ -63,9 +63,9 @@
         </dt>
         <dd>
             @{
-                foreach (var dish in Model.Dishes)
+                foreach (var dish in Model.RestaurantDishes)
                 {
-                    <a href="/Dishes/Details/@dish.ID" class="card-link">@dish.dishName</a>
+                    <a href="/Dishes/Details/@dish.DishID" class="card-link">@dish.dishName</a>
                 }
             }
         </dd>
